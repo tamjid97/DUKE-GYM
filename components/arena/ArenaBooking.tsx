@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { GoldButton } from '@/components/shared/GoldButton';
 import { waLink } from '@/lib/contact';
 import { games, timeSlots, bookedSlots } from '@/data/games';
-import { Clock, Users, PlayCircle } from 'lucide-react';
+import { Users, PlayCircle } from 'lucide-react';
 
 export function ArenaBooking() {
   const reduceMotion = useReducedMotion();
@@ -110,7 +110,7 @@ export function ArenaBooking() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Clock className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5} />
+                    <div className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5}>🕐</div>
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.28em] text-[#8E877A]">Open Daily</div>
                       <div className="mt-1 text-sm text-warm-white">10:00 AM – 12:00 AM</div>
@@ -193,7 +193,7 @@ export function ArenaBooking() {
 
                 <div>
                   <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                    <Clock className="h-3.5 w-3.5" strokeWidth={1.8} />
+                    <span className="h-3.5 w-3.5" strokeWidth={1.8}>🕐</span>
                     Time Slot
                     {selectedDate && (
                       <span className="ml-auto text-[9px] tracking-[0.2em] text-[#8E877A]">
