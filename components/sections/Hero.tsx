@@ -497,7 +497,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           </motion.span>
         </motion.h1>
 
-        {/* CTA Buttons */}
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden', y: 30 }}
           animate={
@@ -510,18 +510,31 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
               ? { duration: 0.55, delay: 1.3, ease: [0.22, 1, 0.36, 1] }
               : { duration: 0.15 }
           }
-          className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4"
+          className="mt-8"
         >
-          <GoldButton href="/membership" icon>
-            {t.joinNow} →
-          </GoldButton>
-          <GoldButton
-            href={waLink('Hello Duke Fitness Club! I would like to book a free tour.')}
-            external
-            variant="secondary"
+          <motion.a
+            href="https://gym-xi-ecru.vercel.app/protein-calculator"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ y: -4 }}
+            whileTap={{ scale: 0.98 }}
+            className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-semibold uppercase tracking-[0.24em] transition-all duration-300"
+            style={{
+              borderRadius: '9999px',
+              background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+              color: '#0A0A0C',
+              boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+            }}
           >
-            {t.bookFreeTour}
-          </GoldButton>
+            CALCULATE YOUR PROTEIN
+            <motion.span
+              className="text-lg"
+              animate={revealed ? { x: [0, 4, 0] } : {}}
+              transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+            >
+              →
+            </motion.span>
+          </motion.a>
         </motion.div>
 
         {/* Gold divider line */}

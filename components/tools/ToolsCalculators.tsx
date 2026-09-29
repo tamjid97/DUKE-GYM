@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Target, Activity, Scale, UtensilsCrossed, Flame, Dumbbell, ArrowRight, PlayCircle, Users, Sparkles, Trophy } from 'lucide-react';
-import { GoldButton } from '@/components/shared/GoldButton';
-import { waLink } from '@/lib/contact';
+import { OptionCard } from '@/components/tools/OptionCard';
 
 type ToolId = 'bmi' | 'protein' | 'calorie' | 'onerm';
 
@@ -13,15 +11,14 @@ interface ToolDef {
   label: string;
   sub: string;
   index: string;
-  icon: typeof Scale;
   tagline: string;
 }
 
 const TOOLS: ToolDef[] = [
-  { id: 'bmi', label: 'BMI', sub: 'Body Composition', index: '01', icon: Scale, tagline: 'Body Mass Index' },
-  { id: 'protein', label: 'Protein', sub: 'Nutrition Target', index: '02', icon: UtensilsCrossed, tagline: 'Daily Protein Need' },
-  { id: 'calorie', label: 'Calories', sub: 'Energy Balance', index: '03', icon: Flame, tagline: 'Daily Maintenance' },
-  { id: 'onerm', label: '1-Rep Max', sub: 'Strength Benchmark', index: '04', icon: Dumbbell, tagline: 'Estimated Max Lift' },
+  { id: 'bmi', label: 'BMI', sub: 'Body Composition', index: '01', tagline: 'Body Mass Index' },
+  { id: 'protein', label: 'Protein', sub: 'Nutrition Target', index: '02', tagline: 'Daily Protein Need' },
+  { id: 'calorie', label: 'Calories', sub: 'Energy Balance', index: '03', tagline: 'Daily Maintenance' },
+  { id: 'onerm', label: '1-Rep Max', sub: 'Strength Benchmark', index: '04', tagline: 'Estimated Max Lift' },
 ];
 
 function BMIGauge({ value }: { value: number }) {
@@ -139,7 +136,7 @@ function Input({
   return (
     <div className="space-y-2.5">
       <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-        <PlayCircle className="h-3 w-3" strokeWidth={1.8} />
+        <span className="text-xs">●</span>
         {label}
       </label>
       <div className="group relative">
@@ -175,7 +172,7 @@ function Select({
   return (
     <div className="space-y-2.5">
       <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-        <PlayCircle className="h-3 w-3" strokeWidth={1.8} />
+        <span className="text-xs">●</span>
         {label}
       </label>
       <div className="group relative">
@@ -209,7 +206,7 @@ function SegmentedSelect({
   return (
     <div className="space-y-2.5">
       <label className="flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-        <Users className="h-3 w-3" strokeWidth={1.8} />
+        <span className="text-xs">●</span>
         {label}
       </label>
       <div className="grid gap-2 border border-[rgba(212,175,55,0.18)] p-1.5 bg-[rgba(10,10,12,0.5)] sm:grid-cols-2">
@@ -240,12 +237,12 @@ function PrimaryButton({ onClick, children }: { onClick: () => void; children: R
   return (
     <button
       onClick={onClick}
-      className="group btn-gold relative inline-flex w-full items-center justify-center gap-3 overflow-hidden px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em]"
-      style={{ borderRadius: 0 }}
+      className="group btn-gold relative inline-flex w-full items-center justify-center gap-3 overflow-hidden px-8 py-5 text-sm font-semibold uppercase tracking-[0.22em]"
+      style={{ borderRadius: 0, minHeight: '56px' }}
     >
       <span className="relative z-10 flex items-center gap-3">
         {children}
-        <Sparkles className="h-4 w-4" strokeWidth={1.6} />
+        <span className="text-xs">→</span>
       </span>
       <span
         aria-hidden
@@ -260,15 +257,57 @@ export function ToolsCalculators() {
   const reduceMotion = useReducedMotion();
   const [active, setActive] = useState<ToolId>('bmi');
 
-  const [bmiState, setBmiState] = useState({ w: '', h: '', result: null as null | { bmi: number; category: string } });
-  const [pState, setPState] = useState({ w: '', activity: 'moderate', result: null as null | number });
-  const [cState, setCState] = useState({ age: '', w: '', h: '', gender: 'male', result: null as null | number });
+  const [bmiState, setBmiState] = useState({ 
+    w: '', 
+    h: '', 
+    hUnit: 'cm' as 'cm' | 'ftin',
+    feet: '',
+    inches: '',
+    age: '', 
+    gender: 'male' as 'male' | 'female',
+    result: null as null | { bmi: number; category: string },
+    error: '' as string
+  });
+  
+  const [pState, setPState] = useState({ 
+    w: '', 
+    h: '', 
+    hUnit: 'cm' as 'cm' | 'ftin',
+    feet: '',
+    inches: '',
+    age: '', 
+    gender: 'male' as 'male' | 'female',
+    fitnessGoal: 'general' as 'general' | 'muscle' | 'fatloss' | 'strength',
+    activityLevel: 'low' as 'low' | 'moderate' | 'active' | 'veryactive',
+    result: null as null | { protein: number; range: string },
+    error: '' as string
+  });
+  
+  const [cState, setCState] = useState({ age: '', w: '', h: '', gender: 'male' as 'male' | 'female', result: null as null | number });
   const [oState, setOState] = useState({ w: '', reps: '', result: null as null | number });
 
   const calcBMI = () => {
     const w = parseFloat(bmiState.w);
-    const h = parseFloat(bmiState.h) / 100;
-    if (!w || !h) return;
+    let h = 0;
+    
+    if (bmiState.hUnit === 'cm') {
+      h = parseFloat(bmiState.h) / 100;
+    } else {
+      const feet = parseFloat(bmiState.feet) || 0;
+      const inches = parseFloat(bmiState.inches) || 0;
+      h = (feet * 12 + inches) * 0.0254;
+    }
+    
+    if (!w) {
+      setBmiState({ ...bmiState, error: 'Please enter your weight.' });
+      return;
+    }
+    if (!h || h <= 0) {
+      setBmiState({ ...bmiState, error: 'Please enter your height.' });
+      return;
+    }
+    
+    setBmiState({ ...bmiState, error: '' });
     const bmi = w / (h * h);
     let category = '';
     if (bmi < 18.5) category = 'Underweight';
@@ -280,9 +319,39 @@ export function ToolsCalculators() {
 
   const calcProtein = () => {
     const w = parseFloat(pState.w);
-    if (!w) return;
-    const multipliers: Record<string, number> = { sedentary: 0.8, moderate: 1.4, active: 1.8, athlete: 2.2 };
-    setPState({ ...pState, result: Math.round(w * multipliers[pState.activity]) });
+    
+    if (!w) {
+      setPState({ ...pState, error: 'Please enter your weight.' });
+      return;
+    }
+    
+    setPState({ ...pState, error: '' });
+    
+    // Protein multipliers based on fitness goal
+    const goalMultipliers: Record<string, number> = { 
+      general: 1.2, 
+      muscle: 1.8, 
+      fatloss: 1.6, 
+      strength: 2.0 
+    };
+    
+    // Activity level adjustment
+    const activityMultipliers: Record<string, number> = { 
+      low: 0.9, 
+      moderate: 1.0, 
+      active: 1.1, 
+      veryactive: 1.2 
+    };
+    
+    const baseProtein = w * goalMultipliers[pState.fitnessGoal];
+    const adjustedProtein = baseProtein * activityMultipliers[pState.activityLevel];
+    const finalProtein = Math.round(adjustedProtein);
+    
+    // Calculate range
+    const minProtein = Math.round(finalProtein * 0.85);
+    const maxProtein = Math.round(finalProtein * 1.15);
+    
+    setPState({ ...pState, result: { protein: finalProtein, range: `${minProtein}–${maxProtein}` } });
   };
 
   const calcCalories = () => {
@@ -354,7 +423,6 @@ export function ToolsCalculators() {
           className="mb-14 grid grid-cols-2 gap-px border border-[rgba(212,175,55,0.15)] bg-[rgba(212,175,55,0.15)] lg:grid-cols-4"
         >
           {TOOLS.map((t) => {
-            const Icon = t.icon;
             const isActive = active === t.id;
             return (
               <button
@@ -371,10 +439,9 @@ export function ToolsCalculators() {
                       : 'border-[rgba(212,175,55,0.18)] bg-transparent group-hover:border-[rgba(212,175,55,0.35)]'
                   }`}
                 >
-                  <Icon
-                    className={`h-5 w-5 transition-colors ${isActive ? 'text-[#F1DDA0]' : 'text-[#A8A39A] group-hover:text-warm-white'}`}
-                    strokeWidth={isActive ? 1.5 : 1.8}
-                  />
+                  <span className={`text-xl ${isActive ? 'text-[#F1DDA0]' : 'text-[#A8A39A] group-hover:text-warm-white'}`}>
+                    {t.index}
+                  </span>
                 </div>
                 <div className="min-w-0">
                   <div className={`text-[10px] uppercase tracking-[0.28em] transition-colors ${isActive ? 'text-[#D4AF37]' : 'text-[#5E574D]'}`}>
@@ -419,8 +486,8 @@ export function ToolsCalculators() {
           >
             <div className="absolute left-0 right-0 top-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.7), transparent)' }} />
 
-            <div className="grid grid-cols-1 lg:grid-cols-5">
-              <div className="relative border-b border-[rgba(212,175,55,0.1)] p-8 lg:col-span-3 lg:border-b-0 lg:border-r lg:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-[11fr_9fr]">
+              <div className="relative border-b border-[rgba(212,175,55,0.1)] p-8 lg:border-b-0 lg:border-r lg:p-12 lg:px-14 lg:py-12">
                 <div
                   className="absolute inset-0 opacity-60"
                   style={{ background: 'linear-gradient(135deg, rgba(212,175,55,0.04) 0%, transparent 60%)' }}
@@ -442,48 +509,216 @@ export function ToolsCalculators() {
                         {activeTool.sub}
                       </span>
                     </h3>
-                    <div
-                      className="flex h-16 w-16 shrink-0 items-center justify-center border border-[rgba(212,175,55,0.25)]"
-                      style={{ background: 'rgba(212,175,55,0.05)' }}
-                    >
-                      <activeTool.icon className="h-7 w-7 text-[#D4AF37]" strokeWidth={1.3} />
-                    </div>
                   </div>
 
-                  <div className="mt-10 space-y-6">
+                  <div className="mt-10 space-y-8">
                     {active === 'bmi' && (
                       <>
-                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                          <Input label="Weight" placeholder="Enter your weight" value={bmiState.w} onChange={(s) => setBmiState({ ...bmiState, w: s })} suffix="kg" />
-                          <Input label="Height" placeholder="Enter your height" value={bmiState.h} onChange={(s) => setBmiState({ ...bmiState, h: s })} suffix="cm" />
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                          <Input label="Weight" placeholder="Enter your weight" value={bmiState.w} onChange={(s) => setBmiState({ ...bmiState, w: s, error: '' })} suffix="kg" />
+                          <div className="space-y-2.5">
+                            <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                              <span className="text-xs">●</span>
+                              Height Unit
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                              <button
+                                onClick={() => setBmiState({ ...bmiState, hUnit: 'cm', error: '' })}
+                                className={`px-4 py-3 text-sm transition-all ${
+                                  bmiState.hUnit === 'cm'
+                                    ? 'bg-[rgba(212,175,55,0.1)] text-[#F1DDA0] border border-[rgba(212,175,55,0.5)]'
+                                    : 'bg-[rgba(10,10,12,0.5)] text-[#A8A39A] border border-[rgba(212,175,55,0.18)] hover:border-[rgba(212,175,55,0.35)]'
+                                }`}
+                              >
+                                CM
+                              </button>
+                              <button
+                                onClick={() => setBmiState({ ...bmiState, hUnit: 'ftin', error: '' })}
+                                className={`px-4 py-3 text-sm transition-all ${
+                                  bmiState.hUnit === 'ftin'
+                                    ? 'bg-[rgba(212,175,55,0.1)] text-[#F1DDA0] border border-[rgba(212,175,55,0.5)]'
+                                    : 'bg-[rgba(10,10,12,0.5)] text-[#A8A39A] border border-[rgba(212,175,55,0.18)] hover:border-[rgba(212,175,55,0.35)]'
+                                }`}
+                              >
+                                FT/IN
+                              </button>
+                            </div>
+                          </div>
+                          <Input label="Age" placeholder="Enter your age" value={bmiState.age} onChange={(s) => setBmiState({ ...bmiState, age: s, error: '' })} suffix="yrs" />
                         </div>
-                        <PrimaryButton onClick={calcBMI}>Calculate BMI</PrimaryButton>
+                        {bmiState.hUnit === 'cm' ? (
+                          <div className="grid grid-cols-1 gap-6">
+                            <Input label="Height" placeholder="Enter your height" value={bmiState.h} onChange={(s) => setBmiState({ ...bmiState, h: s, error: '' })} suffix="cm" />
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-6">
+                            <Input label="Feet" placeholder="e.g., 5" value={bmiState.feet} onChange={(s) => setBmiState({ ...bmiState, feet: s, error: '' })} suffix="ft" />
+                            <Input label="Inches" placeholder="e.g., 10" value={bmiState.inches} onChange={(s) => setBmiState({ ...bmiState, inches: s, error: '' })} suffix="in" />
+                          </div>
+                        )}
+                        {bmiState.error && (
+                          <div className="text-sm text-red-400">{bmiState.error}</div>
+                        )}
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                            <span className="text-xs">●</span>
+                            Gender
+                          </label>
+                          <div className="grid grid-cols-2 gap-4">
+                            <OptionCard
+                              label="MALE"
+                              selected={bmiState.gender === 'male'}
+                              onClick={() => setBmiState({ ...bmiState, gender: 'male' })}
+                            />
+                            <OptionCard
+                              label="FEMALE"
+                              selected={bmiState.gender === 'female'}
+                              onClick={() => setBmiState({ ...bmiState, gender: 'female' })}
+                            />
+                          </div>
+                        </div>
+                        <PrimaryButton onClick={calcBMI}>CALCULATE MY BMI →</PrimaryButton>
                       </>
                     )}
                     {active === 'protein' && (
                       <>
-                        <Input label="Body Weight" placeholder="Enter your weight" value={pState.w} onChange={(s) => setPState({ ...pState, w: s })} suffix="kg" />
-                        <Select
-                          label="Activity Level"
-                          value={pState.activity}
-                          onChange={(s) => setPState({ ...pState, activity: s })}
-                          options={[
-                            { value: 'sedentary', label: 'Sedentary · 0.8g / kg' },
-                            { value: 'moderate', label: 'Moderate · 1.4g / kg' },
-                            { value: 'active', label: 'Active · 1.8g / kg' },
-                            { value: 'athlete', label: 'Athlete · 2.2g / kg' },
-                          ]}
-                        />
-                        <PrimaryButton onClick={calcProtein}>Calculate Protein</PrimaryButton>
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                          <Input label="Weight" placeholder="Enter your weight" value={pState.w} onChange={(s) => setPState({ ...pState, w: s, error: '' })} suffix="kg" />
+                          <div className="space-y-2.5">
+                            <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                              <span className="text-xs">●</span>
+                              Height Unit
+                            </label>
+                            <div className="grid grid-cols-2 gap-3">
+                              <button
+                                onClick={() => setPState({ ...pState, hUnit: 'cm', error: '' })}
+                                className={`px-4 py-3 text-sm transition-all ${
+                                  pState.hUnit === 'cm'
+                                    ? 'bg-[rgba(212,175,55,0.1)] text-[#F1DDA0] border border-[rgba(212,175,55,0.5)]'
+                                    : 'bg-[rgba(10,10,12,0.5)] text-[#A8A39A] border border-[rgba(212,175,55,0.18)] hover:border-[rgba(212,175,55,0.35)]'
+                                }`}
+                              >
+                                CM
+                              </button>
+                              <button
+                                onClick={() => setPState({ ...pState, hUnit: 'ftin', error: '' })}
+                                className={`px-4 py-3 text-sm transition-all ${
+                                  pState.hUnit === 'ftin'
+                                    ? 'bg-[rgba(212,175,55,0.1)] text-[#F1DDA0] border border-[rgba(212,175,55,0.5)]'
+                                    : 'bg-[rgba(10,10,12,0.5)] text-[#A8A39A] border border-[rgba(212,175,55,0.18)] hover:border-[rgba(212,175,55,0.35)]'
+                                }`}
+                              >
+                                FT/IN
+                              </button>
+                            </div>
+                          </div>
+                          <Input label="Age" placeholder="Enter your age" value={pState.age} onChange={(s) => setPState({ ...pState, age: s, error: '' })} suffix="yrs" />
+                        </div>
+                        {pState.hUnit === 'cm' ? (
+                          <div className="grid grid-cols-1 gap-6">
+                            <Input label="Height" placeholder="Enter your height" value={pState.h} onChange={(s) => setPState({ ...pState, h: s, error: '' })} suffix="cm" />
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-6">
+                            <Input label="Feet" placeholder="e.g., 5" value={pState.feet} onChange={(s) => setPState({ ...pState, feet: s, error: '' })} suffix="ft" />
+                            <Input label="Inches" placeholder="e.g., 10" value={pState.inches} onChange={(s) => setPState({ ...pState, inches: s, error: '' })} suffix="in" />
+                          </div>
+                        )}
+                        {pState.error && (
+                          <div className="text-sm text-red-400">{pState.error}</div>
+                        )}
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                            <span className="text-xs">●</span>
+                            Gender
+                          </label>
+                          <div className="grid grid-cols-2 gap-4">
+                            <OptionCard
+                              label="MALE"
+                              selected={pState.gender === 'male'}
+                              onClick={() => setPState({ ...pState, gender: 'male' })}
+                            />
+                            <OptionCard
+                              label="FEMALE"
+                              selected={pState.gender === 'female'}
+                              onClick={() => setPState({ ...pState, gender: 'female' })}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                            <span className="text-xs">●</span>
+                            Fitness Goal
+                          </label>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <OptionCard
+                              label="GENERAL FITNESS"
+                              description="Maintain weight & overall health"
+                              selected={pState.fitnessGoal === 'general'}
+                              onClick={() => setPState({ ...pState, fitnessGoal: 'general' })}
+                            />
+                            <OptionCard
+                              label="MUSCLE GAIN"
+                              description="Build lean muscle mass"
+                              selected={pState.fitnessGoal === 'muscle'}
+                              onClick={() => setPState({ ...pState, fitnessGoal: 'muscle' })}
+                            />
+                            <OptionCard
+                              label="FAT LOSS"
+                              description="Preserve muscle while cutting fat"
+                              selected={pState.fitnessGoal === 'fatloss'}
+                              onClick={() => setPState({ ...pState, fitnessGoal: 'fatloss' })}
+                            />
+                            <OptionCard
+                              label="STRENGTH TRAINING"
+                              description="Maximize strength & power output"
+                              selected={pState.fitnessGoal === 'strength'}
+                              onClick={() => setPState({ ...pState, fitnessGoal: 'strength' })}
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.32em] text-[#D4AF37]">
+                            <span className="text-xs">●</span>
+                            Activity Level
+                          </label>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <OptionCard
+                              label="LOW"
+                              description="Sedentary or light daily activity"
+                              selected={pState.activityLevel === 'low'}
+                              onClick={() => setPState({ ...pState, activityLevel: 'low' })}
+                            />
+                            <OptionCard
+                              label="MODERATE"
+                              description="3–4 workouts / active routines per week"
+                              selected={pState.activityLevel === 'moderate'}
+                              onClick={() => setPState({ ...pState, activityLevel: 'moderate' })}
+                            />
+                            <OptionCard
+                              label="ACTIVE"
+                              description="5+ intense workouts per week"
+                              selected={pState.activityLevel === 'active'}
+                              onClick={() => setPState({ ...pState, activityLevel: 'active' })}
+                            />
+                            <OptionCard
+                              label="VERY ACTIVE"
+                              description="Daily heavy training or physically active job"
+                              selected={pState.activityLevel === 'veryactive'}
+                              onClick={() => setPState({ ...pState, activityLevel: 'veryactive' })}
+                            />
+                          </div>
+                        </div>
+                        <PrimaryButton onClick={calcProtein}>CALCULATE MY PROTEIN →</PrimaryButton>
                       </>
                     )}
                     {active === 'calorie' && (
                       <>
-                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                           <Input label="Age" placeholder="Years" value={cState.age} onChange={(s) => setCState({ ...cState, age: s })} suffix="yrs" />
                           <Input label="Weight" placeholder="kg" value={cState.w} onChange={(s) => setCState({ ...cState, w: s })} suffix="kg" />
                         </div>
-                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                           <Input label="Height" placeholder="cm" value={cState.h} onChange={(s) => setCState({ ...cState, h: s })} suffix="cm" />
                           <SegmentedSelect
                             label="Gender"
@@ -495,23 +730,23 @@ export function ToolsCalculators() {
                             ]}
                           />
                         </div>
-                        <PrimaryButton onClick={calcCalories}>Calculate Calories</PrimaryButton>
+                        <PrimaryButton onClick={calcCalories}>CALCULATE MY CALORIES →</PrimaryButton>
                       </>
                     )}
                     {active === 'onerm' && (
                       <>
-                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                           <Input label="Weight Lifted" placeholder="kg" value={oState.w} onChange={(s) => setOState({ ...oState, w: s })} suffix="kg" />
                           <Input label="Reps Performed" placeholder="reps" value={oState.reps} onChange={(s) => setOState({ ...oState, reps: s })} suffix="reps" />
                         </div>
-                        <PrimaryButton onClick={calc1RM}>Calculate 1-Rep Max</PrimaryButton>
+                        <PrimaryButton onClick={calc1RM}>CALCULATE MY 1-REP MAX →</PrimaryButton>
                       </>
                     )}
                   </div>
                 </div>
               </div>
 
-              <div className="relative flex flex-col p-8 lg:col-span-2 lg:p-12">
+              <div className="relative flex flex-col p-8 lg:p-12 lg:px-14 lg:py-12">
                 <div className="pointer-events-none absolute inset-0">
                   <div className="absolute left-1/2 top-1/2 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40" style={{ background: 'radial-gradient(ellipse, rgba(212,175,55,0.12), transparent 70%)', filter: 'blur(40px)' }} />
                 </div>
@@ -542,6 +777,11 @@ export function ToolsCalculators() {
                             <LinearBar label="Target range (18.5 – 24.9)" value={bmiState.result.bmi} max={30} unit="BMI" />
                             <LinearBar label="Classified" value={bmiState.result.bmi} max={38} unit="class" />
                           </div>
+                          <div className="mt-6 p-4 border border-gold/20 rounded-lg" style={{ background: 'rgba(212,175,55,0.05)' }}>
+                            <p className="text-xs text-muted-warm leading-relaxed">
+                              Your BMI is a general screening measurement and does not account for muscle mass, body composition or other individual factors.
+                            </p>
+                          </div>
                         </motion.div>
                       ) : active === 'protein' && pState.result !== null ? (
                         <motion.div
@@ -552,6 +792,7 @@ export function ToolsCalculators() {
                           transition={{ duration: 0.4 }}
                           className="w-full text-center"
                         >
+                          <div className="text-[11px] uppercase tracking-[0.32em] text-[#8E877A] mb-4">YOUR DAILY PROTEIN TARGET</div>
                           <div
                             className="font-display font-black leading-none"
                             style={{
@@ -563,15 +804,10 @@ export function ToolsCalculators() {
                               filter: 'drop-shadow(0 4px 24px rgba(212,175,55,0.38))',
                             }}
                           >
-                            {pState.result}
+                            {pState.result.protein}
                             <span className="ml-2 align-top text-[0.25em] font-semibold text-[#A8A39A]" style={{ WebkitTextFillColor: '#A8A39A' }}>g</span>
                           </div>
-                          <div className="mt-4 text-[11px] uppercase tracking-[0.32em] text-[#8E877A]">Per Day · Protein Target</div>
-                          <div className="mt-10 space-y-5">
-                            <LinearBar label="Minimum" value={Math.round(parseFloat(pState.w || '0') * 0.8)} max={Math.round(parseFloat(pState.w || '80') * 2.5)} unit="g" />
-                            <LinearBar label="Your target" value={pState.result} max={Math.round(parseFloat(pState.w || '80') * 2.5)} unit="g" />
-                            <LinearBar label="Athlete ceiling" value={Math.round(parseFloat(pState.w || '0') * 2.2)} max={Math.round(parseFloat(pState.w || '80') * 2.5)} unit="g" />
-                          </div>
+                          <div className="mt-4 text-sm text-[#8E877A]">Recommended range: {pState.result.range} g/day</div>
                         </motion.div>
                       ) : active === 'calorie' && cState.result !== null ? (
                         <motion.div
@@ -645,7 +881,7 @@ export function ToolsCalculators() {
                             className="flex h-24 w-24 items-center justify-center border border-[rgba(212,175,55,0.2)]"
                             style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.07), transparent 70%)' }}
                           >
-                            <Activity className="h-11 w-11 text-[#D4AF37]" strokeWidth={1.2} />
+                            <span className="text-4xl text-[#D4AF37]">◉</span>
                           </div>
                           <div>
                             <div className="font-display text-2xl font-semibold text-warm-white">
@@ -679,7 +915,7 @@ export function ToolsCalculators() {
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_auto]">
             <div className="max-w-3xl">
               <div className="flex items-center gap-4">
-                <Trophy className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5} />
+                <span className="text-sm text-[#D4AF37]">◆</span>
                 <span className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37]">Your Results · Your Plan</span>
               </div>
               <h3
@@ -699,25 +935,25 @@ export function ToolsCalculators() {
                 <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-[11px] uppercase tracking-[0.3em] text-[#8E877A]">
                   {bmiState.result && (
                     <span className="flex items-center gap-2">
-                      <Scale className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.5} />
+                      <span className="text-xs text-[#D4AF37]">●</span>
                       BMI <span className="text-gold-gradient">{bmiState.result.bmi}</span> · {bmiState.result.category}
                     </span>
                   )}
                   {pState.result !== null && (
                     <span className="flex items-center gap-2">
-                      <UtensilsCrossed className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.5} />
-                      Protein <span className="text-gold-gradient">{pState.result}g</span> / day
+                      <span className="text-xs text-[#D4AF37]">●</span>
+                      Protein <span className="text-gold-gradient">{pState.result.protein}g</span> / day
                     </span>
                   )}
                   {cState.result !== null && (
                     <span className="flex items-center gap-2">
-                      <Flame className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.5} />
+                      <span className="text-xs text-[#D4AF37]">●</span>
                       {cState.result.toLocaleString()} <span className="text-gold-gradient">kcal</span>
                     </span>
                   )}
                   {oState.result !== null && (
                     <span className="flex items-center gap-2">
-                      <Dumbbell className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.5} />
+                      <span className="text-xs text-[#D4AF37]">●</span>
                       1RM <span className="text-gold-gradient">{oState.result}kg</span>
                     </span>
                   )}
@@ -725,20 +961,21 @@ export function ToolsCalculators() {
               )}
             </div>
             <div className="flex flex-col items-stretch gap-4 lg:min-w-[280px]">
-              <GoldButton
-                href={waLink('Hello Duke Fitness Club! I used the Performance Lab calculators and would like a personalized plan.')}
-                external
-                icon
-                className="w-full"
+              <a
+                href="https://wa.me/8801608044682?text=Hello%20Duke%20Fitness%20Club!%20I%20used%20the%20Performance%20Lab%20calculators%20and%20would%20like%20a%20personalized%20plan."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em]"
+                style={{ borderRadius: 0 }}
               >
                 Book a Personal Trainer
-              </GoldButton>
+              </a>
               <a
                 href="/membership"
                 className="group inline-flex items-center justify-center gap-2 border border-[rgba(212,175,55,0.4)] px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D4AF37] transition-all duration-300 hover:border-[#D4AF37] hover:bg-[rgba(212,175,55,0.07)]"
               >
                 View Membership Plans
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.8} />
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
               </a>
             </div>
           </div>
