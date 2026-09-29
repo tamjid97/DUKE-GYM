@@ -9,6 +9,7 @@ import { FloatingButtons } from '@/components/layout/FloatingButtons';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { LanguageProvider } from '@/components/providers/LanguageProvider';
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { StructuredData } from '@/components/shared/StructuredData';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
@@ -57,15 +58,17 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${cinzel.variable} ${hindSiliguri.variable}`}>
       <body className="bg-obsidian text-warm-white antialiased">
         <LanguageProvider>
-          <Preloader />
-          <ScrollProgress />
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <MobileActionBar />
-          <FloatingButtons />
-          <BackToTop />
-          <StructuredData />
+          <ThemeProvider>
+            <Preloader />
+            <ScrollProgress />
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <MobileActionBar />
+            <FloatingButtons />
+            <BackToTop />
+            <StructuredData />
+          </ThemeProvider>
         </LanguageProvider>
       </body>
     </html>
