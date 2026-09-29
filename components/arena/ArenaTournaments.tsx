@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { tournaments } from '@/data/games';
-import { Calendar, Trophy, Clock, ChevronRight } from 'lucide-react';
+
 import { waLink } from '@/lib/contact';
 
 const tournamentImages = [
@@ -54,7 +54,7 @@ export function ArenaTournaments() {
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-[#D4AF37] transition-all hover:gap-3"
             >
-              Register Entry <ChevronRight className="h-3.5 w-3.5" />
+              Register Entry <span className="h-3.5 w-3.5">→</span>
             </a>
           </div>
         </motion.div>
@@ -94,17 +94,16 @@ export function ArenaTournaments() {
                     }`}
                     style={{ background: 'rgba(212,175,55,0.06)' }}
                   >
-                    <Trophy
+                    <span
                       className={`${i === 0 ? 'h-10 w-10 lg:h-12 lg:w-12' : 'h-7 w-7'} text-gold-gradient`}
-                      strokeWidth={1.2}
-                    />
+                    >🏆</span>
                   </div>
                   <div className={`space-y-2 ${i === 0 ? '' : ''}`}>
                     <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] text-[#D4AF37]">
-                      <Calendar className="h-3 w-3" strokeWidth={1.8} />
+                      <span className="h-3 w-3">📅</span>
                       {t.day}
                       <span className="text-[#5E574D]">◆</span>
-                      <Clock className="h-3 w-3" strokeWidth={1.8} />
+                      <span className="h-3 w-3">🕐</span>
                       {t.time}
                     </div>
                     <h3
@@ -143,7 +142,7 @@ export function ArenaTournaments() {
                     className="group/btn inline-flex items-center gap-2 border border-[rgba(212,175,55,0.4)] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#D4AF37] transition-all duration-300 hover:bg-[rgba(212,175,55,0.08)] hover:border-[#D4AF37]"
                   >
                     Join
-                    <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    <span className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1">→</span>
                   </a>
                 </div>
               </div>
