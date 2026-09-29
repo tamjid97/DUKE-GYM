@@ -5,7 +5,7 @@ import { swimmingClasses } from '@/data/pool';
 import { galleryItems } from '@/data/gallery';
 import { waLink } from '@/lib/contact';
 
-const aquaImages = galleryItems.filter((g) => g.category === 'Aqua').map((g) => g.image);
+const aquaImages = galleryItems.filter((g) => g.category === 'Aqua').map((g) => g.src);
 
 export function AquaClasses() {
   const reduceMotion = useReducedMotion();
