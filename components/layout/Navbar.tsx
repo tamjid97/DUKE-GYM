@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -65,20 +66,15 @@ export function Navbar() {
         }}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8">
-          <Link href="/" className="flex items-center gap-2">
-            <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
-              <defs>
-                <linearGradient id="navLionGold" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="var(--accent-deep)" />
-                  <stop offset="50%" stopColor="var(--accent-primary)" />
-                  <stop offset="100%" stopColor="var(--accent-highlight)" />
-                </linearGradient>
-              </defs>
-              <path d="M60 15 L75 25 L85 20 L80 38 L95 42 L85 55 L92 70 L75 68 L70 85 L60 78 L50 85 L45 68 L28 70 L35 55 L25 42 L40 38 L35 20 L45 25 Z" fill="url(#navLionGold)" />
-              <circle cx="50" cy="48" r="3" fill="var(--obsidian)" />
-              <circle cx="70" cy="48" r="3" fill="var(--obsidian)" />
-              <path d="M52 60 Q60 66 68 60" stroke="var(--obsidian)" strokeWidth="2" fill="none" />
-            </svg>
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="Duke Fitness Club logo"
+              width={48}
+              height={48}
+              className="h-12 w-auto"
+              priority
+            />
             <div className="hidden sm:block">
               <div
                 className="font-display text-lg font-bold tracking-widest leading-none text-accent-gradient"
@@ -211,7 +207,16 @@ export function Navbar() {
               className="flex items-center justify-between p-4 border-b"
               style={{ borderColor: 'var(--border-accent)' }}
             >
-              <span className="font-display text-xl font-bold text-accent-gradient">DUKE</span>
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/logo.png"
+                  alt="Duke Fitness Club logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-auto"
+                />
+                <span className="font-display text-xl font-bold text-accent-gradient">DUKE</span>
+              </div>
               <button
                 onClick={() => setMobileOpen(false)}
                 className="p-2"

@@ -76,8 +76,8 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
 
   const stats = [
     { label: t.members, value: siteConfig.stats.members, suffix: '+' },
-    { label: t.trainersLabel, value: siteConfig.stats.trainers, suffix: '' },
-    { label: t.programsLabel, value: siteConfig.stats.programs, suffix: '' },
+    { label: t.trainers, value: siteConfig.stats.trainers, suffix: '' },
+    { label: t.programs, value: siteConfig.stats.programs, suffix: '' },
     { label: t.years, value: siteConfig.stats.years, suffix: '+' },
   ];
 

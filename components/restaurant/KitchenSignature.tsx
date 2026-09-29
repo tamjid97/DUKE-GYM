@@ -146,7 +146,7 @@ export function KitchenSignature() {
                             href={waLink(`Hello Duke Kitchen! I'd like to order: ${item.name} — ৳${item.price}.`)}
                             external
                             icon
-                            variant="outline"
+                            variant="secondary"
                             className="!px-3 !py-1.5 text-[11px]"
                           >
                             Order

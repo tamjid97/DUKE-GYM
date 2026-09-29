@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
@@ -17,19 +18,13 @@ export function Footer() {
       <div className="mx-auto px-6 py-20 lg:px-16" style={{ maxWidth: '1600px' }}>
         <div className="mb-16 flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
           <div className="flex items-center gap-4">
-            <svg width="52" height="52" viewBox="0 0 120 120" fill="none">
-              <defs>
-                <linearGradient id="footerGold" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#8C6B2A" />
-                  <stop offset="50%" stopColor="#D4AF37" />
-                  <stop offset="100%" stopColor="#F1DDA0" />
-                </linearGradient>
-              </defs>
-              <path d="M60 15 L75 25 L85 20 L80 38 L95 42 L85 55 L92 70 L75 68 L70 85 L60 78 L50 85 L45 68 L28 70 L35 55 L25 42 L40 38 L35 20 L45 25 Z" fill="url(#footerGold)" />
-              <circle cx="50" cy="48" r="3" fill="#0B0B0C" />
-              <circle cx="70" cy="48" r="3" fill="#0B0B0C" />
-              <path d="M52 60 Q60 66 68 60" stroke="#0B0B0C" strokeWidth="2" fill="none" />
-            </svg>
+            <Image
+              src="/logo.png"
+              alt="Duke Fitness Club logo"
+              width={56}
+              height={56}
+              className="h-14 w-auto"
+            />
             <div>
               <div className="font-display text-[clamp(40px,6vw,72px)] font-bold leading-none tracking-tight text-gold-gradient">DUKE</div>
               <div className="text-[10px] uppercase tracking-[0.35em] text-muted-warm">Fitness Club</div>

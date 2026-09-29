@@ -157,7 +157,7 @@ export function ArenaPackages() {
                       <GoldButton
                         href={waLink(`Hello Duke Arena! I'm interested in the ${pkg.name} package (${pkg.duration}).`)}
                         external
-                        variant={featured ? 'solid' : 'outline'}
+                        variant={featured ? 'primary' : 'secondary'}
                         icon
                         className="flex-1"
                       >

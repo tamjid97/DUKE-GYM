@@ -28,11 +28,6 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-      },
     },
   };
 
@@ -53,7 +48,6 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -74,69 +68,42 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
     },
   };
 
-  const SectionContent = ({ animated }: { animated: boolean }) => (
+  const SectionContent = () => (
     <div className="mx-auto max-w-7xl px-4 lg:px-8">
-      <motion.div
-        variants={animated ? headingWrapperVariants : undefined}
-        initial={animated ? 'hidden' : false}
-        animate={animated ? 'show' : false}
-        className="flex flex-col gap-3 items-center text-center"
-      >
-        <motion.div
-          variants={animated ? headingItem : undefined}
-          className="mb-1"
-        >
+      <div className="flex flex-col gap-3 items-center text-center">
+        <div className="mb-1">
           <span className="section-label">Reviews</span>
-        </motion.div>
-        <motion.h2
-          variants={animated ? headingItem : undefined}
-          className="font-display text-3xl font-bold text-warm-white sm:text-4xl lg:text-5xl"
-        >
+        </div>
+        <h2 className="font-display text-3xl font-bold text-warm-white sm:text-4xl lg:text-5xl">
           {t.memberReviews}
-        </motion.h2>
-        <motion.div
-          variants={animated ? headingItem : undefined}
-          className="diamond-divider mt-2"
-        >
+        </h2>
+        <div className="diamond-divider mt-2">
           <div className="diamond" />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <motion.div
-        variants={animated ? gridVariants : undefined}
-        initial={animated ? 'hidden' : false}
-        animate={animated ? 'show' : false}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
         className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
       >
         {testimonials.map((ts, i) => (
           <motion.div
             key={ts.id}
-            variants={animated ? cardVariants : undefined}
-            initial={animated ? false : { opacity: 0, y: 20 }}
-            animate={animated ? false : undefined}
-            whileInView={animated ? false : { opacity: 1, y: 0 }}
-            viewport={animated ? undefined : { once: true }}
-            transition={
-              animated
-                ? undefined
-                : { duration: 0.4, delay: i * 0.1 }
-            }
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
             className="glass-card p-6 flex flex-col"
-            style={
-              animated
-                ? {
-                    boxShadow:
-                      '0 0 0 1px color-mix(in srgb, var(--accent-400) 18%, transparent), 0 20px 40px -20px rgba(0,0,0,0.6)',
-                  }
-                : undefined
-            }
+            style={{
+              boxShadow:
+                '0 0 0 1px color-mix(in srgb, var(--accent-400) 18%, transparent), 0 20px 40px -20px rgba(0,0,0,0.6)',
+            }}
           >
             <Quote className="h-8 w-8 text-gold/40 mb-3" />
             <p className="text-sm text-warm-white leading-relaxed flex-1">{ts.text}</p>
@@ -171,14 +138,14 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
         initial="hidden"
         animate={revealed ? 'show' : 'hidden'}
       >
-        <SectionContent animated={revealed} />
+        <SectionContent />
       </motion.section>
     );
   }
 
   return (
     <section className="relative py-20 lg:py-28 bg-smoke/30">
-      <SectionContent animated={false} />
+      <SectionContent />
     </section>
   );
 }

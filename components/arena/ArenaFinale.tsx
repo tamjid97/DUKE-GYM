@@ -59,7 +59,6 @@ export function ArenaFinale() {
               initial={reduceMotion ? false : { opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 1.1 }}
               animate={{
                 filter: reduceMotion
                   ? 'none'
@@ -70,10 +69,14 @@ export function ArenaFinale() {
                     ],
               }}
               transition={{
-                duration: 3.4,
-                repeat: Infinity,
-                repeatType: 'reverse',
-                ease: 'easeInOut',
+                delay: 0.2,
+                duration: 1.1,
+                filter: {
+                  duration: 3.4,
+                  repeat: Infinity,
+                  repeatType: 'reverse',
+                  ease: 'easeInOut',
+                },
               }}
               style={{
                 background: 'linear-gradient(135deg, #7B5E20 0%, #B89338 18%, #F1DDA0 48%, #D4AF37 70%, #8C6B2A 100%)',
