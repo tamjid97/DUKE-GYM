@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { eventPackages } from '@/data/games';
 import { GoldButton } from '@/components/shared/GoldButton';
-import { Users, Sparkles, ArrowRight, Star } from 'lucide-react';
+
 import { waLink } from '@/lib/contact';
 
 const packageImages = [
@@ -80,7 +80,7 @@ export function ArenaPackages() {
                       color: '#0A0A0C',
                     }}
                   >
-                    <span className="flex items-center gap-2"><Star className="h-3 w-3" fill="#0A0A0C" strokeWidth={0} /> Most Popular</span>
+                    <span className="flex items-center gap-2"><span className="h-3 w-3">⭐</span> Most Popular</span>
                   </div>
                 )}
 
@@ -113,7 +113,7 @@ export function ArenaPackages() {
                         {pkg.name}
                       </h3>
                       <div className="mt-3 flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-[#8E877A]">
-                        <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.6} />
+                        <span className="h-3.5 w-3.5 text-[#D4AF37]">✨</span>
                         {pkg.duration} of private play
                       </div>
                     </div>
@@ -178,7 +178,7 @@ export function ArenaPackages() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-12 flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.3em] text-[#8E877A]"
         >
-          <Users className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.6} />
+          <span className="h-4 w-4 text-[#D4AF37]">👥</span>
           Need a bespoke package for 30+ guests?
           <a
             href={waLink('Hello Duke Arena! I would like a bespoke event package quote.')}
@@ -186,7 +186,7 @@ export function ArenaPackages() {
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-[#D4AF37] transition-all hover:gap-2.5"
           >
-            Talk to our events team <ArrowRight className="h-3.5 w-3.5" />
+            Talk to our events team <span className="h-3.5 w-3.5">→</span>
           </a>
         </motion.div>
       </div>
