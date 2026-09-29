@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Flame } from 'lucide-react';
+
 import { GoldButton } from '@/components/shared/GoldButton';
 import { waLink } from '@/lib/contact';
 import { menuItems } from '@/data/menu';
@@ -88,7 +88,7 @@ export function KitchenSignature() {
                 )}
                 {heroItem.spicy && (
                   <span className="flex items-center gap-2 rounded-full border border-gold/20 bg-smoke/60 px-3 py-1.5 text-[12px] backdrop-blur">
-                    <Flame className="h-3.5 w-3.5 text-red-400" />
+                    <span className="h-3.5 w-3.5 text-red-400">🌶️</span>
                   </span>
                 )}
               </div>
@@ -140,7 +140,7 @@ export function KitchenSignature() {
                             {item.calories !== undefined && (
                               <span className="text-[11px] text-warm-white/60">· {item.calories} cal</span>
                             )}
-                            {item.spicy && <Flame className="h-3 w-3 text-red-400" />}
+                            {item.spicy && <span className="h-3 w-3 text-red-400">🌶️</span>}
                           </div>
                           <GoldButton
                             href={waLink(`Hello Duke Kitchen! I'd like to order: ${item.name} — ৳${item.price}.`)}
@@ -174,7 +174,7 @@ export function KitchenSignature() {
                             {item.protein !== undefined && (
                               <span className="text-[11px] text-gold/80">· {item.protein}g</span>
                             )}
-                            {item.spicy && <Flame className="h-3 w-3 text-red-400" />}
+                            {item.spicy && <span className="h-3 w-3 text-red-400">🌶️</span>}
                           </div>
                           <a
                             href={waLink(`Hello Duke Kitchen! I'd like to order: ${item.name} — ৳${item.price}.`)}
