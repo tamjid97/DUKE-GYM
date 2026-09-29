@@ -6,7 +6,7 @@ import { FourWorlds } from '@/components/sections/FourWorlds';
 import { ExploreBuilding } from '@/components/sections/ExploreBuilding';
 import { FeaturedPrograms } from '@/components/sections/FeaturedPrograms';
 import { MembershipPreview } from '@/components/sections/MembershipPreview';
-import { TrainersPreview } from '@/components/sections/TrainersPreview';
+import { FeaturedTrainer } from '@/components/sections/FeaturedTrainer';
 import { ZoneHighlights } from '@/components/sections/ZoneHighlights';
 import { TransformationsSection } from '@/components/sections/TransformationsSection';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -31,7 +31,7 @@ export function HomeClient() {
       <ExploreBuilding />
       <FeaturedPrograms />
       <MembershipPreview />
-      <TrainersPreview />
+      <FeaturedTrainer />
       <ZoneHighlights />
       <TransformationsSection />
       <Testimonials forceReveal={revealed} />
