@@ -13,17 +13,22 @@ interface ArticleModalProps {
 
 export function ArticleModal({ post, onClose, relatedPosts = [], onReadRelated }: ArticleModalProps) {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     if (post) {
+      const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [post]);
 
   if (!post) return null;
 
   const handleShare = (platform: string) => {
+    if (typeof window === 'undefined') return;
+    
     const url = window.location.href;
     const title = post.title;
     

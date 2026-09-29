@@ -30,44 +30,49 @@ export const galleryItems: GalleryItem[] = [
 export interface Testimonial {
   id: string;
   name: string;
-  role: string;
+  memberSince: string;
   rating: number;
-  text: string;
+  quote: string;
   image: string;
+  largeImage?: string; // For the large portrait image (4:5 ratio)
 }
 
 export const testimonials: Testimonial[] = [
   {
     id: 'ts1',
     name: 'Arif Rahman',
-    role: 'Member — 2 years',
+    memberSince: '2 years',
     rating: 5,
-    text: 'Best gym in Dhaka, hands down. The equipment is top-class and the trainers actually care about your progress. Duke Kitchen\u2019s meal plans changed my fitness game completely.',
+    quote: 'Best gym in Dhaka, hands down. The equipment is top-class and the trainers actually care about your progress. Duke Kitchen\u2019s meal plans changed my fitness game completely.',
     image: 'https://images.pexels.com/photos/17210041/pexels-photo-17210041.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
+    largeImage: '/testimonials/arif-rahman.jpg',
   },
   {
     id: 'ts2',
     name: 'Nadia Sultana',
-    role: 'Member — 1 year',
+    memberSince: '1 year',
     rating: 5,
-    text: 'The women\u2019s section is fantastic — private, well-equipped, and Farzana is an amazing coach. The swimming pool is clean and well-maintained with separate timings.',
+    quote: 'The women\u2019s section is fantastic — private, well-equipped, and Farzana is an amazing coach. The swimming pool is clean and well-maintained with separate timings.',
     image: 'https://images.pexels.com/photos/31245340/pexels-photo-31245340.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
+    largeImage: '/testimonials/nadia-sultana.jpg',
   },
   {
     id: 'ts3',
     name: 'Sabbir Mahmud',
-    role: 'Member — 3 years',
+    memberSince: '3 years',
     rating: 5,
-    text: 'I joined for the gym but stayed for everything. After training I grab a protein shake at Duke Kitchen, then play billiards with friends at the Arena. It\u2019s a whole lifestyle.',
+    quote: 'I joined for the gym but stayed for everything. After training I grab a protein shake at Duke Kitchen, then play billiards with friends at the Arena. It\u2019s a whole lifestyle.',
     image: 'https://images.pexels.com/photos/8874355/pexels-photo-8874355.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
+    largeImage: '/testimonials/sabbir-mahmud.jpg',
   },
   {
     id: 'ts4',
     name: 'Tahmina Akter',
-    role: 'Member — 6 months',
+    memberSince: '6 months',
     rating: 5,
-    text: 'My kids learn swimming here and I use the gym at the same time. The family combo pass makes it affordable. The whole place feels premium and safe.',
+    quote: 'My kids learn swimming here and I use the gym at the same time. The family combo pass makes it affordable. The whole place feels premium and safe.',
     image: 'https://images.pexels.com/photos/20649585/pexels-photo-20649585.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=1',
+    largeImage: '/testimonials/tahmina-akter.jpg',
   },
 ];
 

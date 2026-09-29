@@ -55,6 +55,8 @@ export function FloatingContactButtons() {
   if (!mounted) return null;
 
   const handleScroll = (target: string) => {
+    if (typeof window === 'undefined') return;
+    
     const element = document.getElementById(target);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });

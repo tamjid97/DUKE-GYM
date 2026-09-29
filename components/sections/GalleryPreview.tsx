@@ -15,11 +15,16 @@ function VideoItem({ item, index }: VideoItemProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
     const video = videoRef.current;
-    if (!video) return;
+    if (!video || !isMounted) return;
 
     // Intersection Observer for play/pause based on visibility
     observerRef.current = new IntersectionObserver(
@@ -47,7 +52,7 @@ function VideoItem({ item, index }: VideoItemProps) {
         observerRef.current.disconnect();
       }
     };
-  }, []);
+  }, [isMounted]);
 
   const handleError = () => {
     setHasError(true);
@@ -100,7 +105,7 @@ function VideoItem({ item, index }: VideoItemProps) {
             muted
             loop
             playsInline
-            autoPlay
+            autoPlay={isMounted}
             preload="metadata"
             className={`w-full ${getHeight()} object-cover transition-transform duration-700 group-hover:scale-105`}
             onError={handleError}

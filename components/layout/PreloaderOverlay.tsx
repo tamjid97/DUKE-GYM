@@ -9,6 +9,8 @@ export function PreloaderOverlay() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     // Check if preloader already shown this session
     const hasShown = sessionStorage.getItem('preloaderShown');
     if (hasShown) {
@@ -17,6 +19,7 @@ export function PreloaderOverlay() {
     }
 
     // Prevent scroll while preloader is visible
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     // Set minimum duration and maximum duration
@@ -26,13 +29,13 @@ export function PreloaderOverlay() {
 
     const timer = setTimeout(() => {
       setIsVisible(false);
-      document.body.style.overflow = '';
+      document.body.style.overflow = originalOverflow;
       sessionStorage.setItem('preloaderShown', 'true');
     }, duration);
 
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = '';
+      document.body.style.overflow = originalOverflow;
     };
   }, [reduceMotion]);
 
@@ -105,14 +108,7 @@ export function PreloaderOverlay() {
               transition={{ duration: 0.6, ease: 'easeOut' }}
               className="relative z-10"
             >
-              <Image
-                src="/logo.png"
-                alt="Duke Fitness Club logo"
-                width={120}
-                height={120}
-                className="h-24 w-auto"
-                priority
-              />
+              {/* Logo removed as requested */}
             </motion.div>
 
             {/* Text */}

@@ -15,7 +15,7 @@ export function AquaHero() {
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   const onMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (reduceMotion || window.matchMedia('(pointer: coarse)').matches) return;
+    if (reduceMotion || (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)) return;
     const rect = e.currentTarget.getBoundingClientRect();
     setMouse({
       x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,

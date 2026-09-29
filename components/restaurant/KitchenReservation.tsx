@@ -14,6 +14,8 @@ export function KitchenReservation() {
   const [name, setName] = useState('');
 
   const handleSubmit = () => {
+    if (typeof window === 'undefined') return;
+    
     const msg = `Hello Duke Kitchen! I'd like to reserve a table.\nName: ${name}\nDate: ${date}\nTime: ${time}\nGuests: ${guests}`;
     window.open(waLink(msg), '_blank');
   };

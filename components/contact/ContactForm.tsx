@@ -9,6 +9,8 @@ export function ContactForm() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = () => {
+    if (typeof window === 'undefined') return;
+    
     const whatsappNumber = '8801608044682';
     const msg = `Hello DUKE Fitness Club,\n\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`;
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');

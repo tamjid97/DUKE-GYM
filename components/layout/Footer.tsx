@@ -10,7 +10,9 @@ export function Footer() {
   const { t } = useLang();
 
   const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (

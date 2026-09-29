@@ -39,7 +39,7 @@ export function ZoneHighlights() {
   return (
     <section className="relative py-20 lg:py-28 bg-smoke/30">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {highlights.map((h, i) => (
             <motion.div
               key={h.link}

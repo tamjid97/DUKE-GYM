@@ -12,6 +12,8 @@ export function ContactForm() {
   const [message, setMessage] = useState('');
 
   const handleSubmit = () => {
+    if (typeof window === 'undefined') return;
+    
     const msg = `Hello Duke Fitness Club!\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`;
     window.open(waLink(msg), '_blank');
   };

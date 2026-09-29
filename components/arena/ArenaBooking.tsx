@@ -23,6 +23,8 @@ export function ArenaBooking() {
   };
 
   const handleBook = () => {
+    if (typeof window === 'undefined') return;
+    
     const g = games.find((g) => g.id === selectedGame);
     const msg = `Hello Duke Arena! I'd like to book:\nGame: ${g?.name}\nDate: ${selectedDate}\nTime: ${selectedSlot}\nPlayers: ${players}`;
     window.open(waLink(msg), '_blank');

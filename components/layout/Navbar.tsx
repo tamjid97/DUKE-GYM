@@ -21,6 +21,8 @@ export function Navbar() {
   const [facilitiesOpen, setFacilitiesOpen] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     const onScroll = () => setScrolled(window.scrollY > 40);
 
     window.addEventListener('scroll', onScroll);
