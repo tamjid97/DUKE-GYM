@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '@/data/siteConfig';
+import { Counter } from '@/components/shared/Counter';
+import { useLang } from '@/components/providers/LanguageProvider';
 
 const revealTime = 2.8;
 
@@ -15,6 +17,16 @@ interface Particle {
   size: number;
   delay: number;
   duration: number;
+}
+
+interface Sparkle extends Particle {
+  rotate: number;
+  hue: number;
+}
+
+interface HeroProps {
+  revealed?: boolean;
+  onTrigger?: () => void;
 }
 
 const DUST_COUNT = 15;
@@ -33,10 +45,58 @@ const dustParticles: Particle[] = Array.from({ length: DUST_COUNT }).map((_, i) 
   };
 });
 
-export function Hero() {
+const SPARKLE_COUNT = 22;
+const sparkleParticles: Sparkle[] = Array.from({ length: SPARKLE_COUNT }).map((_, i) => {
+  const angle = Math.random() * Math.PI * 2;
+  const distance = 60 + Math.random() * 200;
+  return {
+    id: i,
+    x: 50,
+    y: 50,
+    dx: 50 + Math.cos(angle) * distance * 0.5,
+    dy: 50 + Math.sin(angle) * distance * 0.5,
+    size: 1.5 + Math.random() * 3.5,
+    delay: Math.random() * 400,
+    duration: 900 + Math.random() * 800,
+    rotate: Math.random() * 360,
+    hue: 42 + Math.random() * 12,
+  };
+});
+
+export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
+  const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const hasTriggeredRef = useRef(false);
-  const [revealed, setRevealed] = useState(false);
+  const [internalRevealed, setInternalRevealed] = useState(false);
+
+  const isControlled = revealedProp !== undefined;
+  const revealed = isControlled ? revealedProp! : internalRevealed;
+
+  const stats = [
+    { label: t.members, value: siteConfig.stats.members, suffix: '+' },
+    { label: t.trainersLabel, value: siteConfig.stats.trainers, suffix: '' },
+    { label: t.programsLabel, value: siteConfig.stats.programs, suffix: '' },
+    { label: t.years, value: siteConfig.stats.years, suffix: '+' },
+  ];
+
+  const fireTrigger = () => {
+    if (hasTriggeredRef.current) return;
+    hasTriggeredRef.current = true;
+    if (!isControlled) setInternalRevealed(true);
+    if (onTrigger) onTrigger();
+  };
+
+  const handlePress = () => {
+    fireTrigger();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fireTrigger();
+    }
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -44,15 +104,14 @@ export function Hero() {
 
     const onTimeUpdate = () => {
       if (!hasTriggeredRef.current && video.currentTime >= revealTime) {
-        hasTriggeredRef.current = true;
-        setRevealed(true);
+        fireTrigger();
       }
     };
 
     const onSeeked = () => {
       if (video.currentTime < 0.5 && hasTriggeredRef.current) {
         hasTriggeredRef.current = false;
-        setRevealed(false);
+        if (!isControlled) setInternalRevealed(false);
       }
     };
 
@@ -63,10 +122,20 @@ export function Hero() {
       video.removeEventListener('timeupdate', onTimeUpdate);
       video.removeEventListener('seeked', onSeeked);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isControlled]);
 
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      style={{ cursor: !revealed ? 'pointer' : 'default' }}
+      onClick={handlePress}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="Start cinematic reveal of Duke Gym"
+    >
       {/* Background video with cinematic overlay */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -197,6 +266,46 @@ export function Hero() {
         />
       ))}
 
+      {/* Premium golden sparkles / light flecks */}
+      {sparkleParticles.map((s) => (
+        <motion.div
+          key={`sparkle-${s.id}`}
+          className="absolute z-0 pointer-events-none"
+          style={{
+            left: `${s.x}%`,
+            top: `${s.y}%`,
+            width: s.size,
+            height: s.size * 2,
+            borderRadius: 1,
+            background: `linear-gradient(180deg, hsl(${s.hue}, 85%, 75%) 0%, hsl(${s.hue}, 90%, 55%) 50%, hsl(${s.hue - 8}, 80%, 40%) 100%)`,
+            boxShadow: `0 0 ${s.size * 3}px hsl(${s.hue}, 90%, 60%), 0 0 ${s.size * 6}px hsla(${s.hue}, 80%, 50%, 0.45)`,
+            transform: `rotate(${s.rotate}deg)`,
+          }}
+          initial={{ opacity: 0, x: 0, y: 0, scale: 0 }}
+          animate={
+            revealed
+              ? {
+                  opacity: [0, 1, 0.7, 0],
+                  scale: [0, 1.2, 0.8, 0],
+                  x: [(s.dx - s.x) * 0.1 + '%', (s.dx - s.x) * 1.1 + '%'],
+                  y: [(s.dy - s.y) * 0.1 + '%', (s.dy - s.y) * 1.1 + '%'],
+                  rotate: [s.rotate, s.rotate + 120],
+                }
+              : { opacity: 0, x: 0, y: 0, scale: 0 }
+          }
+          transition={
+            revealed
+              ? {
+                  times: [0, 0.3, 0.7, 1],
+                  duration: s.duration / 1000,
+                  delay: s.delay / 1000,
+                  ease: 'easeOut',
+                }
+              : { duration: 0 }
+          }
+        />
+      ))}
+
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto perspective-1200">
         
@@ -212,7 +321,7 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Welcome to text */}
+        {/* Welcome to DUKE GYM — WELCOME line */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden', y: 40, scale: 0.8 }}
           animate={
@@ -221,44 +330,65 @@ export function Hero() {
                   opacity: 1,
                   visibility: 'visible',
                   y: 0,
-                  scale: 1,
-                  filter: ['blur(6px)', 'blur(0px)'],
+                  scale: [0.8, 1.04, 1],
+                  filter: ['blur(6px)', 'blur(1px)', 'blur(0px)'],
                 }
               : { opacity: 0, visibility: 'hidden', y: 40, scale: 0.8, filter: 'blur(6px)' }
           }
           transition={
             revealed
               ? {
-                  duration: 0.45,
+                  duration: 0.55,
                   delay: 0.5,
                   ease: [0.22, 1, 0.36, 1],
-                  filter: { duration: 0.4, delay: 0.5 },
+                  times: [0, 0.55, 1],
+                  filter: { duration: 0.45, delay: 0.5, times: [0, 0.6, 1] },
                 }
               : { duration: 0.2 }
           }
           className="mb-4"
         >
-          <span
-            className="font-display font-medium tracking-[0.45em] uppercase"
+          <motion.span
+            className="font-display font-medium tracking-[0.45em] uppercase block"
             style={{
-              fontSize: 'clamp(0.85rem, 2.2vw, 1.35rem)',
+              fontSize: 'clamp(0.9rem, 2.4vw, 1.5rem)',
               color: 'var(--accent-400)',
-              letterSpacing: '0.4em',
-              textShadow: '0 2px 20px rgba(212, 175, 55, 0.4)',
+              letterSpacing: '0.42em',
             }}
+            animate={
+              revealed
+                ? {
+                    textShadow: [
+                      '0 0 0px rgba(212, 175, 55, 0)',
+                      '0 0 28px rgba(212, 175, 55, 0.65), 0 2px 40px rgba(241, 221, 160, 0.35)',
+                      '0 0 16px rgba(212, 175, 55, 0.45), 0 2px 22px rgba(212, 175, 55, 0.25)',
+                    ],
+                  }
+                : { textShadow: '0 0 0px rgba(212, 175, 55, 0)' }
+            }
+            transition={
+              revealed
+                ? {
+                    duration: 1.4,
+                    delay: 0.75,
+                    times: [0, 0.4, 1],
+                    ease: 'easeOut',
+                  }
+                : { duration: 0 }
+            }
           >
             Welcome to
-          </span>
+          </motion.span>
         </motion.div>
 
-        {/* Duke Gym title */}
+        {/* Duke Gym title — premium cinematic reveal */}
         <motion.h1
           initial={{
             opacity: 0,
             visibility: 'hidden',
-            y: 50,
-            scale: 0.65,
-            filter: 'blur(10px)',
+            y: 55,
+            scale: 0.6,
+            filter: 'blur(12px)',
           }}
           animate={
             revealed
@@ -266,34 +396,34 @@ export function Hero() {
                   opacity: 1,
                   visibility: 'visible',
                   y: 0,
-                  scale: [0.65, 1.08, 1],
-                  filter: ['blur(10px)', 'blur(2px)', 'blur(0px)'],
+                  scale: [0.6, 1.1, 1.02, 1],
+                  filter: ['blur(12px)', 'blur(3px)', 'blur(1px)', 'blur(0px)'],
                 }
               : {
                   opacity: 0,
                   visibility: 'hidden',
-                  y: 50,
-                  scale: 0.65,
-                  filter: 'blur(10px)',
+                  y: 55,
+                  scale: 0.6,
+                  filter: 'blur(12px)',
                 }
           }
           transition={
             revealed
               ? {
-                  duration: 0.8,
+                  duration: 0.95,
                   delay: 0.65,
                   ease: [0.19, 1, 0.36, 1],
-                  times: [0, 0.55, 1],
+                  times: [0, 0.48, 0.82, 1],
                   scale: {
-                    duration: 0.8,
+                    duration: 0.95,
                     delay: 0.65,
-                    times: [0, 0.55, 1],
-                    ease: [0.19, 1.25, 0.5, 1],
+                    times: [0, 0.48, 0.82, 1],
+                    ease: [0.19, 1.3, 0.55, 1.02],
                   },
                   filter: {
-                    duration: 0.55,
+                    duration: 0.65,
                     delay: 0.65,
-                    times: [0, 0.55, 1],
+                    times: [0, 0.45, 0.8, 1],
                   },
                 }
               : { duration: 0.2 }
@@ -304,15 +434,32 @@ export function Hero() {
             letterSpacing: '0.015em',
           }}
         >
-          <span
+          <motion.span
             className="text-accent-gradient inline-block relative"
-            style={{
-              textShadow:
-                '0 0 50px color-mix(in srgb, var(--accent-500) 45%, transparent), 0 0 100px color-mix(in srgb, var(--accent-500) 25%, transparent), 0 5px 40px rgba(0,0,0,0.6)',
-            }}
+            animate={
+              revealed
+                ? {
+                    textShadow: [
+                      '0 0 0 rgba(212, 175, 55, 0)',
+                      '0 0 70px color-mix(in srgb, var(--accent-500) 60%, transparent), 0 0 140px color-mix(in srgb, var(--accent-400) 40%, transparent), 0 6px 50px rgba(0,0,0,0.7)',
+                      '0 0 40px color-mix(in srgb, var(--accent-500) 42%, transparent), 0 0 90px color-mix(in srgb, var(--accent-500) 24%, transparent), 0 5px 40px rgba(0,0,0,0.6)',
+                    ],
+                  }
+                : { textShadow: '0 0 0 rgba(212, 175, 55, 0)' }
+            }
+            transition={
+              revealed
+                ? {
+                    duration: 1.8,
+                    delay: 0.9,
+                    times: [0, 0.38, 1],
+                    ease: 'easeOut',
+                  }
+                : { duration: 0 }
+            }
           >
             Duke Gym
-          </span>
+          </motion.span>
           <motion.span
             className="absolute inset-0 pointer-events-none"
             aria-hidden
@@ -320,12 +467,12 @@ export function Hero() {
             animate={revealed ? { x: ['-120%', '130%'] } : { x: '-120%' }}
             transition={
               revealed
-                ? { duration: 1.2, delay: 1.1, ease: [0.22, 1, 0.36, 1] }
+                ? { duration: 1.3, delay: 1.15, ease: [0.22, 1, 0.36, 1] }
                 : { duration: 0 }
             }
             style={{
               background:
-                'linear-gradient(100deg, transparent 0%, color-mix(in srgb, white 0%, transparent) 25%, color-mix(in srgb, white 75%, transparent) 50%, color-mix(in srgb, white 0%, transparent) 75%, transparent 100%)',
+                'linear-gradient(100deg, transparent 0%, color-mix(in srgb, var(--accent-300) 10%, transparent) 22%, color-mix(in srgb, white 85%, transparent) 50%, color-mix(in srgb, var(--accent-300) 10%, transparent) 78%, transparent 100%)',
               mixBlendMode: 'screen',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
@@ -377,6 +524,136 @@ export function Hero() {
               <path d="M5 12h14M13 5l7 7-7 7" />
             </svg>
           </a>
+        </motion.div>
+
+        {/* Stats Reveal — integrated directly below DUKE GYM cinematic */}
+        <motion.div
+          initial={{ opacity: 0, visibility: 'hidden' }}
+          animate={
+            revealed
+              ? { opacity: 1, visibility: 'visible' }
+              : { opacity: 0, visibility: 'hidden' }
+          }
+          transition={
+            revealed
+              ? { duration: 0.1, delay: 1.4 }
+              : { duration: 0.1 }
+          }
+          className="mt-14 w-full max-w-5xl mx-auto"
+        >
+          <div className="relative">
+            <div
+              className="absolute inset-0 -z-10 rounded-3xl pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(ellipse at center, color-mix(in srgb, var(--accent-500) 12%, transparent) 0%, transparent 70%)',
+                filter: 'blur(20px)',
+              }}
+            />
+            <div className="grid grid-cols-2 gap-6 sm:gap-10 lg:grid-cols-4 lg:gap-8">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={`hero-${stat.label}`}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={
+                    revealed
+                      ? { opacity: 1, y: 0 }
+                      : { opacity: 0, y: 50 }
+                  }
+                  transition={
+                    revealed
+                      ? {
+                          duration: 0.65,
+                          delay: 1.42 + i * 0.09,
+                          ease: [0.22, 1, 0.36, 1],
+                        }
+                      : { duration: 0.1 }
+                  }
+                  className="text-center"
+                >
+                  <motion.div
+                    initial={{ filter: 'blur(4px)' }}
+                    animate={
+                      revealed
+                        ? { filter: ['blur(4px)', 'blur(0px)'] }
+                        : { filter: 'blur(4px)' }
+                    }
+                    transition={
+                      revealed
+                        ? {
+                            duration: 0.5,
+                            delay: 1.42 + i * 0.09,
+                            ease: 'easeOut',
+                          }
+                        : { duration: 0.1 }
+                    }
+                    className="relative"
+                  >
+                    <motion.div
+                      animate={
+                        revealed
+                          ? {
+                              textShadow: [
+                                '0 0 0 rgba(212,175,55,0)',
+                                '0 0 28px color-mix(in srgb, var(--accent-400) 70%, transparent), 0 0 60px color-mix(in srgb, var(--accent-500) 35%, transparent)',
+                                '0 0 16px color-mix(in srgb, var(--accent-400) 45%, transparent), 0 0 32px color-mix(in srgb, var(--accent-500) 22%, transparent)',
+                              ],
+                            }
+                          : { textShadow: '0 0 0 rgba(212,175,55,0)' }
+                      }
+                      transition={
+                        revealed
+                          ? {
+                              duration: 1.8,
+                              delay: 1.6 + i * 0.1,
+                              times: [0, 0.4, 1],
+                              ease: 'easeOut',
+                            }
+                          : { duration: 0 }
+                      }
+                      className="font-display font-black leading-none text-gold-gradient"
+                      style={{
+                        fontSize: 'clamp(2.2rem, 6vw, 4.2rem)',
+                      }}
+                    >
+                      {revealed && (
+                        <Counter
+                          key={`counter-${i}-${revealed}`}
+                          target={stat.value}
+                          suffix={stat.suffix}
+                          duration={1.8}
+                        />
+                      )}
+                    </motion.div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={
+                      revealed
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 10 }
+                    }
+                    transition={
+                      revealed
+                        ? {
+                            duration: 0.5,
+                            delay: 1.65 + i * 0.09,
+                            ease: 'easeOut',
+                          }
+                        : { duration: 0.1 }
+                    }
+                    className="mt-2 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase"
+                    style={{
+                      color: 'var(--muted-warm)',
+                      textShadow: '0 1px 6px rgba(0,0,0,0.8)',
+                    }}
+                  >
+                    {stat.label}
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </div>
 
