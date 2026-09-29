@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
 import { siteConfig, type ZoneKey } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { SectionHeading } from '@/components/shared/SectionHeading';
@@ -66,7 +66,7 @@ export function FourWorlds() {
                       href={`/${zone.slug}`}
                       className="inline-flex items-center gap-1 text-sm text-gold hover:text-champagne transition-colors"
                     >
-                      {t.visitPage} <ArrowRight className="h-4 w-4" />
+                      {t.visitPage} <span className="h-4 w-4">→</span>
                     </Link>
                   </motion.div>
                 )}
