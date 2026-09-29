@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Search, Flame, Leaf, Star } from 'lucide-react';
+
 import { menuItems, menuCategories, type MenuItem } from '@/data/menu';
 import { Tabs } from '@/components/shared/Tabs';
 import { Modal } from '@/components/shared/Modal';
@@ -59,7 +59,7 @@ export function KitchenMenu() {
           className="mb-10 mx-auto max-w-2xl"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/70" />
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/70">🔍</span>
             <input
               type="text"
               placeholder="Search the menu..."
@@ -105,19 +105,19 @@ export function KitchenMenu() {
 
                       {item.popular && (
                         <span className="absolute top-4 right-4 flex items-center gap-1.5 px-3.5 py-1.5 bg-gold text-obsidian text-[10px] uppercase tracking-[0.22em] font-bold rounded-none">
-                          <Star className="h-3 w-3 fill-obsidian" /> Popular
+                          <span className="h-3 w-3 fill-obsidian">⭐</span> Popular
                         </span>
                       )}
 
                       <div className="absolute bottom-4 left-4 flex gap-2">
                         {item.veg && (
                           <span className="inline-flex items-center gap-1 bg-smoke/80 backdrop-blur px-2 py-0.5 border border-green-400/30 text-[10px] uppercase tracking-[0.2em] text-green-400">
-                            <Leaf className="h-4 w-4 text-green-400" /> Veg
+                            <span className="h-4 w-4 text-green-400">🥬</span> Veg
                           </span>
                         )}
                         {item.spicy && (
                           <span className="inline-flex items-center gap-1 bg-smoke/80 backdrop-blur px-2 py-0.5 border border-red-400/30 text-[10px] uppercase tracking-[0.2em] text-red-400">
-                            <Flame className="h-4 w-4 text-red-400" /> Spicy
+                            <span className="h-4 w-4 text-red-400">🌶️</span> Spicy
                           </span>
                         )}
                       </div>
@@ -209,12 +209,12 @@ export function KitchenMenu() {
                 )}
                 {selected.veg && (
                   <div className="glass-card corner-ornament px-4 py-3 text-green-400 flex items-center gap-2">
-                    <Leaf className="h-4 w-4" /> Vegetarian
+                    <span className="h-4 w-4">🥬</span> Vegetarian
                   </div>
                 )}
                 {selected.spicy && (
                   <div className="glass-card corner-ornament px-4 py-3 text-red-400 flex items-center gap-2">
-                    <Flame className="h-4 w-4" /> Spicy
+                    <span className="h-4 w-4">🌶️</span> Spicy
                   </div>
                 )}
               </div>
