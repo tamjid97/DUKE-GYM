@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+
 import { galleryItems, galleryCategories, type GalleryItem } from '@/data/gallery';
 import { Tabs } from '@/components/shared/Tabs';
 
@@ -54,14 +54,14 @@ export function GalleryGrid() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-obsidian/95 p-4"
             onClick={() => setLightbox(null)}
           >
-            <button className="absolute top-4 right-4 text-warm-white p-2" onClick={() => setLightbox(null)}>
-              <X className="h-6 w-6" />
+            <button className="absolute top-4 right-4 text-warm-white p-2 text-2xl font-bold" onClick={() => setLightbox(null)}>
+              ×
             </button>
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-warm-white p-2"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-warm-white p-2 text-3xl"
               onClick={(e) => { e.stopPropagation(); setLightbox(Math.max(0, lightbox - 1)); }}
             >
-              <ChevronLeft className="h-8 w-8" />
+              ‹
             </button>
             <motion.img
               key={lightbox}
@@ -72,10 +72,10 @@ export function GalleryGrid() {
               className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg border border-gold/20"
             />
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-white p-2"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-white p-2 text-3xl"
               onClick={(e) => { e.stopPropagation(); setLightbox(Math.min(galleryItems.length - 1, lightbox + 1)); }}
             >
-              <ChevronRight className="h-8 w-8" />
+              ›
             </button>
           </motion.div>
         )}

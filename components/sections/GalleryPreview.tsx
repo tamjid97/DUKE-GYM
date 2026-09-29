@@ -101,7 +101,6 @@ function VideoItem({ item, index }: VideoItemProps) {
             ref={videoRef}
             src={item.src}
             poster={item.poster}
-            alt={item.alt}
             muted
             loop
             playsInline

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Check, Award } from 'lucide-react';
+
 import { longTermPlans, admissionFee, monthlyFee } from '@/data/plans';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { SectionHeading } from '@/components/shared/SectionHeading';
@@ -31,7 +31,7 @@ export function MembershipPreview() {
             >
               {plan.popular && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-champagne px-4 py-1 text-xs font-semibold text-obsidian flex items-center gap-1">
-                  <Award className="h-3 w-3" />
+                  ★
                   Best Value
                 </span>
               )}
@@ -56,7 +56,7 @@ export function MembershipPreview() {
               <ul className="space-y-2 mb-6 flex-1">
                 {plan.features.slice(0, 4).map((f, j) => (
                   <li key={j} className="flex items-start gap-2 text-xs text-muted-warm">
-                    <Check className="h-3 w-3 text-gold shrink-0 mt-0.5" />
+                    <span className="h-3 w-3 text-gold shrink-0 mt-0.5">✓</span>
                     {f}
                   </li>
                 ))}

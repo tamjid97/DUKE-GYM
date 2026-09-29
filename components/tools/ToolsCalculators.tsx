@@ -723,7 +723,7 @@ export function ToolsCalculators() {
                           <SegmentedSelect
                             label="Gender"
                             value={cState.gender}
-                            onChange={(s) => setCState({ ...cState, gender: s })}
+                            onChange={(s) => setCState({ ...cState, gender: s as 'male' | 'female' })}
                             options={[
                               { value: 'male', label: 'Male' },
                               { value: 'female', label: 'Female' },
