@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, ArrowUp } from 'lucide-react';
+
 import { siteConfig } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
 
@@ -38,7 +38,7 @@ export function Footer() {
             aria-label="Back to top"
             className="flex h-16 w-16 items-center justify-center border border-[rgba(212,175,55,0.45)] text-[#D4AF37] transition-colors hover:bg-[rgba(212,175,55,0.08)]"
           >
-            <ArrowUp className="h-6 w-6" strokeWidth={1.25} />
+            <span className="h-6 w-6">↑</span>
           </button>
         </div>
 
@@ -49,9 +49,9 @@ export function Footer() {
               Four Worlds. One Building. Everything you need for your fitness journey under one roof.
             </p>
             <div className="mt-5 flex gap-3">
-              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="Facebook"><Facebook className="h-5 w-5" /></a>
-              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="Instagram"><Instagram className="h-5 w-5" /></a>
-              <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="YouTube"><Youtube className="h-5 w-5" /></a>
+              <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="Facebook"><span className="h-5 w-5">📘</span></a>
+              <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="Instagram"><span className="h-5 w-5">📷</span></a>
+              <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" className="text-muted-warm hover:text-gold transition-colors" aria-label="YouTube"><span className="h-5 w-5">📺</span></a>
             </div>
           </div>
 
@@ -87,11 +87,11 @@ export function Footer() {
             <h4 className="section-label mb-4">Contact</h4>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-muted-warm">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                <span className="mt-0.5 h-4 w-4 shrink-0 text-gold">📍</span>
                 <span>{siteConfig.address}</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-warm">
-                <Phone className="h-4 w-4 shrink-0 text-gold" />
+                <span className="h-4 w-4 shrink-0 text-gold">📞</span>
                 <a href="tel:+8801608044682" className="hover:text-gold transition-colors">01608044682</a>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-warm">
@@ -103,7 +103,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-warm">
-                <Mail className="h-4 w-4 shrink-0 text-gold" />
+                <span className="h-4 w-4 shrink-0 text-gold">✉️</span>
                 <a href={`mailto:${siteConfig.email}`} className="hover:text-gold transition-colors">{siteConfig.email}</a>
               </li>
             </ul>
