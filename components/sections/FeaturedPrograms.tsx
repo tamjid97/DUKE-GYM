@@ -53,7 +53,7 @@ export function FeaturedPrograms() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <GoldButton href="/gym" variant="outline" icon>{t.viewAll}</GoldButton>
+          <GoldButton href="/gym" variant="secondary" icon>{t.viewAll}</GoldButton>
         </div>
       </div>
     </section>

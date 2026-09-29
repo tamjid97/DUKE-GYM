@@ -53,7 +53,7 @@ export function MembershipPreview() {
                   </li>
                 ))}
               </ul>
-              <GoldButton href="/membership" variant={tier.popular ? 'solid' : 'outline'} className="w-full">
+              <GoldButton href="/membership" variant={tier.popular ? 'primary' : 'secondary'} className="w-full">
                 {t.joinNow}
               </GoldButton>
             </motion.div>

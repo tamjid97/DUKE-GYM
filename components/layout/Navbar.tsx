@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Palette } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { useTheme, THEMES } from '@/components/providers/ThemeProvider';
+import { ThemePicker } from '@/components/shared/ThemePicker';
+import { LanguageToggle } from '@/components/shared/LanguageToggle';
 import { waLink } from '@/lib/contact';
 import { cn } from '@/lib/utils';
 
@@ -18,8 +20,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [facilitiesOpen, setFacilitiesOpen] = useState(false);
-  const [themesOpen, setThemesOpen] = useState(false);
-  const themesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -31,18 +31,6 @@ export function Navbar() {
     setMobileOpen(false);
   }, [pathname]);
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (themesRef.current && !themesRef.current.contains(e.target as Node)) {
-        setThemesOpen(false);
-      }
-    }
-    if (themesOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [themesOpen]);
-
   const zoneLinks = [
     { href: '/gym', label: t.gym, sub: 'Duke Gym' },
     { href: '/swimming-pool', label: t.swimmingPool, sub: 'Duke Aqua' },
@@ -51,7 +39,7 @@ export function Navbar() {
   ];
 
   const otherLinks = [
-    { href: '/trainers', label: t.trainers },
+    { href: '/trainers', label: t.trainersPage },
     { href: '/membership', label: t.membership },
     { href: '/schedule', label: t.schedule },
     { href: '/tools', label: t.tools },
@@ -81,9 +69,9 @@ export function Navbar() {
             <svg width="32" height="32" viewBox="0 0 120 120" fill="none">
               <defs>
                 <linearGradient id="navLionGold" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="var(--accent-700)" />
-                  <stop offset="50%" stopColor="var(--accent-500)" />
-                  <stop offset="100%" stopColor="var(--accent-300)" />
+                  <stop offset="0%" stopColor="var(--accent-deep)" />
+                  <stop offset="50%" stopColor="var(--accent-primary)" />
+                  <stop offset="100%" stopColor="var(--accent-highlight)" />
                 </linearGradient>
               </defs>
               <path d="M60 15 L75 25 L85 20 L80 38 L95 42 L85 55 L92 70 L75 68 L70 85 L60 78 L50 85 L45 68 L28 70 L35 55 L25 42 L40 38 L35 20 L45 25 Z" fill="url(#navLionGold)" />
@@ -110,7 +98,7 @@ export function Navbar() {
             <Link
               href="/"
               className={cn('nav-link', pathname === '/' && 'text-accent')}
-              style={pathname === '/' ? { color: 'var(--accent-500)' } : undefined}
+              style={pathname === '/' ? { color: 'var(--accent-primary)' } : undefined}
             >
               {t.home}
             </Link>
@@ -127,7 +115,7 @@ export function Navbar() {
                     pathname.startsWith('/swimming') ||
                     pathname.startsWith('/restaurant') ||
                     pathname.startsWith('/pool-game'))
-                    ? { color: 'var(--accent-500)' }
+                    ? { color: 'var(--accent-primary)' }
                     : undefined
                 }
               >
@@ -165,7 +153,7 @@ export function Navbar() {
                           </div>
                           <ChevronDown
                             className="h-4 w-4 -rotate-90"
-                            style={{ color: 'var(--accent-500)' }}
+                            style={{ color: 'var(--accent-primary)' }}
                           />
                         </Link>
                       ))}
@@ -180,124 +168,16 @@ export function Navbar() {
                 key={l.href}
                 href={l.href}
                 className="nav-link"
-                style={pathname === l.href ? { color: 'var(--accent-500)' } : undefined}
+                style={pathname === l.href ? { color: 'var(--accent-primary)' } : undefined}
               >
                 {l.label}
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="relative" ref={themesRef}>
-              <button
-                onClick={() => setThemesOpen((p) => !p)}
-                className={cn(
-                  'theme-switcher-btn flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-semibold transition-all',
-                  'border-2 shadow-lg'
-                )}
-                style={{
-                  background: 'var(--accent-gradient)',
-                  borderColor: 'var(--accent-300)',
-                  color: 'var(--obsidian)',
-                  boxShadow: '0 0 20px color-mix(in srgb, var(--accent-500) 35%, transparent)',
-                }}
-                aria-label="Change theme color"
-              >
-                <span className="theme-switcher-inner flex items-center gap-1.5">
-                  <Palette className="h-3.5 w-3.5" />
-                  <span className="hidden sm:inline font-semibold">Theme</span>
-                  <span
-                    className="inline-block w-3 h-3 rounded-full border"
-                    style={{
-                      backgroundColor: 'var(--accent-500)',
-                      borderColor: 'var(--obsidian)',
-                    }}
-                  />
-                </span>
-              </button>
-
-              <AnimatePresence>
-                {themesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-                    className="absolute right-0 mt-2 w-72 glass-card corner-ornament p-3 z-50"
-                  >
-                    <div className="section-label mb-3 pl-1">Choose Theme</div>
-                    <div className="grid grid-cols-5 gap-2 mb-3">
-                      {THEMES.map((th) => (
-                        <button
-                          key={th.key}
-                          onClick={() => {
-                            setTheme(th.key);
-                            setThemesOpen(false);
-                          }}
-                          className={cn(
-                            'theme-option w-full aspect-square rounded-lg border-2 relative',
-                            theme === th.key && 'active'
-                          )}
-                          style={{
-                            background: `linear-gradient(135deg, ${th.bg} 0%, ${th.bg} 50%, ${th.primary}22 100%)`,
-                            borderColor: theme === th.key ? th.primary : `${th.primary}33`,
-                          }}
-                          title={th.name}
-                        >
-                          <span
-                            className="absolute bottom-1 left-1/2 -translate-x-1/2 w-5 h-1.5 rounded-full"
-                            style={{ backgroundColor: th.primary }}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                    <div className="space-y-1 border-t pt-2" style={{ borderColor: 'var(--border-accent)' }}>
-                      {THEMES.map((th) => (
-                        <button
-                          key={th.key}
-                          onClick={() => {
-                            setTheme(th.key);
-                            setThemesOpen(false);
-                          }}
-                          className={cn(
-                            'w-full flex items-center gap-3 rounded-md px-2 py-2 text-left transition-colors'
-                          )}
-                          style={{
-                            backgroundColor: theme === th.key ? 'color-mix(in srgb, var(--accent-500) 10%, transparent)' : 'transparent',
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'color-mix(in srgb, var(--accent-500) 10%, transparent)')}
-                          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = theme === th.key ? 'color-mix(in srgb, var(--accent-500) 10%, transparent)' : 'transparent')}
-                        >
-                          <span
-                            className="w-4 h-4 rounded-full border"
-                            style={{
-                              backgroundColor: th.primary,
-                              borderColor: th.secondary,
-                              boxShadow: theme === th.key ? `0 0 10px ${th.primary}` : 'none',
-                            }}
-                          />
-                          <span
-                            className="text-sm flex-1"
-                            style={{ color: 'var(--warm-white)' }}
-                          >
-                            {th.name}
-                          </span>
-                          {theme === th.key && (
-                            <span
-                              className="text-xs font-semibold"
-                              style={{ color: 'var(--accent-500)' }}
-                            >
-                              Active
-                            </span>
-                          )}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
+          <div className="flex items-center gap-3">
+            <ThemePicker />
+            <LanguageToggle />
             <a
               href={waLink('Hello Duke Fitness Club! I would like to join.')}
               target="_blank"
@@ -368,9 +248,9 @@ export function Navbar() {
                 </Link>
               ))}
 
-              <div className="py-3 mt-2" style={{ borderTop: '1px solid var(--border-accent)' }}>
-                <div className="section-label mb-3">Theme Color</div>
-                <div className="grid grid-cols-5 gap-3">
+              <div className="py-3 mt-2 flex items-center gap-4" style={{ borderTop: '1px solid var(--border-accent)' }}>
+                <div className="section-label mb-0">Theme Color</div>
+                <div className="flex gap-2">
                   {THEMES.map((th) => (
                     <button
                       key={th.key}
@@ -378,22 +258,27 @@ export function Navbar() {
                         setTheme(th.key);
                       }}
                       className={cn(
-                        'theme-option w-full aspect-square rounded-lg border-2 relative',
+                        'theme-option w-8 h-8 rounded-full border-2 relative flex-shrink-0',
                         theme === th.key && 'active'
                       )}
                       style={{
-                        background: `linear-gradient(135deg, ${th.bg} 0%, ${th.bg} 50%, ${th.primary}33 100%)`,
+                        background: `linear-gradient(135deg, ${th.deep} 0%, ${th.primary} 50%, ${th.highlight} 100%)`,
                         borderColor: theme === th.key ? th.primary : `${th.primary}44`,
+                        boxShadow: theme === th.key ? `0 0 10px ${th.primary}40` : 'none',
                       }}
                       title={th.name}
                     >
-                      <span
-                        className="absolute bottom-1 left-1/2 -translate-x-1/2 w-6 h-1.5 rounded-full"
-                        style={{ backgroundColor: th.primary }}
-                      />
+                      {theme === th.key && (
+                        <div className="absolute inset-0 rounded-full border-2" style={{ borderColor: th.primary }} />
+                      )}
                     </button>
                   ))}
                 </div>
+              </div>
+
+              <div className="py-2 flex items-center gap-4" style={{ borderTop: '1px solid var(--border-accent)' }}>
+                <div className="section-label mb-0">Language</div>
+                <LanguageToggle />
               </div>
 
               <a
@@ -418,7 +303,7 @@ export function Navbar() {
           transition: color 0.2s;
         }
         :global(.nav-link:hover) {
-          color: var(--accent-500);
+          color: var(--accent-primary);
         }
         :global(.mobile-nav-link) {
           display: block;
@@ -428,7 +313,7 @@ export function Navbar() {
           border-bottom: 1px solid var(--border-accent);
         }
         :global(.mobile-nav-link:hover) {
-          color: var(--accent-500);
+          color: var(--accent-primary);
         }
       `}</style>
     </>

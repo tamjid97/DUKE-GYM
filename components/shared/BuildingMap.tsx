@@ -117,7 +117,7 @@ export function BuildingMap() {
                 </div>
               </div>
               <div className="mt-5">
-                <GoldButton href={`/${siteConfig.zones[active].slug}`} variant="outline" icon>
+                <GoldButton href={`/${siteConfig.zones[active].slug}`} variant="secondary" icon>
                   {t.visitPage}
                 </GoldButton>
               </div>

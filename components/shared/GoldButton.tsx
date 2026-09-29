@@ -1,60 +1,106 @@
 'use client';
 
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface GoldButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   href?: string;
   onClick?: () => void;
-  className?: string;
-  variant?: 'solid' | 'outline';
+  variant?: 'primary' | 'secondary';
   icon?: boolean;
   external?: boolean;
+  className?: string;
 }
 
 export function GoldButton({
   children,
   href,
   onClick,
-  className,
-  variant = 'solid',
+  variant = 'primary',
   icon = false,
   external = false,
+  className = '',
 }: GoldButtonProps) {
-  const baseClass = cn(
-    'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300',
-    variant === 'solid' && 'btn-gold',
-    variant === 'outline' && 'border border-gold/40 text-gold hover:bg-gold/10 hover:border-gold',
-    className
-  );
+  const baseStyles = 'btn-gold relative overflow-hidden rounded-full font-bold tracking-[0.2em] uppercase transition-all duration-300';
+  
+  const variantStyles = {
+    primary: 'text-[var(--obsidian)] px-10 py-4',
+    secondary: 'text-[var(--accent-primary)] border-2 px-8 py-3 hover:text-[var(--obsidian)]',
+  };
 
-  const content = (
+  const buttonContent = (
     <>
-      {children}
-      {icon && <ArrowRight className="h-4 w-4" />}
+      <span className="relative z-10 flex items-center gap-2">
+        {children}
+        {icon && (
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        )}
+      </span>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
     </>
   );
 
+  const MotionButton = motion.button;
+  const MotionLink = motion.a;
+
   if (href) {
-    if (external) {
-      return (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={baseClass}>
-          {content}
-        </a>
-      );
-    }
     return (
-      <Link href={href} className={baseClass}>
-        {content}
-      </Link>
+      <MotionLink
+        href={href}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
+        className={`${baseStyles} ${variantStyles[variant]} ${className} group`}
+        style={
+          variant === 'primary'
+            ? {
+                background: 'var(--accent-gradient)',
+                boxShadow: '0 0 0 1px var(--accent-primary), 0 10px 30px -8px var(--accent-glow)',
+              }
+            : {
+                borderColor: 'var(--accent-primary)',
+                background: 'transparent',
+              }
+        }
+        whileHover={{ scale: 1.05, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        {buttonContent}
+      </MotionLink>
     );
   }
 
   return (
-    <button onClick={onClick} className={baseClass}>
-      {content}
-    </button>
+    <MotionButton
+      onClick={onClick}
+      className={`${baseStyles} ${variantStyles[variant]} ${className} group`}
+      style={
+        variant === 'primary'
+          ? {
+              background: 'var(--accent-gradient)',
+              boxShadow: '0 0 0 1px var(--accent-primary), 0 10px 30px -8px var(--accent-glow)',
+            }
+          : {
+              borderColor: 'var(--accent-primary)',
+              background: 'transparent',
+            }
+      }
+      whileHover={{ scale: 1.05, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      {buttonContent}
+    </MotionButton>
   );
 }

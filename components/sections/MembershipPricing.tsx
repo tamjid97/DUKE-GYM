@@ -141,7 +141,7 @@ export function MembershipPricing() {
               </div>
               <p className="text-sm text-muted-warm mt-3">{pass.description}</p>
               <div className="mt-4">
-                <GoldButton href={waLink(`Hello Duke Fitness Club! I'm interested in the ${pass.name}.`)} external variant="outline" className="w-full">
+                <GoldButton href={waLink(`Hello Duke Fitness Club! I'm interested in the ${pass.name}.`)} external variant="secondary" className="w-full">
                   Enquire
                 </GoldButton>
               </div>

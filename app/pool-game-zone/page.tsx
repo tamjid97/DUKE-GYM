@@ -124,7 +124,7 @@ export default function PoolGameZonePage() {
                   <span className="font-display text-3xl font-bold text-gold-gradient">৳{pkg.price.toLocaleString()}</span>
                 </div>
                 <div className="mt-4">
-                  <GoldButton href={`/contact`} variant="outline" className="w-full">Enquire Now</GoldButton>
+                  <GoldButton href={`/contact`} variant="secondary" className="w-full">Enquire Now</GoldButton>
                 </div>
               </GlassCard>
             ))}

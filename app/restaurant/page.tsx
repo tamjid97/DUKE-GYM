@@ -97,7 +97,7 @@ export default function RestaurantPage() {
           <p className="text-sm text-muted-warm mb-4">Call us for takeaway orders or delivery within Gulshan area.</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
             <GoldButton href={telLink()} icon>Call to Order</GoldButton>
-            <GoldButton href={waLink('Hello Duke Kitchen! I would like to place an order.')} external variant="outline">WhatsApp Order</GoldButton>
+            <GoldButton href={waLink('Hello Duke Kitchen! I would like to place an order.')} external variant="secondary">WhatsApp Order</GoldButton>
           </div>
           <p className="text-xs text-muted-warm mt-4">Opening Hours: {siteConfig.zones.restaurant.hours}</p>
         </div>

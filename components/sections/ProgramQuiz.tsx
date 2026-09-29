@@ -139,7 +139,7 @@ export function ProgramQuiz() {
                 <GoldButton
                   href={waLink(`Hello Duke Fitness Club! I would like to book a personal trainer for the "${result.name}" program.`)}
                   external
-                  variant="outline"
+                  variant="secondary"
                   className="rounded-none"
                 >
                   Book a Trainer

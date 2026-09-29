@@ -9,7 +9,7 @@ import { FloatingButtons } from '@/components/layout/FloatingButtons';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { LanguageProvider } from '@/components/providers/LanguageProvider';
-import { ThemeProvider } from '@/components/providers/ThemeProvider';
+import { ThemeProvider, ThemeScript } from '@/components/providers/ThemeProvider';
 import { StructuredData } from '@/components/shared/StructuredData';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-body' });
@@ -56,6 +56,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${cinzel.variable} ${hindSiliguri.variable}`}>
+      <head>
+        <ThemeScript />
+        <meta name="theme-color" content="#C9A24B" />
+      </head>
       <body className="bg-obsidian text-warm-white antialiased">
         <LanguageProvider>
           <ThemeProvider>

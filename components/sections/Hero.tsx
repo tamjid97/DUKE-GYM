@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '@/data/siteConfig';
+import { useLang } from '@/components/providers/LanguageProvider';
+import { GoldButton } from '@/components/shared/GoldButton';
+import { waLink } from '@/lib/contact';
 
 const revealTime = 2.8;
 
@@ -34,6 +37,7 @@ const dustParticles: Particle[] = Array.from({ length: DUST_COUNT }).map((_, i) 
 });
 
 export function Hero() {
+  const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const hasTriggeredRef = useRef(false);
   const [revealed, setRevealed] = useState(false);
@@ -339,7 +343,7 @@ export function Hero() {
           </motion.span>
         </motion.h1>
 
-        {/* CTA Button */}
+        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden', y: 30 }}
           animate={
@@ -352,31 +356,18 @@ export function Hero() {
               ? { duration: 0.55, delay: 1.3, ease: [0.22, 1, 0.36, 1] }
               : { duration: 0.15 }
           }
-          className="mt-12"
+          className="mt-12 flex flex-col gap-3 sm:flex-row sm:gap-4"
         >
-          <a
-            href="/membership"
-            className="btn-gold group inline-flex items-center gap-3 rounded-full px-10 py-4 text-sm font-bold tracking-[0.25em] uppercase relative overflow-hidden"
-            style={{
-              boxShadow:
-                '0 0 0 1px color-mix(in srgb, var(--accent-400) 40%, transparent), 0 12px 35px -8px color-mix(in srgb, var(--accent-500) 60%, transparent)',
-            }}
+          <GoldButton href="/membership" icon>
+            {t.joinNow}
+          </GoldButton>
+          <GoldButton
+            href={waLink('Hello Duke Fitness Club! I would like to book a free tour.')}
+            external
+            variant="secondary"
           >
-            JOIN NOW
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            >
-              <path d="M5 12h14M13 5l7 7-7 7" />
-            </svg>
-          </a>
+            {t.bookFreeTour}
+          </GoldButton>
         </motion.div>
       </div>
 

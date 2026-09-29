@@ -46,7 +46,7 @@ export function TrainersPreview() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <GoldButton href="/trainers" variant="outline" icon>{t.viewAll}</GoldButton>
+          <GoldButton href="/trainers" variant="secondary" icon>{t.viewAll}</GoldButton>
         </div>
       </div>
     </section>

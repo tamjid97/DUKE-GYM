@@ -5,24 +5,34 @@
 @layer base {
   :root,
   [data-theme="gold"] {
-    --obsidian: #0a0a0a;
-    --smoke: #141414;
+    /* Constant base colors - NEVER change with themes */
+    --obsidian: #0B0B0C;
+    --smoke: #22262A;
     --panel: #1a1a1a;
-    --accent-500: #d4af37;
-    --accent-400: #e5c158;
-    --accent-600: #b8922a;
-    --accent-300: #f1dda0;
-    --accent-700: #8c6b2a;
+    --warm-white: #F5F1E6;
+    --muted-warm: #A8A39A;
+    
+    /* Jewel-toned accent colors - Royal Gold */
+    --accent-primary: #C9A24B;
+    --accent-highlight: #EAD9A0;
+    --accent-deep: #7C5E24;
+    --accent-glow: rgba(201, 162, 75, 0.15);
+    
+    /* Legacy compatibility */
+    --accent-500: #C9A24B;
+    --accent-400: #EAD9A0;
+    --accent-600: #7C5E24;
+    --accent-300: #EAD9A0;
+    --accent-700: #7C5E24;
+    
     --accent-gradient: linear-gradient(
       135deg,
-      var(--accent-700) 0%,
-      var(--accent-500) 50%,
-      var(--accent-300) 100%
+      var(--accent-deep) 0%,
+      var(--accent-primary) 50%,
+      var(--accent-highlight) 100%
     );
-    --warm-white: #f5f1e6;
-    --muted-warm: #9a958a;
-    --border-accent: rgba(212, 175, 55, 0.2);
-    --border-accent-strong: rgba(212, 175, 55, 0.4);
+    --border-accent: rgba(201, 162, 75, 0.2);
+    --border-accent-strong: rgba(201, 162, 75, 0.4);
 
     --background: 0 0% 4%;
     --foreground: 39 25% 95%;
@@ -52,24 +62,34 @@
   }
 
   [data-theme="sapphire"] {
-    --obsidian: #0a0e1a;
-    --smoke: #131a2e;
-    --panel: #1b2540;
-    --accent-500: #4a7cff;
-    --accent-400: #6b95ff;
-    --accent-600: #355fd6;
-    --accent-300: #a8c4ff;
-    --accent-700: #2442a3;
+    /* Constant base colors - NEVER change with themes */
+    --obsidian: #0B0B0C;
+    --smoke: #22262A;
+    --panel: #1a1a1a;
+    --warm-white: #F5F1E6;
+    --muted-warm: #A8A39A;
+    
+    /* Jewel-toned accent colors - Sapphire Blue */
+    --accent-primary: #3E63A6;
+    --accent-highlight: #8FB0E0;
+    --accent-deep: #1D3559;
+    --accent-glow: rgba(62, 99, 166, 0.15);
+    
+    /* Legacy compatibility */
+    --accent-500: #3E63A6;
+    --accent-400: #8FB0E0;
+    --accent-600: #1D3559;
+    --accent-300: #8FB0E0;
+    --accent-700: #1D3559;
+    
     --accent-gradient: linear-gradient(
       135deg,
-      var(--accent-700) 0%,
-      var(--accent-500) 50%,
-      var(--accent-300) 100%
+      var(--accent-deep) 0%,
+      var(--accent-primary) 50%,
+      var(--accent-highlight) 100%
     );
-    --warm-white: #e8ecf5;
-    --muted-warm: #8b95b0;
-    --border-accent: rgba(74, 124, 255, 0.15);
-    --border-accent-strong: rgba(74, 124, 255, 0.35);
+    --border-accent: rgba(62, 99, 166, 0.2);
+    --border-accent-strong: rgba(62, 99, 166, 0.4);
 
     --background: 225 55% 6%;
     --foreground: 220 25% 95%;
@@ -98,25 +118,92 @@
     --radius: 0.5rem;
   }
 
-  [data-theme="emerald"] {
-    --obsidian: #081210;
-    --smoke: #0f1f1b;
-    --panel: #17302a;
-    --accent-500: #10b981;
-    --accent-400: #34d399;
-    --accent-600: #059669;
-    --accent-300: #86efac;
-    --accent-700: #047857;
+  [data-theme="amethyst"] {
+    /* Constant base colors - NEVER change with themes */
+    --obsidian: #0B0B0C;
+    --smoke: #22262A;
+    --panel: #1a1a1a;
+    --warm-white: #F5F1E6;
+    --muted-warm: #A8A39A;
+    
+    /* Jewel-toned accent colors - Amethyst Violet */
+    --accent-primary: #6C4E9E;
+    --accent-highlight: #B39DDB;
+    --accent-deep: #3A2A5C;
+    --accent-glow: rgba(108, 78, 158, 0.15);
+    
+    /* Legacy compatibility */
+    --accent-500: #6C4E9E;
+    --accent-400: #B39DDB;
+    --accent-600: #3A2A5C;
+    --accent-300: #B39DDB;
+    --accent-700: #3A2A5C;
+    
     --accent-gradient: linear-gradient(
       135deg,
-      var(--accent-700) 0%,
-      var(--accent-500) 50%,
-      var(--accent-300) 100%
+      var(--accent-deep) 0%,
+      var(--accent-primary) 50%,
+      var(--accent-highlight) 100%
     );
-    --warm-white: #e6f4ef;
-    --muted-warm: #80a094;
-    --border-accent: rgba(16, 185, 129, 0.15);
-    --border-accent-strong: rgba(16, 185, 129, 0.35);
+    --border-accent: rgba(108, 78, 158, 0.2);
+    --border-accent-strong: rgba(108, 78, 158, 0.4);
+
+    --background: 270 55% 6%;
+    --foreground: 270 25% 95%;
+    --card: 270 35% 16%;
+    --card-foreground: 270 25% 95%;
+    --popover: 270 40% 12%;
+    --popover-foreground: 270 25% 95%;
+    --primary: 270 80% 60%;
+    --primary-foreground: 270 55% 6%;
+    --secondary: 270 35% 20%;
+    --secondary-foreground: 270 25% 95%;
+    --muted: 270 35% 20%;
+    --muted-foreground: 270 20% 65%;
+    --accent: 270 80% 60%;
+    --accent-foreground: 270 55% 6%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 40% 30%;
+    --input: 270 35% 22%;
+    --ring: 270 80% 60%;
+    --chart-1: 270 80% 60%;
+    --chart-2: 300 70% 50%;
+    --chart-3: 240 60% 55%;
+    --chart-4: 270 85% 72%;
+    --chart-5: 310 80% 60%;
+    --radius: 0.5rem;
+  }
+
+  [data-theme="emerald"] {
+    /* Constant base colors - NEVER change with themes */
+    --obsidian: #0B0B0C;
+    --smoke: #22262A;
+    --panel: #1a1a1a;
+    --warm-white: #F5F1E6;
+    --muted-warm: #A8A39A;
+    
+    /* Jewel-toned accent colors - Emerald Jade */
+    --accent-primary: #2E7D5B;
+    --accent-highlight: #7FCBA4;
+    --accent-deep: #144A34;
+    --accent-glow: rgba(46, 125, 91, 0.15);
+    
+    /* Legacy compatibility */
+    --accent-500: #2E7D5B;
+    --accent-400: #7FCBA4;
+    --accent-600: #144A34;
+    --accent-300: #7FCBA4;
+    --accent-700: #144A34;
+    
+    --accent-gradient: linear-gradient(
+      135deg,
+      var(--accent-deep) 0%,
+      var(--accent-primary) 50%,
+      var(--accent-highlight) 100%
+    );
+    --border-accent: rgba(46, 125, 91, 0.2);
+    --border-accent-strong: rgba(46, 125, 91, 0.4);
 
     --background: 165 55% 5%;
     --foreground: 160 20% 95%;
@@ -145,25 +232,35 @@
     --radius: 0.5rem;
   }
 
-  [data-theme="crimson"] {
-    --obsidian: #120808;
-    --smoke: #1f1111;
-    --panel: #321818;
-    --accent-500: #dc2626;
-    --accent-400: #ef4444;
-    --accent-600: #b91c1c;
-    --accent-300: #fca5a5;
-    --accent-700: #991b1b;
+  [data-theme="ruby"] {
+    /* Constant base colors - NEVER change with themes */
+    --obsidian: #0B0B0C;
+    --smoke: #22262A;
+    --panel: #1a1a1a;
+    --warm-white: #F5F1E6;
+    --muted-warm: #A8A39A;
+    
+    /* Jewel-toned accent colors - Ruby Rose */
+    --accent-primary: #B14A5C;
+    --accent-highlight: #E2909D;
+    --accent-deep: #6B1F2E;
+    --accent-glow: rgba(177, 74, 92, 0.15);
+    
+    /* Legacy compatibility */
+    --accent-500: #B14A5C;
+    --accent-400: #E2909D;
+    --accent-600: #6B1F2E;
+    --accent-300: #E2909D;
+    --accent-700: #6B1F2E;
+    
     --accent-gradient: linear-gradient(
       135deg,
-      var(--accent-700) 0%,
-      var(--accent-500) 50%,
-      var(--accent-300) 100%
+      var(--accent-deep) 0%,
+      var(--accent-primary) 50%,
+      var(--accent-highlight) 100%
     );
-    --warm-white: #f5e8e8;
-    --muted-warm: #a58989;
-    --border-accent: rgba(220, 38, 38, 0.15);
-    --border-accent-strong: rgba(220, 38, 38, 0.35);
+    --border-accent: rgba(177, 74, 92, 0.2);
+    --border-accent-strong: rgba(177, 74, 92, 0.4);
 
     --background: 0 55% 5%;
     --foreground: 0 20% 95%;
@@ -192,53 +289,6 @@
     --radius: 0.5rem;
   }
 
-  [data-theme="platinum"] {
-    --obsidian: #0f0f10;
-    --smoke: #1a1a1d;
-    --panel: #26262b;
-    --accent-500: #c0c0c0;
-    --accent-400: #d4d4d8;
-    --accent-600: #a1a1aa;
-    --accent-300: #e4e4e7;
-    --accent-700: #71717a;
-    --accent-gradient: linear-gradient(
-      135deg,
-      var(--accent-700) 0%,
-      var(--accent-500) 50%,
-      var(--accent-300) 100%
-    );
-    --warm-white: #fafafa;
-    --muted-warm: #8f8f98;
-    --border-accent: rgba(192, 192, 192, 0.15);
-    --border-accent-strong: rgba(192, 192, 192, 0.35);
-
-    --background: 240 4% 6%;
-    --foreground: 240 5% 96%;
-    --card: 240 4% 16%;
-    --card-foreground: 240 5% 96%;
-    --popover: 240 4% 12%;
-    --popover-foreground: 240 5% 96%;
-    --primary: 240 5% 68%;
-    --primary-foreground: 240 4% 6%;
-    --secondary: 240 4% 20%;
-    --secondary-foreground: 240 5% 96%;
-    --muted: 240 4% 20%;
-    --muted-foreground: 240 4% 65%;
-    --accent: 240 5% 68%;
-    --accent-foreground: 240 4% 6%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5% 30%;
-    --input: 240 4% 22%;
-    --ring: 240 5% 68%;
-    --chart-1: 240 5% 68%;
-    --chart-2: 200 15% 55%;
-    --chart-3: 280 10% 50%;
-    --chart-4: 240 8% 80%;
-    --chart-5: 180 15% 62%;
-    --radius: 0.5rem;
-  }
-
   * {
     @apply border-border;
     border-color: hsl(var(--border));
@@ -252,6 +302,20 @@
     transition:
       background-color 0.4s ease,
       color 0.4s ease;
+  }
+
+  /* Smooth theme transitions for accent colors */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow, text-shadow;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+  }
+
+  /* Disable transitions for theme change ripple effect */
+  .theme-ripple {
+    transition: none !important;
   }
 
   h1,

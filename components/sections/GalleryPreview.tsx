@@ -40,7 +40,7 @@ export function GalleryPreview() {
           ))}
         </div>
         <div className="mt-10 text-center">
-          <GoldButton href="/gallery" variant="outline" icon>{t.viewAll}</GoldButton>
+          <GoldButton href="/gallery" variant="secondary" icon>{t.viewAll}</GoldButton>
         </div>
       </div>
     </section>

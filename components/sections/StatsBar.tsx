@@ -10,13 +10,19 @@ export function StatsBar() {
 
   const stats = [
     { label: t.members, value: siteConfig.stats.members, suffix: '+' },
-    { label: t.trainersLabel, value: siteConfig.stats.trainers, suffix: '' },
-    { label: t.programsLabel, value: siteConfig.stats.programs, suffix: '' },
+    { label: t.expertTrainers, value: siteConfig.stats.trainers, suffix: '' },
+    { label: t.fitnessPrograms, value: siteConfig.stats.programs, suffix: '' },
     { label: t.years, value: siteConfig.stats.years, suffix: '+' },
   ];
 
   return (
-    <section className="relative border-y border-gold/15 bg-smoke/40 py-12">
+    <section 
+      className="relative border-y py-12"
+      style={{
+        backgroundColor: 'color-mix(in srgb, var(--panel) 60%, transparent)',
+        borderColor: 'var(--border-accent)',
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {stats.map((stat, i) => (
@@ -28,10 +34,10 @@ export function StatsBar() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className="text-center"
             >
-              <div className="font-display text-4xl font-bold text-gold-gradient sm:text-5xl lg:text-6xl">
+              <div className="font-display text-4xl font-bold text-accent-gradient sm:text-5xl lg:text-6xl">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <div className="mt-2 text-xs tracking-[0.2em] text-muted-warm uppercase">
+              <div className="mt-2 text-xs tracking-[0.2em] uppercase" style={{ color: 'var(--muted-warm)' }}>
                 {stat.label}
               </div>
             </motion.div>

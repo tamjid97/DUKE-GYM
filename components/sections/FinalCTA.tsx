@@ -43,7 +43,7 @@ export function FinalCTA() {
             <div className="diamond" />
           </div>
           <h2 className="font-display text-4xl font-bold text-gold-gradient sm:text-5xl lg:text-6xl">
-            {t.finalCta}
+            {t.finalCTA}
           </h2>
           <p className="mt-4 text-base text-muted-warm max-w-xl mx-auto">
             {t.finalCtaDesc}
@@ -53,7 +53,7 @@ export function FinalCTA() {
             <GoldButton
               href={waLink('Hello Duke Fitness Club! I would like to book a free tour.')}
               external
-              variant="outline"
+              variant="secondary"
             >
               {t.bookFreeTour}
             </GoldButton>

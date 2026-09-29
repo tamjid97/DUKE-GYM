@@ -71,7 +71,7 @@ export function ZoneHighlights() {
                     ))}
                   </ul>
                   <div className="mt-4">
-                    <GoldButton href={h.link} variant="outline" icon className="text-xs">
+                    <GoldButton href={h.link} variant="secondary" icon className="text-xs">
                       {t.visitPage}
                     </GoldButton>
                   </div>
