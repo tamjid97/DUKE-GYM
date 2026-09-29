@@ -5,29 +5,25 @@
 export interface GalleryItem {
   id: string;
   category: 'Gym' | 'Restaurant' | 'Aqua' | 'Arena' | 'Events';
-  image: string;
+  src: string;
   alt: string;
-  video?: boolean;
+  poster?: string;
+  aspectRatio?: 'tall' | 'wide' | 'square';
 }
 
 export const galleryCategories = ['All', 'Gym', 'Restaurant', 'Aqua', 'Arena', 'Events'] as const;
 
 export const galleryItems: GalleryItem[] = [
-  { id: 'g1', category: 'Gym', image: 'https://images.pexels.com/photos/17211446/pexels-photo-17211446.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&dpr=1', alt: 'Gym interior' },
-  { id: 'g2', category: 'Gym', image: 'https://images.pexels.com/photos/6739958/pexels-photo-6739958.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Punching bags' },
-  { id: 'g3', category: 'Gym', image: 'https://images.pexels.com/photos/29149073/pexels-photo-29149073.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Dumbbells rack' },
-  { id: 'g4', category: 'Restaurant', image: 'https://images.pexels.com/photos/6111932/pexels-photo-6111932.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&dpr=1', alt: 'Gourmet plate' },
-  { id: 'g5', category: 'Restaurant', image: 'https://images.pexels.com/photos/16020703/pexels-photo-16020703.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Salmon dish' },
-  { id: 'g6', category: 'Restaurant', image: 'https://images.pexels.com/photos/2424034/pexels-photo-2424034.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Smoothie' },
-  { id: 'g7', category: 'Aqua', image: 'https://images.pexels.com/photos/23916836/pexels-photo-23916836.png?auto=compress&cs=tinysrgb&w=800&h=1000&dpr=1', alt: 'Indoor pool' },
-  { id: 'g8', category: 'Aqua', image: 'https://images.pexels.com/photos/261041/pexels-photo-261041.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Pool area' },
-  { id: 'g9', category: 'Aqua', image: 'https://images.pexels.com/photos/7222171/pexels-photo-7222171.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Swimming' },
-  { id: 'g10', category: 'Arena', image: 'https://images.pexels.com/photos/31512997/pexels-photo-31512997.png?auto=compress&cs=tinysrgb&w=800&h=1000&dpr=1', alt: 'Billiards table' },
-  { id: 'g11', category: 'Arena', image: 'https://images.pexels.com/photos/6032656/pexels-photo-6032656.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Billiards lounge' },
-  { id: 'g12', category: 'Arena', image: 'https://images.pexels.com/photos/10627127/pexels-photo-10627127.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Playing billiards' },
-  { id: 'g13', category: 'Events', image: 'https://images.pexels.com/photos/2762942/pexels-photo-2762942.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Steak dinner' },
-  { id: 'g14', category: 'Events', image: 'https://images.pexels.com/photos/13422453/pexels-photo-13422453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'BBQ grill' },
-  { id: 'g15', category: 'Events', image: 'https://images.pexels.com/photos/4753998/pexels-photo-4753998.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1', alt: 'Cross training' },
+  { id: 'g1', category: 'Gym', src: '/videos/g1.mp4', alt: 'Gym interior', aspectRatio: 'tall' },
+  { id: 'g2', category: 'Gym', src: '/videos/g2.mp4', alt: 'Training equipment', aspectRatio: 'wide' },
+  { id: 'g3', category: 'Gym', src: '/videos/g3.mp4', alt: 'Weight lifting area', aspectRatio: 'square' },
+  { id: 'g8', category: 'Events', src: '/videos/g8.mp4', alt: 'Special events', aspectRatio: 'wide' },
+  { id: 'g7', category: 'Arena', src: '/videos/g7.jpg', alt: 'Game zone', aspectRatio: 'tall' },
+  { id: 'g9', category: 'Gym', src: '/videos/g9.mp4', alt: 'Personal training', aspectRatio: 'square' },
+  { id: 'g4', category: 'Gym', src: '/videos/g4.mp4', alt: 'Cardio zone', aspectRatio: 'tall' },
+  { id: 'g5', category: 'Restaurant', src: '/videos/g5.mp4', alt: 'Duke Kitchen dining', aspectRatio: 'wide' },
+  { id: 'g6', category: 'Aqua', src: '/videos/g6.mp4', alt: 'Swimming pool', aspectRatio: 'square' },
+
 ];
 
 // Testimonials — placeholder data, replace with real reviews
