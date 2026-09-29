@@ -1,21 +1,23 @@
 import type { Metadata } from 'next';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { SectionHeading } from '@/components/shared/SectionHeading';
-import { GlassCard } from '@/components/shared/GlassCard';
-import { GoldButton } from '@/components/shared/GoldButton';
-import { BookingUI } from '@/components/sections/BookingUI';
-import { siteConfig } from '@/data/siteConfig';
-import { games, tournaments, leaderboard, eventPackages } from '@/data/games';
-import { Trophy, Crown, Calendar, Users } from 'lucide-react';
+import { ArenaHero } from '@/components/arena/ArenaHero';
+import { ArenaGames } from '@/components/arena/ArenaGames';
+import { ArenaBooking } from '@/components/arena/ArenaBooking';
+import { ArenaTournaments } from '@/components/arena/ArenaTournaments';
+import { ArenaLeaderboard } from '@/components/arena/ArenaLeaderboard';
+import { ArenaPackages } from '@/components/arena/ArenaPackages';
+import { ArenaRules } from '@/components/arena/ArenaRules';
+import { ArenaFinale } from '@/components/arena/ArenaFinale';
 
 export const metadata: Metadata = {
-  title: 'Duke Arena — Pool & Game Zone',
-  description: 'Billiards, snooker, table tennis, foosball, console gaming, and board games at Duke Arena. Hourly booking, tournaments, and event packages.',
+  title: 'Duke Arena — Private Pool & Game Club | DUKE FITNESS CLUB',
+  description:
+    'Billiards, snooker, table tennis, foosball, console gaming, and board games at Duke Arena — an exclusive private game & entertainment club. Hourly booking, weekly tournaments, and event packages.',
 };
 
 export default function PoolGameZonePage() {
   return (
     <>
+<<<<<<< HEAD
       <PageHeader
         label={siteConfig.zones.arena.tagline}
         title="DUKE ARENA"
@@ -154,6 +156,16 @@ export default function PoolGameZonePage() {
           </div>
         </div>
       </section>
+=======
+      <ArenaHero />
+      <ArenaGames />
+      <ArenaBooking />
+      <ArenaTournaments />
+      <ArenaLeaderboard />
+      <ArenaPackages />
+      <ArenaRules />
+      <ArenaFinale />
+>>>>>>> c75c51e7c7df8f4b1792be46b4ff4e4c6ca46623
     </>
   );
 }

@@ -1,26 +1,20 @@
 import type { Metadata } from 'next';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { SectionHeading } from '@/components/shared/SectionHeading';
-import { ToolsSection } from '@/components/sections/ToolsSection';
+import { ToolsHero } from '@/components/tools/ToolsHero';
+import { ToolsCalculators } from '@/components/tools/ToolsCalculators';
+import { ToolsCTA } from '@/components/tools/ToolsCTA';
 
 export const metadata: Metadata = {
-  title: 'Tools — Fitness Calculators',
-  description: 'BMI, protein, calorie, and one-rep-max calculators at Duke Fitness Club. Free fitness tools for everyone.',
+  title: 'Fitness Performance Lab | Free BMI · Protein · Calorie · 1RM Calculators — DUKE FITNESS CLUB',
+  description:
+    'Four precise performance instruments used by Duke Fitness Club trainers. BMI, daily protein, maintenance calories and 1-rep max — free, fast and calibrated for real results.',
 };
 
 export default function ToolsPage() {
   return (
     <>
-      <PageHeader
-        label="Free Tools"
-        title="Fitness Calculators"
-        subtitle="Calculate your BMI, protein needs, daily calories, and one-rep max — all in one place."
-      />
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <ToolsSection />
-        </div>
-      </section>
+      <ToolsHero />
+      <ToolsCalculators />
+      <ToolsCTA />
     </>
   );
 }

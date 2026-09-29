@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { SectionHeading } from '@/components/shared/SectionHeading';
-import { GlassCard } from '@/components/shared/GlassCard';
-import { GoldButton } from '@/components/shared/GoldButton';
-import { MenuSection, ComboDeals } from '@/components/sections/MenuSection';
-import { ReservationForm } from '@/components/sections/ReservationForm';
-import { siteConfig } from '@/data/siteConfig';
-import { waLink, telLink } from '@/lib/contact';
-import { UtensilsCrossed, Truck, Phone, Percent } from 'lucide-react';
+import { KitchenHero } from '@/components/restaurant/KitchenHero';
+import { KitchenPhilosophy } from '@/components/restaurant/KitchenPhilosophy';
+import { KitchenSignature } from '@/components/restaurant/KitchenSignature';
+import { KitchenMenu } from '@/components/restaurant/KitchenMenu';
+import { KitchenCombos } from '@/components/restaurant/KitchenCombos';
+import { KitchenBenefits } from '@/components/restaurant/KitchenBenefits';
+import { KitchenReservation } from '@/components/restaurant/KitchenReservation';
+import { KitchenTakeaway } from '@/components/restaurant/KitchenTakeaway';
+import { KitchenFinale } from '@/components/restaurant/KitchenFinale';
 
 export const metadata: Metadata = {
   title: 'Duke Kitchen — Healthy Restaurant',
@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 export default function RestaurantPage() {
   return (
     <>
+<<<<<<< HEAD
       <PageHeader
         label={siteConfig.zones.restaurant.tagline}
         title="DUKE KITCHEN"
@@ -102,6 +103,17 @@ export default function RestaurantPage() {
           <p className="text-xs text-muted-warm mt-4">Opening Hours: {siteConfig.zones.restaurant.hours}</p>
         </div>
       </section>
+=======
+      <KitchenHero />
+      <KitchenPhilosophy />
+      <KitchenSignature />
+      <KitchenMenu />
+      <KitchenCombos />
+      <KitchenBenefits />
+      <KitchenReservation />
+      <KitchenTakeaway />
+      <KitchenFinale />
+>>>>>>> c75c51e7c7df8f4b1792be46b4ff4e4c6ca46623
     </>
   );
 }
