@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { GoldButton } from '@/components/shared/GoldButton';
 import { waLink } from '@/lib/contact';
 import { games, timeSlots, bookedSlots } from '@/data/games';
-import { Calendar, Clock, Users, PlayCircle } from 'lucide-react';
+import { CalendarDays, Clock, Users, PlayCircle } from 'lucide-react';
 
 export function ArenaBooking() {
   const reduceMotion = useReducedMotion();
@@ -160,7 +160,7 @@ export function ArenaBooking() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
                     <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                      <Calendar className="h-3.5 w-3.5" strokeWidth={1.8} />
+                      <CalendarDays className="h-3.5 w-3.5" strokeWidth={1.8} />
                       Date
                     </label>
                     <input
