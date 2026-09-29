@@ -3,14 +3,9 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '@/data/siteConfig';
-<<<<<<< HEAD
 import { useLang } from '@/components/providers/LanguageProvider';
 import { GoldButton } from '@/components/shared/GoldButton';
 import { waLink } from '@/lib/contact';
-=======
-import { Counter } from '@/components/shared/Counter';
-import { useLang } from '@/components/providers/LanguageProvider';
->>>>>>> c75c51e7c7df8f4b1792be46b4ff4e4c6ca46623
 
 const revealTime = 2.8;
 
@@ -51,9 +46,6 @@ const dustParticles: Particle[] = Array.from({ length: DUST_COUNT }).map((_, i) 
   };
 });
 
-<<<<<<< HEAD
-export function Hero() {
-=======
 const SPARKLE_COUNT = 22;
 const sparkleParticles: Sparkle[] = Array.from({ length: SPARKLE_COUNT }).map((_, i) => {
   const angle = Math.random() * Math.PI * 2;
@@ -73,7 +65,6 @@ const sparkleParticles: Sparkle[] = Array.from({ length: SPARKLE_COUNT }).map((_
 });
 
 export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
->>>>>>> c75c51e7c7df8f4b1792be46b4ff4e4c6ca46623
   const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -601,51 +592,28 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                       transition={
                         revealed
                           ? {
-                              duration: 1.8,
-                              delay: 1.6 + i * 0.1,
-                              times: [0, 0.4, 1],
+                              duration: 1.6,
+                              delay: 1.42 + i * 0.09,
+                              times: [0, 0.5, 1],
                               ease: 'easeOut',
                             }
                           : { duration: 0 }
                       }
-                      className="font-display font-black leading-none text-gold-gradient"
+                      className="font-display font-black"
                       style={{
-                        fontSize: 'clamp(2.2rem, 6vw, 4.2rem)',
+                        fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                        color: 'var(--accent-400)',
                       }}
                     >
-                      {revealed && (
-                        <Counter
-                          key={`counter-${i}-${revealed}`}
-                          target={stat.value}
-                          suffix={stat.suffix}
-                          duration={1.8}
-                        />
-                      )}
+                      {stat.value}
+                      {stat.suffix}
                     </motion.div>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={
-                      revealed
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 10 }
-                    }
-                    transition={
-                      revealed
-                        ? {
-                            duration: 0.5,
-                            delay: 1.65 + i * 0.09,
-                            ease: 'easeOut',
-                          }
-                        : { duration: 0.1 }
-                    }
-                    className="mt-2 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase"
-                    style={{
-                      color: 'var(--muted-warm)',
-                      textShadow: '0 1px 6px rgba(0,0,0,0.8)',
-                    }}
-                  >
-                    {stat.label}
+                    <div
+                      className="mt-2 text-xs sm:text-sm tracking-widest uppercase"
+                      style={{ color: 'var(--muted-warm)' }}
+                    >
+                      {stat.label}
+                    </div>
                   </motion.div>
                 </motion.div>
               ))}
@@ -658,40 +626,18 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={revealed ? { opacity: 1 } : { opacity: 0 }}
-        transition={revealed ? { delay: 1.8, duration: 0.9 } : { duration: 0.1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        transition={{ delay: 2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="flex flex-col items-center gap-1"
         >
-          <span
-            className="text-[11px] tracking-[0.4em] uppercase"
-            style={{ color: 'var(--muted-warm)' }}
-          >
-            Scroll
-          </span>
-          <div
-            className="h-10 w-[1px]"
-            style={{
-              background:
-                'linear-gradient(to bottom, var(--accent-500), transparent)',
-            }}
-          />
+          <span className="text-xs text-muted-warm tracking-widest uppercase">Scroll</span>
+          <div className="h-8 w-[1px] bg-gradient-to-b from-gold to-transparent" />
         </motion.div>
       </motion.div>
-
-      <style jsx>{`
-        .perspective-1200 {
-          perspective: 1200px;
-        }
-        :global(.hero-video) {
-          transform: translateZ(0);
-          will-change: transform;
-          backface-visibility: hidden;
-        }
-      `}</style>
     </section>
   );
 }
