@@ -28,7 +28,7 @@ export function GalleryGrid() {
                   onClick={() => setLightbox(galleryItems.indexOf(item))}
                 >
                   <img
-                    src={item.image}
+                    src={item.src}
                     alt={item.alt}
                     className="w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
@@ -67,7 +67,7 @@ export function GalleryGrid() {
               key={lightbox}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              src={galleryItems[lightbox].image}
+              src={galleryItems[lightbox].src}
               alt={galleryItems[lightbox].alt}
               className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg border border-gold/20"
             />

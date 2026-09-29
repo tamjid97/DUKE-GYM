@@ -52,7 +52,7 @@ export function AquaDetails() {
             className="relative overflow-hidden"
             style={{ borderRadius: '12px', minHeight: '520px' }}
           >
-            <img src={poolImage.image} alt={poolImage.alt} className="h-full min-h-[520px] w-full object-cover" />
+            <img src={poolImage.src} alt={poolImage.alt} className="h-full min-h-[520px] w-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-transparent to-transparent" />
             <div className="absolute left-5 top-5 h-8 w-8 border-l border-t border-[rgba(212,175,55,0.5)]" />
             <div className="absolute right-5 top-5 h-8 w-8 border-r border-t border-[rgba(212,175,55,0.5)]" />

@@ -10,7 +10,7 @@ export function AquaRhythm() {
 
   return (
     <section className="relative flex min-h-[55vh] items-center overflow-hidden">
-      <img src={image.image} alt={image.alt} className="absolute inset-0 h-full w-full object-cover opacity-35" />
+      <img src={image.src} alt={image.alt} className="absolute inset-0 h-full w-full object-cover opacity-35" />
       <div className="absolute inset-0 bg-[#0B0B0C]/75" />
       <div className="absolute inset-0 aqua-caustics" />
       <div className="relative z-10 mx-auto w-full px-6 py-24 text-center lg:px-16" style={{ maxWidth: '1600px' }}>

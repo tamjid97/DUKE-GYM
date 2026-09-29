@@ -10,7 +10,7 @@ export function AquaFlow() {
 
   return (
     <section className="relative flex min-h-[70vh] items-center overflow-hidden">
-      <img src={image.image} alt={image.alt} className={`absolute inset-0 h-full w-full object-cover ${reduceMotion ? '' : 'ken-burns'}`} />
+      <img src={image.src} alt={image.alt} className={`absolute inset-0 h-full w-full object-cover ${reduceMotion ? '' : 'ken-burns'}`} />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0C] via-[#0B0B0C]/78 to-[#0B0B0C]/55" />
       <div className="absolute inset-0 aqua-caustics opacity-70" />
       <div className="relative z-10 mx-auto w-full px-6 py-28 lg:px-16" style={{ maxWidth: '1600px' }}>
