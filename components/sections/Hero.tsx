@@ -135,7 +135,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      aria-label="Start cinematic reveal of Duke Gym"
+      aria-label="Start cinematic reveal of Duke Fitness Club"
     >
       {/* Background video with cinematic overlay */}
       <motion.div
@@ -308,8 +308,33 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
       ))}
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto perspective-1200">
+      <div className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto">
         
+        {/* Premium pill badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={revealed ? { duration: 0.5, delay: 0.3 } : { duration: 0.15 }}
+          className="mb-6"
+        >
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border"
+            style={{
+              borderColor: 'var(--accent-400)',
+              background: 'rgba(11, 11, 12, 0.6)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            <span style={{ color: 'var(--accent-400)', fontSize: '12px' }}>◆</span>
+            <span
+              className="font-display text-xs font-semibold tracking-[0.3em] uppercase"
+              style={{ color: 'var(--accent-400)' }}
+            >
+              Premium Fitness Experience
+            </span>
+          </div>
+        </motion.div>
+
         {/* Diamond divider */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -322,7 +347,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           </div>
         </motion.div>
 
-        {/* Welcome to DUKE GYM — WELCOME line */}
+        {/* WELCOME TO line */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden', y: 40, scale: 0.8 }}
           animate={
@@ -350,39 +375,18 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           className="mb-4"
         >
           <motion.span
-            className="font-display font-medium tracking-[0.45em] uppercase block"
+            className="font-display font-medium tracking-[0.35em] uppercase block"
             style={{
-              fontSize: 'clamp(0.9rem, 2.4vw, 1.5rem)',
-              color: 'var(--accent-400)',
-              letterSpacing: '0.42em',
+              fontSize: 'clamp(0.85rem, 2vw, 1.25rem)',
+              color: 'var(--muted-warm)',
+              letterSpacing: '0.32em',
             }}
-            animate={
-              revealed
-                ? {
-                    textShadow: [
-                      '0 0 0px rgba(212, 175, 55, 0)',
-                      '0 0 28px rgba(212, 175, 55, 0.65), 0 2px 40px rgba(241, 221, 160, 0.35)',
-                      '0 0 16px rgba(212, 175, 55, 0.45), 0 2px 22px rgba(212, 175, 55, 0.25)',
-                    ],
-                  }
-                : { textShadow: '0 0 0px rgba(212, 175, 55, 0)' }
-            }
-            transition={
-              revealed
-                ? {
-                    duration: 1.4,
-                    delay: 0.75,
-                    times: [0, 0.4, 1],
-                    ease: 'easeOut',
-                  }
-                : { duration: 0 }
-            }
           >
             Welcome to
           </motion.span>
         </motion.div>
 
-        {/* Duke Gym title — premium cinematic reveal */}
+        {/* DUKE FITNESS CLUB title — premium gradient with proper background-clip */}
         <motion.h1
           initial={{
             opacity: 0,
@@ -429,61 +433,47 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                 }
               : { duration: 0.2 }
           }
-          className="font-display font-black leading-none relative overflow-hidden select-none"
+          className="font-display font-black leading-none select-none mb-4"
           style={{
-            fontSize: 'clamp(3.8rem, 15vw, 11rem)',
-            letterSpacing: '0.015em',
+            fontSize: 'clamp(2.5rem, 8vw, 6rem)',
+            letterSpacing: '0.05em',
+            lineHeight: '1.1',
           }}
         >
           <motion.span
-            className="text-accent-gradient inline-block relative"
+            className="inline-block"
+            style={{
+              background: 'linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-primary) 50%, var(--accent-highlight) 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+            }}
             animate={
               revealed
                 ? {
-                    textShadow: [
-                      '0 0 0 rgba(212, 175, 55, 0)',
-                      '0 0 70px color-mix(in srgb, var(--accent-500) 60%, transparent), 0 0 140px color-mix(in srgb, var(--accent-400) 40%, transparent), 0 6px 50px rgba(0,0,0,0.7)',
-                      '0 0 40px color-mix(in srgb, var(--accent-500) 42%, transparent), 0 0 90px color-mix(in srgb, var(--accent-500) 24%, transparent), 0 5px 40px rgba(0,0,0,0.6)',
+                    filter: [
+                      'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                      'drop-shadow(0 4px 30px color-mix(in srgb, var(--accent-primary) 50%, transparent))',
+                      'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
                     ],
                   }
-                : { textShadow: '0 0 0 rgba(212, 175, 55, 0)' }
+                : {
+                    filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                  }
             }
             transition={
               revealed
                 ? {
                     duration: 1.8,
                     delay: 0.9,
-                    times: [0, 0.38, 1],
+                    times: [0, 0.5, 1],
                     ease: 'easeOut',
                   }
                 : { duration: 0 }
             }
           >
-            Duke Gym
-          </motion.span>
-          <motion.span
-            className="absolute inset-0 pointer-events-none"
-            aria-hidden
-            initial={{ x: '-120%' }}
-            animate={revealed ? { x: ['-120%', '130%'] } : { x: '-120%' }}
-            transition={
-              revealed
-                ? { duration: 1.3, delay: 1.15, ease: [0.22, 1, 0.36, 1] }
-                : { duration: 0 }
-            }
-            style={{
-              background:
-                'linear-gradient(100deg, transparent 0%, color-mix(in srgb, var(--accent-300) 10%, transparent) 22%, color-mix(in srgb, white 85%, transparent) 50%, color-mix(in srgb, var(--accent-300) 10%, transparent) 78%, transparent 100%)',
-              mixBlendMode: 'screen',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              fontSize: 'inherit',
-              fontWeight: 'inherit',
-              letterSpacing: 'inherit',
-            }}
-          >
-            Duke Gym
+            DUKE FITNESS CLUB
           </motion.span>
         </motion.h1>
 
@@ -500,10 +490,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
               ? { duration: 0.55, delay: 1.3, ease: [0.22, 1, 0.36, 1] }
               : { duration: 0.15 }
           }
-          className="mt-12 flex flex-col gap-3 sm:flex-row sm:gap-4"
+          className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4"
         >
           <GoldButton href="/membership" icon>
-            {t.joinNow}
+            {t.joinNow} →
           </GoldButton>
           <GoldButton
             href={waLink('Hello Duke Fitness Club! I would like to book a free tour.')}
@@ -514,7 +504,18 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           </GoldButton>
         </motion.div>
 
-        {/* Stats Reveal — integrated directly below DUKE GYM cinematic */}
+        {/* Gold divider line */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={revealed ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+          transition={revealed ? { duration: 0.6, delay: 1.4 } : { duration: 0.15 }}
+          className="mt-12 w-24 h-[1px]"
+          style={{
+            background: 'linear-gradient(90deg, transparent, var(--accent-400), transparent)',
+          }}
+        />
+
+        {/* Stats counters */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden' }}
           animate={
@@ -524,10 +525,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           }
           transition={
             revealed
-              ? { duration: 0.1, delay: 1.4 }
+              ? { duration: 0.1, delay: 1.5 }
               : { duration: 0.1 }
           }
-          className="mt-14 w-full max-w-5xl mx-auto"
+          className="mt-10 w-full max-w-5xl mx-auto"
         >
           <div className="relative">
             <div
@@ -552,7 +553,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                     revealed
                       ? {
                           duration: 0.65,
-                          delay: 1.42 + i * 0.09,
+                          delay: 1.52 + i * 0.09,
                           ease: [0.22, 1, 0.36, 1],
                         }
                       : { duration: 0.1 }
@@ -570,7 +571,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                       revealed
                         ? {
                             duration: 0.5,
-                            delay: 1.42 + i * 0.09,
+                            delay: 1.52 + i * 0.09,
                             ease: 'easeOut',
                           }
                         : { duration: 0.1 }
@@ -578,32 +579,38 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                     className="relative"
                   >
                     <motion.div
+                      className="font-display font-black"
+                      style={{
+                        fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+                        background: 'linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-primary) 50%, var(--accent-highlight) 100%)',
+                        WebkitBackgroundClip: 'text',
+                        backgroundClip: 'text',
+                        color: 'transparent',
+                        filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                      }}
                       animate={
                         revealed
                           ? {
-                              textShadow: [
-                                '0 0 0 rgba(212,175,55,0)',
-                                '0 0 28px color-mix(in srgb, var(--accent-400) 70%, transparent), 0 0 60px color-mix(in srgb, var(--accent-500) 35%, transparent)',
-                                '0 0 16px color-mix(in srgb, var(--accent-400) 45%, transparent), 0 0 32px color-mix(in srgb, var(--accent-500) 22%, transparent)',
+                              filter: [
+                                'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                                'drop-shadow(0 2px 15px color-mix(in srgb, var(--accent-primary) 40%, transparent))',
+                                'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
                               ],
                             }
-                          : { textShadow: '0 0 0 rgba(212,175,55,0)' }
+                          : {
+                              filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                            }
                       }
                       transition={
                         revealed
                           ? {
                               duration: 1.6,
-                              delay: 1.42 + i * 0.09,
+                              delay: 1.52 + i * 0.09,
                               times: [0, 0.5, 1],
                               ease: 'easeOut',
                             }
                           : { duration: 0 }
                       }
-                      className="font-display font-black"
-                      style={{
-                        fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-                        color: 'var(--accent-400)',
-                      }}
                     >
                       {stat.value}
                       {stat.suffix}
@@ -634,8 +641,13 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           transition={{ duration: 1.5, repeat: Infinity }}
           className="flex flex-col items-center gap-1"
         >
-          <span className="text-xs text-muted-warm tracking-widest uppercase">Scroll</span>
-          <div className="h-8 w-[1px] bg-gradient-to-b from-gold to-transparent" />
+          <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--muted-warm)' }}>Scroll</span>
+          <div
+            className="h-8 w-[1px]"
+            style={{
+              background: 'linear-gradient(to bottom, var(--accent-400), transparent)',
+            }}
+          />
         </motion.div>
       </motion.div>
     </section>
