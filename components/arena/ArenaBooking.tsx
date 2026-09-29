@@ -96,21 +96,21 @@ export function ArenaBooking() {
                 <h3 className="font-display text-3xl font-bold text-gold-gradient">{game.name}</h3>
                 <div className="mt-8 space-y-5">
                   <div className="flex items-center gap-3">
-                    <div className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5}>🎮</div>
+                    <div className="h-4 w-4 text-[#D4AF37]">🎮</div>
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.28em] text-[#8E877A]">Member Rate</div>
                       <div className="mt-1 font-display text-2xl font-bold text-warm-white">৳{game.priceMember}<span className="ml-1 text-xs text-[#8E877A]">/hr</span></div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5}>👥</div>
+                    <div className="h-4 w-4 text-[#D4AF37]">👥</div>
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.28em] text-[#8E877A]">Guest Rate</div>
                       <div className="mt-1 font-display text-2xl font-bold text-[#C9BFA8]">৳{game.pricePerHour}<span className="ml-1 text-xs text-[#8E877A]">/hr</span></div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5}>🕐</div>
+                    <div className="h-4 w-4 text-[#D4AF37]">🕐</div>
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.28em] text-[#8E877A]">Open Daily</div>
                       <div className="mt-1 text-sm text-warm-white">10:00 AM – 12:00 AM</div>
@@ -129,7 +129,7 @@ export function ArenaBooking() {
               <div className="space-y-7">
                 <div>
                   <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                    <span className="h-3.5 w-3.5" strokeWidth={1.8}>🎮</span>
+                    <span className="h-3.5 w-3.5">🎮</span>
                     Select Arena
                   </label>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
@@ -174,7 +174,7 @@ export function ArenaBooking() {
                   </div>
                   <div>
                     <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                      <span className="h-3.5 w-3.5" strokeWidth={1.8}>👥</span>
+                      <span className="h-3.5 w-3.5">👥</span>
                       Players
                     </label>
                     <select
@@ -193,7 +193,7 @@ export function ArenaBooking() {
 
                 <div>
                   <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                    <span className="h-3.5 w-3.5" strokeWidth={1.8}>🕐</span>
+                    <span className="h-3.5 w-3.5">🕐</span>
                     Time Slot
                     {selectedDate && (
                       <span className="ml-auto text-[9px] tracking-[0.2em] text-[#8E877A]">
