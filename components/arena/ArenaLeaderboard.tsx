@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { leaderboard } from '@/data/games';
-import { Trophy, Star, Flame } from 'lucide-react';
+
 
 const rankStyles = [
   {
@@ -12,7 +12,7 @@ const rankStyles = [
     nameColor: '#FFF8E7',
     numberGrad: 'linear-gradient(135deg, #F1DDA0 0%, #D4AF37 55%, #8C6B2A 100%)',
     glow: 'drop-shadow(0 2px 16px rgba(212,175,55,0.5))',
-    icon: Trophy,
+    icon: '🏆',
   },
   {
     rowBg: 'linear-gradient(90deg, rgba(200,200,210,0.1), rgba(200,200,210,0.02) 55%, transparent)',
@@ -21,7 +21,7 @@ const rankStyles = [
     nameColor: '#ECECF2',
     numberGrad: 'linear-gradient(135deg, #F4F4F7 0%, #CFCFCF 55%, #8A8A94 100%)',
     glow: 'drop-shadow(0 2px 12px rgba(200,200,210,0.35))',
-    icon: Star,
+    icon: '⭐',
   },
   {
     rowBg: 'linear-gradient(90deg, rgba(205,127,50,0.12), rgba(205,127,50,0.03) 55%, transparent)',
@@ -30,7 +30,7 @@ const rankStyles = [
     nameColor: '#F2E2D0',
     numberGrad: 'linear-gradient(135deg, #E6B98A 0%, #CD7F32 55%, #8A5420 100%)',
     glow: 'drop-shadow(0 2px 12px rgba(205,127,50,0.4))',
-    icon: Flame,
+    icon: '🔥',
   },
 ];
 
@@ -56,11 +56,11 @@ export function ArenaLeaderboard() {
           className="mb-16 text-center lg:mb-20"
         >
           <div className="flex items-center justify-center gap-4">
-            <Flame className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.6} />
+            <span className="h-3.5 w-3.5 text-[#D4AF37]">🔥</span>
             <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-[#D4AF37]">
               Hall of Champions
             </span>
-            <Flame className="h-3.5 w-3.5 text-[#D4AF37]" strokeWidth={1.6} />
+            <span className="h-3.5 w-3.5 text-[#D4AF37]">🔥</span>
           </div>
           <h2
             className="mt-6 font-display font-bold text-warm-white"
@@ -102,9 +102,9 @@ export function ArenaLeaderboard() {
                 nameColor: '#D6CFC3',
                 numberGrad: 'linear-gradient(135deg, #B6B0A5, #8E877A)',
                 glow: 'none',
-                icon: Star,
+                icon: '⭐',
               };
-              const Icon = rs.icon;
+
 
               return (
                 <motion.div
@@ -126,10 +126,10 @@ export function ArenaLeaderboard() {
                         background: `linear-gradient(135deg, ${rs.sideAccent}14, transparent 70%)`,
                       }}
                     >
-                      <Icon
+                      <span
                         className={`${i < 3 ? 'h-5 w-5 lg:h-6 lg:w-6' : 'h-4 w-4 lg:h-5 lg:w-5'}`}
-                        style={{ color: rs.sideAccent, strokeWidth: i < 3 ? 1.4 : 1.6 }}
-                      />
+                        style={{ color: rs.sideAccent }}
+                      >{rs.icon}</span>
                     </div>
                     <div
                       className="font-display font-black leading-none lg:text-3xl"
