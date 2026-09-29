@@ -5,7 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { GoldButton } from '@/components/shared/GoldButton';
 import { waLink } from '@/lib/contact';
 import { games, timeSlots, bookedSlots } from '@/data/games';
-import { Users, PlayCircle } from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 
 export function ArenaBooking() {
   const reduceMotion = useReducedMotion();
@@ -103,7 +103,7 @@ export function ArenaBooking() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Users className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5} />
+                    <div className="h-4 w-4 text-[#D4AF37]" strokeWidth={1.5}>👥</div>
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.28em] text-[#8E877A]">Guest Rate</div>
                       <div className="mt-1 font-display text-2xl font-bold text-[#C9BFA8]">৳{game.pricePerHour}<span className="ml-1 text-xs text-[#8E877A]">/hr</span></div>
@@ -174,7 +174,7 @@ export function ArenaBooking() {
                   </div>
                   <div>
                     <label className="mb-3 flex items-center gap-2 text-[10px] uppercase tracking-[0.32em] text-[#D4AF37]">
-                      <Users className="h-3.5 w-3.5" strokeWidth={1.8} />
+                      <span className="h-3.5 w-3.5" strokeWidth={1.8}>👥</span>
                       Players
                     </label>
                     <select
