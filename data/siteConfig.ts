@@ -14,9 +14,9 @@ export const siteConfig = {
   subtitle: 'Gym • Restaurant • Swimming Pool • Game Zone',
 
   // --- Contact ---
-  phone: '+8801700000000', // [PLACEHOLDER]
-  phoneDisplay: '+880 1700-000000',
-  whatsapp: '8801700000000', // [PLACEHOLDER] no + or spaces
+  phone: '+8801608044682',
+  phoneDisplay: '01608044682',
+  whatsapp: '8801608044682',
   email: 'info@dukefitnessclub.com', // [PLACEHOLDER]
   address: 'House 1, Road 1, Gulshan 2, Dhaka 1212, Bangladesh', // [PLACEHOLDER]
   addressBn: 'বাড়ি ১, রোড ১, গুলশান ২, ঢাকা ১২১২, বাংলাদেশ', // [PLACEHOLDER]

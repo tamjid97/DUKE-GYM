@@ -5,7 +5,8 @@
 import { siteConfig } from '@/data/siteConfig';
 
 export function waLink(message: string): string {
-  return `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
+  const whatsappNumber = '8801608044682';
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
 export function mailtoLink(subject: string, body: string): string {
@@ -13,5 +14,5 @@ export function mailtoLink(subject: string, body: string): string {
 }
 
 export function telLink(): string {
-  return `tel:${siteConfig.phone}`;
+  return `tel:+8801608044682`;
 }

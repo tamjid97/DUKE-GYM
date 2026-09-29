@@ -70,6 +70,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
   const sectionRef = useRef<HTMLElement | null>(null);
   const hasTriggeredRef = useRef(false);
   const [internalRevealed, setInternalRevealed] = useState(false);
+  const [cycleCount, setCycleCount] = useState(0);
 
   const isControlled = revealedProp !== undefined;
   const revealed = isControlled ? revealedProp! : internalRevealed;
@@ -104,28 +105,30 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
     if (!video) return;
 
     const onTimeUpdate = () => {
+      // Trigger animation at chest press moment
       if (!hasTriggeredRef.current && video.currentTime >= revealTime) {
         fireTrigger();
       }
     };
 
-    const onSeeked = () => {
-      if (video.currentTime < 0.5 && hasTriggeredRef.current) {
-        hasTriggeredRef.current = false;
-        if (!isControlled) setInternalRevealed(false);
+    const onEnded = () => {
+      // Video ended - reset animation state for next loop
+      hasTriggeredRef.current = false;
+      if (!isControlled) {
+        setInternalRevealed(false);
+        setCycleCount(prev => prev + 1);
       }
     };
 
     video.addEventListener('timeupdate', onTimeUpdate);
-    video.addEventListener('seeked', onSeeked);
+    video.addEventListener('ended', onEnded);
 
     return () => {
       video.removeEventListener('timeupdate', onTimeUpdate);
-      video.removeEventListener('seeked', onSeeked);
+      video.removeEventListener('ended', onEnded);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isControlled]);
-
   return (
     <section
       ref={sectionRef}
@@ -147,6 +150,23 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
             : { duration: 0 }
         }
       >
+        {/* <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          className="hero-video"
+          poster={siteConfig.zones.gym.image}
+          style={{
+            width: '100%',
+            height: '100vh',
+            objectFit: 'cover',
+          }}
+        >
+          <source src="/videos/gym-hero.mp4" type="video/mp4" />
+        </video> */}
+
+
         <video
           ref={videoRef}
           autoPlay
@@ -248,20 +268,20 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                  opacity: [0, 0.9, 0],
-                  x: [(p.dx - p.x) * 0.15 + '%', (p.dx - p.x) * 1.2 + '%'],
-                  y: [(p.dy - p.y) * 0.15 + '%', (p.dy - p.y) * 1.2 + '%'],
-                }
+                opacity: [0, 0.9, 0],
+                x: [(p.dx - p.x) * 0.15 + '%', (p.dx - p.x) * 1.2 + '%'],
+                y: [(p.dy - p.y) * 0.15 + '%', (p.dy - p.y) * 1.2 + '%'],
+              }
               : { opacity: 0, x: 0, y: 0 }
           }
           transition={
             revealed
               ? {
-                  times: [0, 0.4, 1],
-                  duration: p.duration / 1000,
-                  delay: p.delay / 1000,
-                  ease: 'easeOut',
-                }
+                times: [0, 0.4, 1],
+                duration: p.duration / 1000,
+                delay: p.delay / 1000,
+                ease: 'easeOut',
+              }
               : { duration: 0 }
           }
         />
@@ -286,30 +306,30 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                  opacity: [0, 1, 0.7, 0],
-                  scale: [0, 1.2, 0.8, 0],
-                  x: [(s.dx - s.x) * 0.1 + '%', (s.dx - s.x) * 1.1 + '%'],
-                  y: [(s.dy - s.y) * 0.1 + '%', (s.dy - s.y) * 1.1 + '%'],
-                  rotate: [s.rotate, s.rotate + 120],
-                }
+                opacity: [0, 1, 0.7, 0],
+                scale: [0, 1.2, 0.8, 0],
+                x: [(s.dx - s.x) * 0.1 + '%', (s.dx - s.x) * 1.1 + '%'],
+                y: [(s.dy - s.y) * 0.1 + '%', (s.dy - s.y) * 1.1 + '%'],
+                rotate: [s.rotate, s.rotate + 120],
+              }
               : { opacity: 0, x: 0, y: 0, scale: 0 }
           }
           transition={
             revealed
               ? {
-                  times: [0, 0.3, 0.7, 1],
-                  duration: s.duration / 1000,
-                  delay: s.delay / 1000,
-                  ease: 'easeOut',
-                }
+                times: [0, 0.3, 0.7, 1],
+                duration: s.duration / 1000,
+                delay: s.delay / 1000,
+                ease: 'easeOut',
+              }
               : { duration: 0 }
           }
         />
       ))}
 
       {/* Main content */}
-      <div className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto">
-        
+      <div key={`hero-content-${cycleCount}`} className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto">
+
         {/* Premium pill badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -353,23 +373,23 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                  opacity: 1,
-                  visibility: 'visible',
-                  y: 0,
-                  scale: [0.8, 1.04, 1],
-                  filter: ['blur(6px)', 'blur(1px)', 'blur(0px)'],
-                }
+                opacity: 1,
+                visibility: 'visible',
+                y: 0,
+                scale: [0.8, 1.04, 1],
+                filter: ['blur(6px)', 'blur(1px)', 'blur(0px)'],
+              }
               : { opacity: 0, visibility: 'hidden', y: 40, scale: 0.8, filter: 'blur(6px)' }
           }
           transition={
             revealed
               ? {
-                  duration: 0.55,
-                  delay: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  times: [0, 0.55, 1],
-                  filter: { duration: 0.45, delay: 0.5, times: [0, 0.6, 1] },
-                }
+                duration: 0.55,
+                delay: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+                times: [0, 0.55, 1],
+                filter: { duration: 0.45, delay: 0.5, times: [0, 0.6, 1] },
+              }
               : { duration: 0.2 }
           }
           className="mb-4"
@@ -398,39 +418,39 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                  opacity: 1,
-                  visibility: 'visible',
-                  y: 0,
-                  scale: [0.6, 1.1, 1.02, 1],
-                  filter: ['blur(12px)', 'blur(3px)', 'blur(1px)', 'blur(0px)'],
-                }
+                opacity: 1,
+                visibility: 'visible',
+                y: 0,
+                scale: [0.6, 1.1, 1.02, 1],
+                filter: ['blur(12px)', 'blur(3px)', 'blur(1px)', 'blur(0px)'],
+              }
               : {
-                  opacity: 0,
-                  visibility: 'hidden',
-                  y: 55,
-                  scale: 0.6,
-                  filter: 'blur(12px)',
-                }
+                opacity: 0,
+                visibility: 'hidden',
+                y: 55,
+                scale: 0.6,
+                filter: 'blur(12px)',
+              }
           }
           transition={
             revealed
               ? {
+                duration: 0.95,
+                delay: 0.65,
+                ease: [0.19, 1, 0.36, 1],
+                times: [0, 0.48, 0.82, 1],
+                scale: {
                   duration: 0.95,
                   delay: 0.65,
-                  ease: [0.19, 1, 0.36, 1],
                   times: [0, 0.48, 0.82, 1],
-                  scale: {
-                    duration: 0.95,
-                    delay: 0.65,
-                    times: [0, 0.48, 0.82, 1],
-                    ease: [0.19, 1.3, 0.55, 1.02],
-                  },
-                  filter: {
-                    duration: 0.65,
-                    delay: 0.65,
-                    times: [0, 0.45, 0.8, 1],
-                  },
-                }
+                  ease: [0.19, 1.3, 0.55, 1.02],
+                },
+                filter: {
+                  duration: 0.65,
+                  delay: 0.65,
+                  times: [0, 0.45, 0.8, 1],
+                },
+              }
               : { duration: 0.2 }
           }
           className="font-display font-black leading-none select-none mb-4"
@@ -452,24 +472,24 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
             animate={
               revealed
                 ? {
-                    filter: [
-                      'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                      'drop-shadow(0 4px 30px color-mix(in srgb, var(--accent-primary) 50%, transparent))',
-                      'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                    ],
-                  }
+                  filter: [
+                    'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                    'drop-shadow(0 4px 30px color-mix(in srgb, var(--accent-primary) 50%, transparent))',
+                    'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                  ],
+                }
                 : {
-                    filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                  }
+                  filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                }
             }
             transition={
               revealed
                 ? {
-                    duration: 1.8,
-                    delay: 0.9,
-                    times: [0, 0.5, 1],
-                    ease: 'easeOut',
-                  }
+                  duration: 1.8,
+                  delay: 0.9,
+                  times: [0, 0.5, 1],
+                  ease: 'easeOut',
+                }
                 : { duration: 0 }
             }
           >
@@ -552,10 +572,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                   transition={
                     revealed
                       ? {
-                          duration: 0.65,
-                          delay: 1.52 + i * 0.09,
-                          ease: [0.22, 1, 0.36, 1],
-                        }
+                        duration: 0.65,
+                        delay: 1.52 + i * 0.09,
+                        ease: [0.22, 1, 0.36, 1],
+                      }
                       : { duration: 0.1 }
                   }
                   className="text-center"
@@ -570,10 +590,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                     transition={
                       revealed
                         ? {
-                            duration: 0.5,
-                            delay: 1.52 + i * 0.09,
-                            ease: 'easeOut',
-                          }
+                          duration: 0.5,
+                          delay: 1.52 + i * 0.09,
+                          ease: 'easeOut',
+                        }
                         : { duration: 0.1 }
                     }
                     className="relative"
@@ -591,24 +611,24 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                       animate={
                         revealed
                           ? {
-                              filter: [
-                                'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                                'drop-shadow(0 2px 15px color-mix(in srgb, var(--accent-primary) 40%, transparent))',
-                                'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                              ],
-                            }
+                            filter: [
+                              'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                              'drop-shadow(0 2px 15px color-mix(in srgb, var(--accent-primary) 40%, transparent))',
+                              'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                            ],
+                          }
                           : {
-                              filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                            }
+                            filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                          }
                       }
                       transition={
                         revealed
                           ? {
-                              duration: 1.6,
-                              delay: 1.52 + i * 0.09,
-                              times: [0, 0.5, 1],
-                              ease: 'easeOut',
-                            }
+                            duration: 1.6,
+                            delay: 1.52 + i * 0.09,
+                            times: [0, 0.5, 1],
+                            ease: 'easeOut',
+                          }
                           : { duration: 0 }
                       }
                     >
