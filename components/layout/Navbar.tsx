@@ -65,8 +65,8 @@ export function Navbar() {
           borderColor: 'var(--border-accent)',
         }}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:px-8">
-          <Link href="/" className="flex items-center gap-3">
+        <nav className="mx-auto flex max-w-7xl items-center px-4 lg:px-8">
+          <Link href="/" className="flex items-center gap-3 mr-6">
             <Image
               src="/logo.png"
               alt="Duke Fitness Club logo"
@@ -173,7 +173,6 @@ export function Navbar() {
 
           <div className="flex items-center gap-3">
             <ThemePicker />
-            <LanguageToggle />
             <a
               href={waLink('Hello Duke Fitness Club! I would like to join.')}
               target="_blank"
@@ -254,7 +253,6 @@ export function Navbar() {
               ))}
 
               <div className="py-3 mt-2 flex items-center gap-4" style={{ borderTop: '1px solid var(--border-accent)' }}>
-                <div className="section-label mb-0">Theme Color</div>
                 <div className="flex gap-2">
                   {THEMES.map((th) => (
                     <button
@@ -279,11 +277,6 @@ export function Navbar() {
                     </button>
                   ))}
                 </div>
-              </div>
-
-              <div className="py-2 flex items-center gap-4" style={{ borderTop: '1px solid var(--border-accent)' }}>
-                <div className="section-label mb-0">Language</div>
-                <LanguageToggle />
               </div>
 
               <a

@@ -1,3 +1,5 @@
+import { siteConfig } from '@/data/siteConfig';
+
 export function StructuredData() {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -11,7 +13,7 @@ export function StructuredData() {
       postalCode: '1212',
       addressCountry: 'BD',
     },
-    telephone: '+8801700000000',
+    telephone: siteConfig.phone,
     openingHours: 'Mo-Su 06:00-23:00',
     priceRange: '৳৳',
   };
