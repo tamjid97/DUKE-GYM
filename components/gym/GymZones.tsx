@@ -1,11 +1,11 @@
 ﻿'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Dumbbell, Heart, Users, Sparkles, Shield, Trophy } from 'lucide-react';
+
 
 const gymZones = [
   {
-    icon: Dumbbell,
+    icon: '🏋️',
     number: '01',
     title: 'Weights Zone',
     subtitle: 'BUILD WITH PURPOSE',
@@ -13,7 +13,7 @@ const gymZones = [
     image: 'https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
   },
   {
-    icon: Heart,
+    icon: '❤️',
     number: '02',
     title: 'Cardio Zone',
     subtitle: 'BURN. ENDURE.',
@@ -21,7 +21,7 @@ const gymZones = [
     image: 'https://images.pexels.com/photos/4753995/pexels-photo-4753995.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
   },
   {
-    icon: Sparkles,
+    icon: '✨',
     number: '03',
     title: 'Functional / Cross-Training',
     subtitle: 'MOVE BETTER',
@@ -29,7 +29,7 @@ const gymZones = [
     image: 'https://images.pexels.com/photos/4753998/pexels-photo-4753998.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
   },
   {
-    icon: Users,
+    icon: '👥',
     number: '04',
     title: "Women's Section",
     subtitle: 'PRIVATE. POWERFUL.',
@@ -37,7 +37,7 @@ const gymZones = [
     image: 'https://images.pexels.com/photos/4753986/pexels-photo-4753986.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
   },
   {
-    icon: Trophy,
+    icon: '🏆',
     number: '05',
     title: 'Personal Training Studio',
     subtitle: 'TRAIN ONE-ON-ONE',
@@ -45,7 +45,7 @@ const gymZones = [
     image: 'https://images.pexels.com/photos/17840/pexels-photo-17840.jpg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
   },
   {
-    icon: Shield,
+    icon: '🛡️',
     number: '06',
     title: 'Recovery',
     subtitle: 'RESTORE. REBUILD.',
@@ -146,7 +146,7 @@ export function GymZones() {
                   </span>
                 </div>
 
-                <zone.icon className="mb-3 h-6 w-6 text-[#D4AF37] transition-transform duration-300 group-hover:scale-110" />
+                <span className="mb-3 h-6 w-6 text-[#D4AF37] transition-transform duration-300 group-hover:scale-110">{zone.icon}</span>
                 <p className="mb-2 text-[9px] uppercase tracking-[0.36em] text-[#D4AF37] opacity-80">
                   {zone.subtitle}
                 </p>
