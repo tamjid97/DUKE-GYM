@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Percent, UtensilsCrossed, Truck } from 'lucide-react';
+
 
 export function KitchenBenefits() {
   const reduceMotion = useReducedMotion();
@@ -44,7 +44,7 @@ export function KitchenBenefits() {
             <div className="absolute top-5 left-5 w-5 h-5 border-l border-t border-gold/50" />
             <div className="absolute top-5 right-5 w-5 h-5 border-r border-t border-gold/50" />
 
-            <Percent className="absolute top-10 right-10 h-40 w-40 text-gold opacity-[0.07]" strokeWidth={1} />
+            <span className="absolute top-10 right-10 h-40 w-40 text-gold opacity-[0.07]">%</span>
 
             <div className="p-8 lg:p-10 flex flex-col justify-between h-full">
               <div>
@@ -53,7 +53,7 @@ export function KitchenBenefits() {
                 </p>
                 <div className="flex items-start gap-5">
                   <div className="h-16 w-16 flex items-center justify-center border border-gold/35 bg-gold/8 backdrop-blur shrink-0">
-                    <Percent className="h-7 w-7 text-gold" />
+                    <span className="h-7 w-7 text-gold">%</span>
                   </div>
                   <h3 className="font-display font-bold text-warm-white text-[30px] lg:text-[34px] leading-[1.02]">
                     Member Discount
@@ -96,7 +96,7 @@ export function KitchenBenefits() {
               </p>
               <div className="flex flex-row gap-5 items-start">
                 <div className="h-12 w-12 shrink-0 flex items-center justify-center border border-gold/30 bg-gold/8">
-                  <UtensilsCrossed className="h-5 w-5 text-gold" />
+                  <span className="h-5 w-5 text-gold">🍽️</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="font-display font-bold text-[22px] text-warm-white leading-tight mb-2">
@@ -122,7 +122,7 @@ export function KitchenBenefits() {
               </p>
               <div className="flex flex-row gap-5 items-start">
                 <div className="h-12 w-12 shrink-0 flex items-center justify-center border border-gold/30 bg-gold/8">
-                  <Truck className="h-5 w-5 text-gold" />
+                  <span className="h-5 w-5 text-gold">🚚</span>
                 </div>
                 <div className="flex-1">
                   <h3 className="font-display font-bold text-[22px] text-warm-white leading-tight mb-2">
