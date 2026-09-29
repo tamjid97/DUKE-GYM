@@ -45,7 +45,7 @@ export function ContactForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
-            className="w-full bg-obsidian/50 border border-gold/20 rounded-xl px-5 py-4 text-warm-white placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300"
+            className="w-full bg-white border border-gold/20 rounded-xl px-5 py-4 text-obsidian placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300"
           />
         </div>
 
@@ -59,7 +59,7 @@ export function ContactForm() {
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             placeholder="Your phone number"
-            className="w-full bg-obsidian/50 border border-gold/20 rounded-xl px-5 py-4 text-warm-white placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300"
+            className="w-full bg-white border border-gold/20 rounded-xl px-5 py-4 text-obsidian placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300"
           />
         </div>
 
@@ -73,7 +73,7 @@ export function ContactForm() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Your message"
             rows={5}
-            className="w-full bg-obsidian/50 border border-gold/20 rounded-xl px-5 py-4 text-warm-white placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300 resize-none"
+            className="w-full bg-white border border-gold/20 rounded-xl px-5 py-4 text-obsidian placeholder:text-muted-warm/50 focus:border-gold/60 focus:outline-none focus:ring-2 focus:ring-gold/20 transition-all duration-300 resize-none"
           />
         </div>
 

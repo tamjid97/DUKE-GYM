@@ -13,6 +13,9 @@ import { Testimonials } from '@/components/sections/Testimonials';
 import { GalleryPreview } from '@/components/sections/GalleryPreview';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { FinalCTA } from '@/components/sections/FinalCTA';
+import { ContactForm } from '@/components/contact/ContactForm';
+import { ContactInfo } from '@/components/contact/ContactInfo';
+import { ContactMap } from '@/components/contact/ContactMap';
 
 export function HomeClient() {
   const [revealed, setRevealed] = useState(false);
@@ -38,6 +41,15 @@ export function HomeClient() {
       <GalleryPreview />
       <FAQSection />
       <FinalCTA />
+      <section className="py-16 lg:py-24 bg-obsidian">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-2">
+            <ContactForm />
+            <ContactInfo />
+          </div>
+        </div>
+      </section>
+      <ContactMap />
     </>
   );
 }
