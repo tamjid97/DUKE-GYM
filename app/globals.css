@@ -892,17 +892,21 @@
       ellipse at 20% 50%,
       rgba(156, 203, 200, 0.12),
       transparent 55%
-    ),
-    radial-gradient(
-      ellipse at 80% 40%,
-      color-mix(in srgb, var(--accent-500) 8%, transparent),
-      transparent 50%
     );
-  background-size:
-    160% 160%,
-    180% 180%;
-  animation: aqua-caustics 14s ease-in-out infinite;
-  mix-blend-mode: screen;
+}
+
+@keyframes fog-drift {
+  0%,
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(20px) translateY(-10px);
+  }
+}
+
+.fog-drift {
+  animation: fog-drift 20s ease-in-out infinite;
 }
 
 @keyframes ripple {
