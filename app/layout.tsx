@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, Cinzel, Hind_Siliguri } from 'next/font/google';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Preloader } from '@/components/layout/Preloader';
+import { PreloaderOverlay } from '@/components/layout/PreloaderOverlay';
 import { MobileActionBar } from '@/components/layout/MobileActionBar';
 import { FloatingButtons } from '@/components/layout/FloatingButtons';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
@@ -63,7 +63,7 @@ export default function RootLayout({
       <body className="bg-obsidian text-warm-white antialiased">
         <LanguageProvider>
           <ThemeProvider>
-            <Preloader />
+            <PreloaderOverlay />
             <ScrollProgress />
             <Navbar />
             <main className="min-h-screen">{children}</main>
