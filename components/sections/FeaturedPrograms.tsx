@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Clock, Dumbbell, Flame, TrendingUp } from 'lucide-react';
+
 import { programs } from '@/data/programs';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { SectionHeading } from '@/components/shared/SectionHeading';
@@ -44,8 +44,8 @@ export function FeaturedPrograms() {
                   </h3>
                   <p className="text-xs text-muted-warm mt-1 line-clamp-2">{p.description}</p>
                   <div className="mt-4 flex items-center gap-3 text-xs text-muted-warm">
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3 text-gold" />{p.duration}</span>
-                    <span className="flex items-center gap-1"><Dumbbell className="h-3 w-3 text-gold" />{p.frequency}</span>
+                    <span className="flex items-center gap-1"><span className="h-3 w-3 text-gold">🕐</span>{p.duration}</span>
+                    <span className="flex items-center gap-1"><span className="h-3 w-3 text-gold">🏋️</span>{p.frequency}</span>
                   </div>
                 </div>
               </Link>
