@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+
 import { siteConfig } from '@/data/siteConfig';
 
 export function ContactInfo() {
@@ -28,7 +28,7 @@ export function ContactInfo() {
           {/* Location */}
           <div className="flex items-start gap-4 group">
             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-              <MapPin className="h-5 w-5 text-gold" />
+              <span className="h-5 w-5 text-gold">📍</span>
             </div>
             <div className="flex-1">
               <p className="text-sm text-warm-white font-medium">Location</p>
@@ -47,7 +47,7 @@ export function ContactInfo() {
           {/* Phone */}
           <div className="flex items-start gap-4 group">
             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-              <Phone className="h-5 w-5 text-gold" />
+              <span className="h-5 w-5 text-gold">📞</span>
             </div>
             <div className="flex-1">
               <p className="text-sm text-warm-white font-medium">Phone</p>
@@ -63,7 +63,7 @@ export function ContactInfo() {
           {/* Email */}
           <div className="flex items-start gap-4 group">
             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
-              <Mail className="h-5 w-5 text-gold" />
+              <span className="h-5 w-5 text-gold">✉️</span>
             </div>
             <div className="flex-1">
               <p className="text-sm text-warm-white font-medium">Email</p>
@@ -99,7 +99,7 @@ export function ContactInfo() {
             >
               <span className="text-sm text-warm-white font-medium">{zone.title}</span>
               <span className="text-sm text-muted-warm flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 text-gold" />
+                <span className="h-3.5 w-3.5 text-gold">🕐</span>
                 {zone.hours}
               </span>
             </div>
