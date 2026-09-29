@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import { siteConfig } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
@@ -16,7 +15,7 @@ export function FeaturedTrainer() {
   if (!featuredTrainer) return null;
 
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-12 relative overflow-hidden">
       {/* Subtle background */}
       <div className="absolute inset-0 pointer-events-none">
         <div
@@ -33,7 +32,7 @@ export function FeaturedTrainer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center"
         >
           {/* Left: Trainer Image */}
           <motion.div
@@ -44,12 +43,10 @@ export function FeaturedTrainer() {
             className="relative"
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border-accent-gradient">
-              <Image
+              <img
                 src={featuredTrainer.image}
                 alt={featuredTrainer.name}
-                fill
-                className="object-cover"
-                priority
+                className="w-full h-full object-cover"
               />
               {/* Dark overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -109,7 +106,7 @@ export function FeaturedTrainer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="font-display text-4xl lg:text-5xl font-bold text-accent-gradient leading-tight"
+              className="font-display text-3xl lg:text-4xl font-bold text-accent-gradient leading-tight"
             >
               {t.trainWithBest}
             </motion.h2>
@@ -121,10 +118,10 @@ export function FeaturedTrainer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.7 }}
             >
-              <h3 className="font-display text-3xl font-bold text-warm-white mb-2">
+              <h3 className="font-display text-2xl font-bold text-warm-white mb-2">
                 {lang === 'bn' ? featuredTrainer.nameBn : featuredTrainer.name}
               </h3>
-              <p className="text-accent-500 font-medium text-lg">
+              <p className="text-accent-500 font-medium text-base">
                 {lang === 'bn' ? featuredTrainer.titleBn : featuredTrainer.title}
               </p>
             </motion.div>
@@ -135,7 +132,7 @@ export function FeaturedTrainer() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-muted-warm leading-relaxed"
+              className="text-muted-warm text-sm leading-relaxed"
             >
               {lang === 'bn' ? featuredTrainer.shortBioBn : featuredTrainer.shortBio}
             </motion.p>
@@ -146,12 +143,12 @@ export function FeaturedTrainer() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="space-y-3"
+              className="space-y-2"
             >
-              {(lang === 'bn' ? featuredTrainer.specializationsBn : featuredTrainer.specializations).slice(0, 4).map((item, index) => (
-                <div key={index} className="flex items-center gap-3 text-warm-white">
+              {(lang === 'bn' ? featuredTrainer.specializationsBn : featuredTrainer.specializations).slice(0, 3).map((item, index) => (
+                <div key={index} className="flex items-center gap-2 text-warm-white text-sm">
                   <div
-                    className="w-1.5 h-1.5 rounded-full"
+                    className="w-1 h-1 rounded-full"
                     style={{ backgroundColor: 'var(--accent-500)' }}
                   />
                   <span>{item}</span>

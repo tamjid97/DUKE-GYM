@@ -258,7 +258,7 @@ export const siteConfig = {
       experienceBn: '৮ বছর',
       featured: true,
       certifications: ['NASM-CPT', 'CrossFit Level 2', 'Olympic Lifting Coach'],
-      image: 'https://images.pexels.com/photos/1182822/pexels-photo-1182822.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image: '/triner/ttttt.jpg',
       category: 'gym',
       shortBio: 'Elite strength coach specializing in hypertrophy and athletic performance. Ahmed brings 8+ years of experience helping members achieve their strength goals.',
       shortBioBn: 'এলিট শক্তি কোচ যিনি হাইপারট্রফি এবং অ্যাথলেটিক পারফরম্যান্সে বিশেষজ্ঞ। আহমেদ ৮+ বছরের অভিজ্ঞতা নিয়ে সদস্যদের তাদের শক্তি লক্ষ্য অর্জনে সাহায্য করেন।',

@@ -1,96 +1,89 @@
 'use client';
 
-import { siteConfig } from '@/data/siteConfig';
-import { FeaturedTrainer } from '@/components/sections/FeaturedTrainer';
-import { SectionHeading } from '@/components/shared/SectionHeading';
-import Link from 'next/link';
-import Image from 'next/image';
-import { GoldButton } from '@/components/shared/GoldButton';
+import { useState } from 'react';
+import { trainers } from '@/data/trainers';
+import { TrainerCard } from '@/components/trainers/TrainerCard';
+import { TrainerModal } from '@/components/trainers/TrainerModal';
+import { TrainerFilter } from '@/components/trainers/TrainerFilter';
 import { useLang } from '@/components/providers/LanguageProvider';
 
+type FilterType = 'all' | 'owner' | 'manager' | 'male' | 'female';
+
 export default function TrainersPage() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
+  const [selectedTrainer, setSelectedTrainer] = useState<typeof trainers[0] | null>(null);
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+
+  // Filter trainers based on selected filter
+  const filteredTrainers = trainers.filter((trainer) => {
+    switch (activeFilter) {
+      case 'owner':
+        return trainer.role.toLowerCase().includes('owner');
+      case 'manager':
+        return trainer.role.toLowerCase().includes('manager');
+      case 'male':
+        return trainer.gender === 'male';
+      case 'female':
+        return trainer.gender === 'female';
+      default:
+        return true;
+    }
+  });
 
   return (
-    <main className="min-h-screen">
-      {/* Page Header */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent-500) 8%, transparent) 0%, transparent 50%)',
-            }}
-          />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <SectionHeading
-            title={t.ourTrainers}
-            subtitle="Expert coaches dedicated to your fitness journey"
-          />
-        </div>
-      </section>
-
-      {/* Featured Trainer */}
-      <FeaturedTrainer />
-
-      {/* All Trainers Grid */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {siteConfig.trainers.map((trainer) => (
-              <Link
-                key={trainer.id}
-                href={`/trainers/${trainer.slug}`}
-                className="group"
-              >
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border-accent-gradient mb-4">
-                  <Image
-                    src={trainer.image}
-                    alt={trainer.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                  
-                  {/* Badge */}
-                  {trainer.featured && (
-                    <div className="absolute top-4 left-4">
-                      <div
-                        className="px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase"
-                        style={{
-                          background: 'var(--accent-gradient)',
-                          color: 'var(--obsidian)',
-                        }}
-                      >
-                        {t.featuredCoach}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="font-display text-2xl font-bold text-warm-white mb-1">
-                      {lang === 'bn' ? trainer.nameBn : trainer.name}
-                    </h3>
-                    <p className="text-accent-500 font-medium mb-2">
-                      {lang === 'bn' ? trainer.titleBn : trainer.title}
-                    </p>
-                    <p className="text-muted-warm text-sm line-clamp-2">
-                      {lang === 'bn' ? trainer.shortBioBn : trainer.shortBio}
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center gap-2 text-accent-500 group-hover:text-accent-400 transition-colors text-sm font-medium">
-                  {t.viewDetails} →
-                </div>
-              </Link>
-            ))}
+    <main className="min-h-screen bg-smoke/30">
+      {/* Simple Page Heading */}
+      <section className="py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          <div className="text-center">
+            <h1 className="font-display text-4xl lg:text-5xl font-bold text-warm-white mb-3">
+              OUR TRAINERS
+            </h1>
+            <p className="text-sm lg:text-base text-muted-warm max-w-2xl mx-auto">
+              Meet our professional trainers and fitness specialists.
+            </p>
           </div>
         </div>
       </section>
+
+      {/* Trainers Grid */}
+      <section className="pb-20 lg:pb-28">
+        <div className="mx-auto max-w-7xl px-4 lg:px-8">
+          {/* Filter Buttons */}
+          <TrainerFilter
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {filteredTrainers.map((trainer) => (
+              <TrainerCard
+                key={trainer.id}
+                trainer={trainer}
+                onViewProfile={() => setSelectedTrainer(trainer)}
+              />
+            ))}
+          </div>
+
+          {/* No Results Message */}
+          {filteredTrainers.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-warm text-lg">
+                No trainers found for this filter.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Trainer Profile Modal */}
+      {selectedTrainer && (
+        <TrainerModal
+          trainer={selectedTrainer}
+          onClose={() => setSelectedTrainer(null)}
+        />
+      )}
     </main>
   );
 }

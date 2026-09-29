@@ -43,23 +43,24 @@ export function ThemePicker() {
     <div className="relative" ref={popoverRef}>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--obsidian)] focus:ring-[var(--accent-primary)]"
+        className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--obsidian)] focus:ring-[var(--accent-primary)]"
         style={{
           background: 'color-mix(in srgb, var(--panel) 80%, transparent)',
           border: '1px solid var(--border-accent)',
         }}
         whileHover={{ 
           background: 'color-mix(in srgb, var(--panel) 90%, transparent)',
-          scale: 1.02 
+          scale: 1.05,
+          boxShadow: '0 0 12px var(--accent-primary)40'
         }}
-        whileTap={{ scale: 0.98 }}
-        aria-label="Change theme"
+        whileTap={{ scale: 0.95 }}
+        aria-label="Toggle theme"
         aria-expanded={isOpen}
-        title="Change Theme"
+        title="Toggle theme"
       >
         <div className="relative">
           <Palette 
-            className="w-4 h-4" 
+            className="w-5 h-5" 
             style={{ color: 'var(--accent-primary)' }}
           />
           <motion.div
@@ -72,12 +73,6 @@ export function ThemePicker() {
             }}
           />
         </div>
-        <span 
-          className="text-xs font-medium tracking-wide hidden sm:block"
-          style={{ color: 'var(--warm-white)' }}
-        >
-          Theme
-        </span>
       </motion.button>
 
       <AnimatePresence>

@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { leaderboard } from '@/data/games';
-import { Crown, Medal, Award, Flame } from 'lucide-react';
+import { Trophy, Star, Flame } from 'lucide-react';
 
 const rankStyles = [
   {
@@ -12,7 +12,7 @@ const rankStyles = [
     nameColor: '#FFF8E7',
     numberGrad: 'linear-gradient(135deg, #F1DDA0 0%, #D4AF37 55%, #8C6B2A 100%)',
     glow: 'drop-shadow(0 2px 16px rgba(212,175,55,0.5))',
-    icon: Crown,
+    icon: Trophy,
   },
   {
     rowBg: 'linear-gradient(90deg, rgba(200,200,210,0.1), rgba(200,200,210,0.02) 55%, transparent)',
@@ -21,7 +21,7 @@ const rankStyles = [
     nameColor: '#ECECF2',
     numberGrad: 'linear-gradient(135deg, #F4F4F7 0%, #CFCFCF 55%, #8A8A94 100%)',
     glow: 'drop-shadow(0 2px 12px rgba(200,200,210,0.35))',
-    icon: Medal,
+    icon: Star,
   },
   {
     rowBg: 'linear-gradient(90deg, rgba(205,127,50,0.12), rgba(205,127,50,0.03) 55%, transparent)',
@@ -30,7 +30,7 @@ const rankStyles = [
     nameColor: '#F2E2D0',
     numberGrad: 'linear-gradient(135deg, #E6B98A 0%, #CD7F32 55%, #8A5420 100%)',
     glow: 'drop-shadow(0 2px 12px rgba(205,127,50,0.4))',
-    icon: Award,
+    icon: Flame,
   },
 ];
 
@@ -102,7 +102,7 @@ export function ArenaLeaderboard() {
                 nameColor: '#D6CFC3',
                 numberGrad: 'linear-gradient(135deg, #B6B0A5, #8E877A)',
                 glow: 'none',
-                icon: Award,
+                icon: Star,
               };
               const Icon = rs.icon;
 

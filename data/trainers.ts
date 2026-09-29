@@ -13,6 +13,8 @@ export interface Trainer {
 
   role: string;
 
+  gender: 'male' | 'female';
+
   certifications: string[];
 
   specialties: string[];
@@ -24,6 +26,7 @@ export interface Trainer {
   social: {
     facebook?: string;
     instagram?: string;
+    linkedin?: string;
   };
 
   // Short description for homepage / trainer cards
@@ -47,7 +50,133 @@ export interface Trainer {
 
 export const trainers: Trainer[] = [
   // ============================================================
-  // 01 — RAKIB HASAN
+  // 01 — SK DUKE (Owner)
+  // ============================================================
+  {
+    id: 't0',
+    slug: 'sk-duke',
+
+    name: 'Sk Duke',
+    nameBn: 'স্ক ডিউক',
+
+    category: 'Gym',
+
+    role: 'Owner & Director',
+
+    gender: 'male',
+
+    certifications: ['MBA', 'Fitness Management Certified'],
+
+    specialties: [
+      'Gym Management',
+      'Business Strategy',
+      'Member Relations',
+    ],
+
+    experience: '12 years',
+
+    image:
+      '/owner/owner.jpg',
+
+    social: {
+      facebook: '#',
+      instagram: '#',
+      linkedin: '#',
+    },
+
+    shortBio:
+      'Founder and owner of DUKE Fitness Club, dedicated to providing world-class fitness facilities and expert training.',
+
+    bio:
+      'Sk Duke is the founder and owner of DUKE Fitness Club. With over 12 years of experience in the fitness industry, he has built a premium facility that combines state-of-the-art equipment with expert coaching. His vision is to provide a world-class fitness experience that helps members achieve their health and wellness goals in a supportive environment.',
+
+    trainingApproach:
+      'A member-centric approach focused on quality service, expert guidance, and creating a welcoming community atmosphere.',
+
+    achievements: [
+      '12+ Years in Fitness Industry',
+      'Founded DUKE Fitness Club',
+      'MBA in Business Management',
+      'Fitness Management Certified',
+    ],
+
+    availability: [
+      'Saturday',
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+    ],
+
+    featured: true,
+  },
+
+  // ============================================================
+  // 02 — SABA KHAN (Manager)
+  // ============================================================
+  {
+    id: 't00',
+    slug: 'saba-khan',
+
+    name: 'Saba Khan',
+    nameBn: 'সাবা খান',
+
+    category: 'Gym',
+
+    role: 'General Manager',
+
+    gender: 'female',
+
+    certifications: ['Sports Management', 'Customer Relations'],
+
+    specialties: [
+      'Operations Management',
+      'Member Services',
+      'Team Leadership',
+    ],
+
+    experience: '8 years',
+
+    image:
+      '/videos/g7.jpg',
+
+    social: {
+      facebook: '#',
+      instagram: '#',
+      linkedin: '#',
+    },
+
+    shortBio:
+      'Managing daily operations and ensuring exceptional member experience at DUKE Fitness Club.',
+
+    bio:
+      'Saba Khan oversees all operations at DUKE Fitness Club, ensuring smooth day-to-day functioning and maintaining the highest standards of service. With 8 years of experience in fitness management, she leads the team with dedication and ensures every member receives personalized attention and support.',
+
+    trainingApproach:
+      'A service-oriented approach focused on operational excellence, team coordination, and member satisfaction.',
+
+    achievements: [
+      '8+ Years in Management',
+      'Sports Management Certified',
+      'Customer Relations Expert',
+      'Operations Specialist',
+    ],
+
+    availability: [
+      'Saturday',
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+    ],
+
+    featured: false,
+  },
+
+  // ============================================================
+  // 03 — RAKIB HASAN
   // ============================================================
   {
     id: 't1',
@@ -60,6 +189,8 @@ export const trainers: Trainer[] = [
 
     role: 'Head Strength Coach',
 
+    gender: 'male',
+
     certifications: ['NASM-CPT', 'Precision Nutrition L1'],
 
     specialties: [
@@ -71,11 +202,12 @@ export const trainers: Trainer[] = [
     experience: '8 years',
 
     image:
-      'https://images.pexels.com/photos/17210041/pexels-photo-17210041.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -119,6 +251,8 @@ export const trainers: Trainer[] = [
 
     role: 'Strength & Hypertrophy Coach',
 
+    gender: 'male',
+
     certifications: ['ISSA', 'Kettlebell Specialist'],
 
     specialties: [
@@ -130,11 +264,12 @@ export const trainers: Trainer[] = [
     experience: '6 years',
 
     image:
-      'https://images.pexels.com/photos/8874355/pexels-photo-8874355.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -178,6 +313,8 @@ export const trainers: Trainer[] = [
 
     role: 'Cardio & Weight Loss Specialist',
 
+    gender: 'female',
+
     certifications: ['ACE-CPT', 'HIIT Instructor'],
 
     specialties: [
@@ -189,11 +326,12 @@ export const trainers: Trainer[] = [
     experience: '5 years',
 
     image:
-      'https://images.pexels.com/photos/31245340/pexels-photo-31245340.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -237,6 +375,8 @@ export const trainers: Trainer[] = [
 
     role: "Women's Section Coach",
 
+    gender: 'female',
+
     certifications: [
       'NASM-WLS',
       'Pre/Post Natal Certified',
@@ -251,11 +391,12 @@ export const trainers: Trainer[] = [
     experience: '4 years',
 
     image:
-      'https://images.pexels.com/photos/20649585/pexels-photo-20649585.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1594381898411-846e7d193883?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -299,6 +440,8 @@ export const trainers: Trainer[] = [
 
     role: 'Cross-Training & Functional Coach',
 
+    gender: 'male',
+
     certifications: [
       'CrossFit L2',
       'Mobility Specialist',
@@ -313,11 +456,12 @@ export const trainers: Trainer[] = [
     experience: '7 years',
 
     image:
-      'https://images.pexels.com/photos/15018025/pexels-photo-15018025.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -361,6 +505,8 @@ export const trainers: Trainer[] = [
 
     role: 'Head Swimming Coach',
 
+    gender: 'male',
+
     certifications: [
       'ASA Level 2',
       'Lifeguard Certified',
@@ -375,11 +521,12 @@ export const trainers: Trainer[] = [
     experience: '10 years',
 
     image:
-      'https://images.pexels.com/photos/2629936/pexels-photo-2629936.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -423,6 +570,8 @@ export const trainers: Trainer[] = [
 
     role: "Women's & Kids Swimming Coach",
 
+    gender: 'female',
+
     certifications: [
       'STA Certified',
       'Water Safety Instructor',
@@ -437,11 +586,12 @@ export const trainers: Trainer[] = [
     experience: '6 years',
 
     image:
-      'https://images.pexels.com/photos/7222168/pexels-photo-7222168.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:
@@ -485,6 +635,8 @@ export const trainers: Trainer[] = [
 
     role: 'Arena Manager & Billiards Pro',
 
+    gender: 'male',
+
     certifications: [
       'Billiards Association Certified',
     ],
@@ -498,11 +650,12 @@ export const trainers: Trainer[] = [
     experience: '5 years',
 
     image:
-      'https://images.pexels.com/photos/13211450/pexels-photo-13211450.jpeg?auto=compress&cs=tinysrgb&w=1200&h=1500&dpr=1',
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=1500&fit=crop',
 
     social: {
       facebook: '#',
       instagram: '#',
+      linkedin: '#',
     },
 
     shortBio:

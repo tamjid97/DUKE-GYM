@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Training',
     readTime: '5 min',
     image:
-      'https://images.pexels.com/photos/17840/pexels-photo-17840.jpg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
     content: [
       'Strength training is the foundation of any serious fitness journey. At Duke Gym, we believe everyone should learn to move well before adding weight.',
       'Start with the big compound movements: squat, bench press, deadlift, overhead press, and rows. These exercises recruit the most muscle and give you the best return on your time investment.',
@@ -42,7 +42,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Swimming',
     readTime: '4 min',
     image:
-      'https://images.pexels.com/photos/261041/pexels-photo-261041.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+      'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
     content: [
       'Bangladesh\u2019s hot and humid climate makes many forms of exercise uncomfortable, especially during summer. Swimming offers a refreshing alternative that works your entire body.',
       'Swimming is a low-impact exercise, meaning it puts minimal stress on your joints while still providing an excellent cardiovascular workout. This makes it ideal for people of all ages and fitness levels.',
@@ -60,7 +60,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Nutrition',
     readTime: '6 min',
     image:
-      'https://images.pexels.com/photos/1247677/pexels-photo-1247677.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1',
+      'https://images.unsplash.com/photo-1546099905-3d8a2f6d7e9e?auto=compress&cs=tinysrgb&w=1200&h=800&dpr=1',
     content: [
       'You can\u2019t out-train a bad diet. Nutrition is the other half of the fitness equation, and it\u2019s where many people struggle.',
       'Meal prep doesn\u2019t have to be complicated. Start simple: pick a protein source, a complex carbohydrate, and vegetables for each meal. Cook in bulk twice a week.',

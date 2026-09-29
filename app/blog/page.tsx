@@ -1,51 +1,139 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { SectionHeading } from '@/components/shared/SectionHeading';
-import { GlassCard } from '@/components/shared/GlassCard';
-import { GoldButton } from '@/components/shared/GoldButton';
-import { blogPosts } from '@/data/blog';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Blog — Tips & Articles',
-  description: 'Training tips, swimming guides, nutrition advice, and club news from Duke Fitness Club experts.',
-};
+import { useState } from 'react';
+import { blogPosts, BlogPost } from '@/data/blog';
+import { FeaturedArticle } from '@/components/blog/FeaturedArticle';
+import { BlogCard } from '@/components/blog/BlogCard';
+import { BlogFilter } from '@/components/blog/BlogFilter';
+import { BlogSearch } from '@/components/blog/BlogSearch';
+import { ArticleModal } from '@/components/blog/ArticleModal';
+
+type CategoryType = 'all' | 'training' | 'nutrition' | 'swimming' | 'recovery' | 'lifestyle';
 
 export default function BlogPage() {
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [activeFilter, setActiveFilter] = useState<CategoryType>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter posts based on category and search
+  const filteredPosts = blogPosts.filter((post) => {
+    const categoryMatch = activeFilter === 'all' || post.category.toLowerCase() === activeFilter;
+    const searchMatch = 
+      searchQuery === '' ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.category.toLowerCase().includes(searchQuery.toLowerCase());
+    return categoryMatch && searchMatch;
+  });
+
+  // Get featured post (first post)
+  const featuredPost = blogPosts[0];
+  const otherPosts = filteredPosts.filter(post => post.slug !== featuredPost?.slug);
+
+  // Get related posts (excluding current)
+  const getRelatedPosts = (currentPost: BlogPost) => {
+    return blogPosts.filter(post => post.slug !== currentPost.slug).slice(0, 3);
+  };
+
+  const handleReadPost = (post: BlogPost) => {
+    setSelectedPost(post);
+  };
+
+  const handleReadRelated = (post: BlogPost) => {
+    setSelectedPost(post);
+  };
+
   return (
     <>
-      <PageHeader
-        label="Read"
-        title="Blog & Tips"
-        subtitle="Expert advice on training, nutrition, swimming, and lifestyle from our team."
-      />
-      <section className="py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post, i) => (
-              <GlassCard key={post.slug} className="overflow-hidden p-0">
-                <div className="relative h-48 overflow-hidden">
-                  <img src={post.image} alt={post.title} className="h-full w-full object-cover" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent" />
-                  <span className="absolute top-3 left-3 rounded-full bg-gold/20 px-3 py-1 text-xs text-gold backdrop-blur-sm">
-                    {post.category}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-3 text-xs text-muted-warm mb-2">
-                    <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{post.date}</span>
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.readTime}</span>
-                  </div>
-                  <h3 className="font-display text-lg font-bold text-warm-white mb-2">{post.title}</h3>
-                  <p className="text-sm text-muted-warm line-clamp-2 mb-4">{post.excerpt}</p>
-                  <p className="text-xs text-gold">By {post.author}</p>
-                </div>
-              </GlassCard>
-            ))}
+      {/* Blog Intro */}
+      <section className="py-16 relative overflow-hidden">
+        {/* Subtle background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--accent-500) 5%, transparent) 0%, transparent 50%)',
+            }}
+          />
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          {/* Eyebrow */}
+          <div className="text-center mb-4">
+            <span className="text-xs font-semibold tracking-[0.3em] uppercase text-gold">
+              READ • LEARN • GROW
+            </span>
+          </div>
+
+          {/* Main Heading */}
+          <h1 className="font-display text-4xl lg:text-6xl font-bold text-accent-gradient text-center mb-4">
+            BLOG & TIPS
+          </h1>
+
+          {/* Subtitle */}
+          <p className="text-muted-warm text-center max-w-2xl mx-auto text-lg">
+            Expert advice on training, nutrition, swimming, recovery and lifestyle from the DUKE team.
+          </p>
+
+          {/* Decorative Line */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-gold/50" />
+            <div className="w-2 h-2 rotate-45 bg-gold" />
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-gold/50" />
           </div>
         </div>
       </section>
+
+      {/* Featured Article */}
+      {featuredPost && (
+        <section className="py-8">
+          <div className="container mx-auto px-4 lg:px-8">
+            <FeaturedArticle post={featuredPost} onRead={() => handleReadPost(featuredPost)} />
+          </div>
+        </section>
+      )}
+
+      {/* Latest Articles */}
+      <section className="py-12">
+        <div className="container mx-auto px-4 lg:px-8">
+          {/* Section Heading */}
+          <div className="text-center mb-8">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-warm-white mb-2">
+              LATEST ARTICLES
+            </h2>
+          </div>
+
+          {/* Search and Filter */}
+          <BlogSearch onSearch={setSearchQuery} />
+          <BlogFilter activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+
+          {/* Article Grid */}
+          {filteredPosts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} onRead={() => handleReadPost(post)} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-warm text-lg">
+                No articles found matching your criteria.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Article Modal */}
+      {selectedPost && (
+        <ArticleModal
+          post={selectedPost}
+          onClose={() => setSelectedPost(null)}
+          relatedPosts={getRelatedPosts(selectedPost)}
+          onReadRelated={handleReadRelated}
+        />
+      )}
     </>
   );
 }

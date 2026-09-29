@@ -1,7 +1,7 @@
 // ============================================================
 // MEMBERSHIP PLANS
 // ============================================================
-// Prices in BDT (৳). Replace with real pricing.
+// Prices in BDT (৳). Updated pricing structure.
 // ============================================================
 
 export interface MembershipTier {
@@ -10,88 +10,71 @@ export interface MembershipTier {
   tagline: string;
   color: string;
   popular?: boolean;
-  prices: { monthly: number; quarterly: number; yearly: number };
+  duration: string;
+  price: number;
   features: string[];
-  zones: { gym: boolean; restaurant: boolean; pool: boolean; arena: boolean };
 }
 
-export const membershipTiers: MembershipTier[] = [
+export const admissionFee = 2000;
+export const monthlyFee = 1000;
+export const promotionalAdmissionFee = 1000; // 50% off for first 100 members
+
+export const longTermPlans: MembershipTier[] = [
   {
-    id: 'silver',
-    name: 'Silver',
+    id: 'bronze',
+    name: 'Bronze',
     tagline: 'Start your journey',
-    color: '#A8A39A',
-    prices: { monthly: 2000, quarterly: 5400, yearly: 20000 },
+    color: '#CD7F32',
+    duration: '3 MONTHS',
+    price: 2500,
     features: [
       'Full gym access',
       'Locker & shower access',
-      '2 group classes / week',
-      'Free fitness assessment',
+      'Modern equipment',
+      'Air conditioned environment',
     ],
-    zones: { gym: true, restaurant: false, pool: false, arena: false },
+  },
+  {
+    id: 'silver',
+    name: 'Silver',
+    tagline: 'Commit to growth',
+    color: '#C0C0C0',
+    duration: '6 MONTHS',
+    price: 5000,
+    features: [
+      'Full gym access',
+      'Locker & shower access',
+      'Modern equipment',
+      'Professional training guidance',
+      'Priority support',
+    ],
   },
   {
     id: 'gold',
     name: 'Gold',
-    tagline: 'Train & dine',
+    tagline: 'Maximum value',
     color: '#D4AF37',
     popular: true,
-    prices: { monthly: 3500, quarterly: 9450, yearly: 35000 },
+    duration: '12 MONTHS',
+    price: 10000,
     features: [
       'Full gym access',
-      '10% discount at Duke Kitchen',
-      '4 group classes / week',
-      '1 PT session / month',
-      'Free fitness assessment',
+      'Locker & shower access',
+      'Modern equipment',
+      'Professional training guidance',
+      'Priority support',
+      'Special member events',
     ],
-    zones: { gym: true, restaurant: true, pool: false, arena: false },
-  },
-  {
-    id: 'platinum',
-    name: 'Platinum',
-    tagline: 'Train, dine & swim',
-    color: '#E5E4E2',
-    prices: { monthly: 5000, quarterly: 13500, yearly: 50000 },
-    features: [
-      'Full gym access',
-      '15% discount at Duke Kitchen',
-      'Swimming pool access (scheduled)',
-      'Game Zone — 4 hours/week',
-      '2 PT sessions / month',
-      'Free fitness assessment',
-    ],
-    zones: { gym: true, restaurant: true, pool: true, arena: true },
-  },
-  {
-    id: 'black',
-    name: 'Black Diamond',
-    tagline: 'Own the building',
-    color: '#1A1A1A',
-    prices: { monthly: 8000, quarterly: 21600, yearly: 80000 },
-    features: [
-      'Unlimited gym, pool & game zone',
-      '20% discount at Duke Kitchen',
-      'Priority booking all zones',
-      '4 PT sessions / month',
-      'Free guest pass (2/month)',
-      'Personal locker',
-      'Nutrition consultation',
-    ],
-    zones: { gym: true, restaurant: true, pool: true, arena: true },
   },
 ];
 
-export const specialPasses = [
-  {
-    name: 'Swimming Only Pass',
-    price: 2500,
-    period: 'monthly',
-    description: 'Unlimited swimming pool access during your scheduled batches.',
-  },
-  {
-    name: 'Family / Couple Combo',
-    price: 7000,
-    period: 'monthly',
-    description: 'Two members, full gym + pool access. Save ৳2,000 vs individual plans.',
-  },
+export const membershipBenefits = [
+  { icon: 'dumbbell', title: 'Full Gym Access', description: 'Access to all gym equipment and facilities' },
+  { icon: 'barbell', title: 'Modern Equipment', description: 'State-of-the-art fitness machines' },
+  { icon: 'lock', title: 'Locker Facilities', description: 'Secure storage for your belongings' },
+  { icon: 'wind', title: 'Air Conditioned', description: 'Comfortable workout environment' },
+  { icon: 'user', title: 'Professional Training', description: 'Expert guidance from certified trainers' },
+  { icon: 'shield', title: 'Clean & Safe', description: 'Hygienic and secure environment' },
+  { icon: 'maximize', title: 'Spacious Area', description: 'Large workout space for comfort' },
+  { icon: 'headphones', title: 'Member Support', description: 'Dedicated customer service' },
 ];
