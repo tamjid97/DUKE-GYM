@@ -63,7 +63,7 @@ export function GetInTouch() {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-obsidian">
+    <section id="contact" className="py-16 lg:py-24 bg-obsidian">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         {/* Section Header */}
         <motion.div

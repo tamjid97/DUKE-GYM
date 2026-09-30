@@ -14,7 +14,6 @@ import { GalleryPreview } from '@/components/sections/GalleryPreview';
 import { FAQSection } from '@/components/sections/FAQSection';
 import { FinalCTA } from '@/components/sections/FinalCTA';
 import { GetInTouch } from '@/components/sections/GetInTouch';
-import { siteConfig } from '@/data/siteConfig';
 
 export function HomeClient() {
   const [revealed, setRevealed] = useState(false);

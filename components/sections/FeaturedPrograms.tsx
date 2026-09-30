@@ -100,7 +100,15 @@ export function FeaturedPrograms() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Link href="/gym" className="group block h-full">
+              <button
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="group block h-full w-full text-left"
+              >
                 <div className="relative h-full rounded-2xl overflow-hidden border border-gold/20 bg-[#1a1a1a] transition-all duration-300 hover:border-gold/50 hover:shadow-2xl hover:shadow-gold/10 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
@@ -171,7 +179,7 @@ export function FeaturedPrograms() {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -184,13 +192,24 @@ export function FeaturedPrograms() {
           transition={{ duration: 0.4, delay: 0.6 }}
           className="mt-12 text-center"
         >
-          <Link
-            href="/gym"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-gold to-orange-500 text-obsidian font-semibold tracking-wider uppercase text-sm hover:shadow-lg hover:shadow-gold/30 transition-all duration-300"
+          <button
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold tracking-wider uppercase text-sm hover:shadow-lg hover:shadow-gold/30 transition-all duration-300 relative overflow-hidden shimmer-effect"
+            style={{
+              borderRadius: '9999px',
+              background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+              color: '#0A0A0C',
+              boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+            }}
           >
-            View All Programs
-            <span className="text-lg">→</span>
-          </Link>
+            <span className="relative z-10">View All Programs</span>
+            <span className="text-lg relative z-10">→</span>
+          </button>
         </motion.div>
       </div>
     </section>

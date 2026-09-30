@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { useTheme, THEMES } from '@/components/providers/ThemeProvider';
 import { ThemePicker } from '@/components/shared/ThemePicker';
-import { waLink } from '@/lib/contact';
 import { cn } from '@/lib/utils';
 
 export function Navbar() {
@@ -224,16 +223,24 @@ export function Navbar() {
           <div className="flex shrink-0 items-center justify-end gap-3">
             <ThemePicker />
 
-            <a
-              href={waLink(
-                'Hello Duke Fitness Club! I would like to join.'
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold hidden rounded-full px-5 py-2 text-sm sm:inline-block"
+            <button
+              onClick={() => {
+                if (pathname === '/' || pathname === '/contact') {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                  }
+                } else {
+                  window.location.href = '/#contact';
+                }
+              }}
+              className="btn-gold hidden rounded-full px-5 py-2 text-sm sm:inline-block relative overflow-hidden shimmer-effect"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+              }}
             >
-              {t.joinNow}
-            </a>
+              <span className="relative z-10">{t.joinNow}</span>
+            </button>
 
             <button
               onClick={() => setMobileOpen(true)}
@@ -393,16 +400,25 @@ export function Navbar() {
                 </div>
               </div>
 
-              <a
-                href={waLink(
-                  'Hello Duke Fitness Club! I would like to join.'
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold mt-4 rounded-full px-6 py-3 text-center text-sm"
+              <button
+                onClick={() => {
+                  setMobileOpen(false);
+                  if (pathname === '/' || pathname === '/contact') {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  } else {
+                    window.location.href = '/#contact';
+                  }
+                }}
+                className="btn-gold mt-4 rounded-full px-6 py-3 text-center text-sm relative overflow-hidden shimmer-effect"
+                style={{
+                  background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+                }}
               >
-                {t.joinNow}
-              </a>
+                <span className="relative z-10">{t.joinNow}</span>
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '@/data/siteConfig';
@@ -81,16 +82,17 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isControlled]);
   return (
-    <section
-      ref={sectionRef}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
-      style={{ cursor: !revealed ? 'pointer' : 'default' }}
-      onClick={handlePress}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="button"
-      aria-label="Start cinematic reveal of Duke Fitness Club"
-    >
+    <>
+      <section
+        ref={sectionRef}
+        className="relative flex min-h-screen items-center justify-center overflow-hidden"
+        style={{ cursor: !revealed ? 'pointer' : 'default' }}
+        onClick={handlePress}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-label="Start cinematic reveal of Duke Fitness Club"
+      >
       {/* Background video with cinematic overlay */}
       <motion.div
         className="absolute inset-0 z-0 overflow-hidden"
@@ -303,13 +305,19 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           }
           className="mt-8"
         >
-          <motion.a
-            href="https://gym-xi-ecru.vercel.app/protein-calculator"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ y: -4 }}
+          <motion.button
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            whileHover={{ 
+              y: -4,
+              boxShadow: '0 8px 32px color-mix(in srgb, var(--accent-primary) 50%, transparent), 0 0 20px color-mix(in srgb, var(--accent-highlight) 30%, transparent)'
+            }}
             whileTap={{ scale: 0.98 }}
-            className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-semibold uppercase tracking-[0.24em] transition-all duration-300"
+            className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-semibold uppercase tracking-[0.24em] transition-all duration-300 relative overflow-hidden shimmer-effect"
             style={{
               borderRadius: '9999px',
               background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
@@ -317,15 +325,15 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
               boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
             }}
           >
-            CALCULATE YOUR PROTEIN
+            <span className="relative z-10">JOIN NOW</span>
             <motion.span
-              className="text-lg"
+              className="text-lg relative z-10"
               animate={revealed ? { x: [0, 4, 0] } : {}}
               transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
             >
               →
             </motion.span>
-          </motion.a>
+          </motion.button>
         </motion.div>
 
         {/* Gold divider line */}
@@ -475,5 +483,6 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
         </motion.div>
       </motion.div>
     </section>
+    </>
   );
 }
