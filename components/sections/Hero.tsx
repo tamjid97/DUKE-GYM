@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { siteConfig } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
-import { GoldButton } from '@/components/shared/GoldButton';
-import { waLink } from '@/lib/contact';
 
 const revealTime = 2.8;
 
@@ -13,7 +11,6 @@ interface HeroProps {
   revealed?: boolean;
   onTrigger?: () => void;
 }
-
 
 export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
   const { t } = useLang();
@@ -56,14 +53,12 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
     if (!video) return;
 
     const onTimeUpdate = () => {
-      // Trigger animation at chest press moment
       if (!hasTriggeredRef.current && video.currentTime >= revealTime) {
         fireTrigger();
       }
     };
 
     const onEnded = () => {
-      // Video ended - reset animation state for next loop
       hasTriggeredRef.current = false;
       if (!isControlled) {
         setInternalRevealed(false);
@@ -80,6 +75,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isControlled]);
+
   return (
     <section
       ref={sectionRef}
@@ -101,23 +97,6 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
             : { duration: 0 }
         }
       >
-        {/* <video
-          ref={videoRef}
-          autoPlay
-          muted
-          playsInline
-          className="hero-video"
-          poster={siteConfig.zones.gym.image}
-          style={{
-            width: '100%',
-            height: '100vh',
-            objectFit: 'cover',
-          }}
-        >
-          <source src="/videos/gym-hero.mp4" type="video/mp4" />
-        </video> */}
-
-
         <video
           ref={videoRef}
           autoPlay
@@ -153,10 +132,8 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
         />
       </motion.div>
 
-
       {/* Main content */}
       <div key={`hero-content-${cycleCount}`} className="relative z-10 flex flex-col items-center px-4 text-center w-full max-w-6xl mx-auto">
-
 
         {/* WELCOME TO line */}
         <motion.div
@@ -164,23 +141,23 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                opacity: 1,
-                visibility: 'visible',
-                y: 0,
-                scale: [0.8, 1.04, 1],
-                filter: ['blur(6px)', 'blur(1px)', 'blur(0px)'],
-              }
+                  opacity: 1,
+                  visibility: 'visible',
+                  y: 0,
+                  scale: [0.8, 1.04, 1],
+                  filter: ['blur(6px)', 'blur(1px)', 'blur(0px)'],
+                }
               : { opacity: 0, visibility: 'hidden', y: 40, scale: 0.8, filter: 'blur(6px)' }
           }
           transition={
             revealed
               ? {
-                duration: 0.55,
-                delay: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                times: [0, 0.55, 1],
-                filter: { duration: 0.45, delay: 0.5, times: [0, 0.6, 1] },
-              }
+                  duration: 0.55,
+                  delay: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  times: [0, 0.55, 1],
+                  filter: { duration: 0.45, delay: 0.5, times: [0, 0.6, 1] },
+                }
               : { duration: 0.2 }
           }
           className="mb-4"
@@ -191,13 +168,14 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
               fontSize: 'clamp(0.85rem, 2vw, 1.25rem)',
               color: 'var(--muted-warm)',
               letterSpacing: '0.32em',
+              textShadow: '0 0 12px color-mix(in srgb, var(--accent-primary) 20%, transparent)'
             }}
           >
             Welcome to
           </motion.span>
         </motion.div>
 
-        {/* DUKE FITNESS CLUB title — premium gradient with proper background-clip */}
+        {/* DUKE FITNESS CLUB title — Original gradient with glowing aura */}
         <motion.h1
           initial={{
             opacity: 0,
@@ -209,39 +187,39 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           animate={
             revealed
               ? {
-                opacity: 1,
-                visibility: 'visible',
-                y: 0,
-                scale: [0.6, 1.1, 1.02, 1],
-                filter: ['blur(12px)', 'blur(3px)', 'blur(1px)', 'blur(0px)'],
-              }
+                  opacity: 1,
+                  visibility: 'visible',
+                  y: 0,
+                  scale: [0.6, 1.1, 1.02, 1],
+                  filter: ['blur(12px)', 'blur(3px)', 'blur(1px)', 'blur(0px)'],
+                }
               : {
-                opacity: 0,
-                visibility: 'hidden',
-                y: 55,
-                scale: 0.6,
-                filter: 'blur(12px)',
-              }
+                  opacity: 0,
+                  visibility: 'hidden',
+                  y: 55,
+                  scale: 0.6,
+                  filter: 'blur(12px)',
+                }
           }
           transition={
             revealed
               ? {
-                duration: 0.95,
-                delay: 0.65,
-                ease: [0.19, 1, 0.36, 1],
-                times: [0, 0.48, 0.82, 1],
-                scale: {
                   duration: 0.95,
                   delay: 0.65,
+                  ease: [0.19, 1, 0.36, 1],
                   times: [0, 0.48, 0.82, 1],
-                  ease: [0.19, 1.3, 0.55, 1.02],
-                },
-                filter: {
-                  duration: 0.65,
-                  delay: 0.65,
-                  times: [0, 0.45, 0.8, 1],
-                },
-              }
+                  scale: {
+                    duration: 0.95,
+                    delay: 0.65,
+                    times: [0, 0.48, 0.82, 1],
+                    ease: [0.19, 1.3, 0.55, 1.02],
+                  },
+                  filter: {
+                    duration: 0.65,
+                    delay: 0.65,
+                    times: [0, 0.45, 0.8, 1],
+                  },
+                }
               : { duration: 0.2 }
           }
           className="font-display font-black leading-none select-none mb-4"
@@ -258,29 +236,29 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
               color: 'transparent',
-              filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+              filter: 'drop-shadow(0 0 25px color-mix(in srgb, var(--accent-primary) 50%, transparent)) drop-shadow(0 0 50px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
             }}
             animate={
               revealed
                 ? {
-                  filter: [
-                    'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                    'drop-shadow(0 4px 30px color-mix(in srgb, var(--accent-primary) 50%, transparent))',
-                    'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                  ],
-                }
+                    filter: [
+                      'drop-shadow(0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent)) drop-shadow(0 0 40px color-mix(in srgb, var(--accent-primary) 20%, transparent))',
+                      'drop-shadow(0 0 35px color-mix(in srgb, var(--accent-primary) 70%, transparent)) drop-shadow(0 0 65px color-mix(in srgb, var(--accent-primary) 40%, transparent))',
+                      'drop-shadow(0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent)) drop-shadow(0 0 40px color-mix(in srgb, var(--accent-primary) 20%, transparent))',
+                    ],
+                  }
                 : {
-                  filter: 'drop-shadow(0 4px 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
-                }
+                    filter: 'drop-shadow(0 0 20px color-mix(in srgb, var(--accent-primary) 30%, transparent))',
+                  }
             }
             transition={
               revealed
                 ? {
-                  duration: 1.8,
-                  delay: 0.9,
-                  times: [0, 0.5, 1],
-                  ease: 'easeOut',
-                }
+                    duration: 2.2,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    ease: 'easeInOut',
+                  }
                 : { duration: 0 }
             }
           >
@@ -307,14 +285,14 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
             href="https://gym-xi-ecru.vercel.app/protein-calculator"
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ y: -4 }}
+            whileHover={{ y: -4, scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="group inline-flex items-center gap-3 px-10 py-5 text-sm font-semibold uppercase tracking-[0.24em] transition-all duration-300"
             style={{
               borderRadius: '9999px',
               background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
               color: '#0A0A0C',
-              boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+              boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 40%, transparent), 0 0 15px color-mix(in srgb, var(--accent-primary) 25%, transparent)',
             }}
           >
             CALCULATE YOUR PROTEIN
@@ -339,7 +317,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
           }}
         />
 
-        {/* Stats counters */}
+        {/* Stats counters (No Boxes - Clean Original Layout) */}
         <motion.div
           initial={{ opacity: 0, visibility: 'hidden' }}
           animate={
@@ -376,10 +354,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                   transition={
                     revealed
                       ? {
-                        duration: 0.65,
-                        delay: 1.52 + i * 0.09,
-                        ease: [0.22, 1, 0.36, 1],
-                      }
+                          duration: 0.65,
+                          delay: 1.52 + i * 0.09,
+                          ease: [0.22, 1, 0.36, 1],
+                        }
                       : { duration: 0.1 }
                   }
                   className="text-center"
@@ -394,10 +372,10 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                     transition={
                       revealed
                         ? {
-                          duration: 0.5,
-                          delay: 1.52 + i * 0.09,
-                          ease: 'easeOut',
-                        }
+                            duration: 0.5,
+                            delay: 1.52 + i * 0.09,
+                            ease: 'easeOut',
+                          }
                         : { duration: 0.1 }
                     }
                     className="relative"
@@ -410,29 +388,28 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                         WebkitBackgroundClip: 'text',
                         backgroundClip: 'text',
                         color: 'transparent',
-                        filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                        filter: 'drop-shadow(0 0 15px color-mix(in srgb, var(--accent-primary) 35%, transparent))',
                       }}
                       animate={
                         revealed
                           ? {
-                            filter: [
-                              'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                              'drop-shadow(0 2px 15px color-mix(in srgb, var(--accent-primary) 40%, transparent))',
-                              'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                            ],
-                          }
+                              filter: [
+                                'drop-shadow(0 0 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                                'drop-shadow(0 0 20px color-mix(in srgb, var(--accent-primary) 50%, transparent))',
+                                'drop-shadow(0 0 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                              ],
+                            }
                           : {
-                            filter: 'drop-shadow(0 2px 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
-                          }
+                              filter: 'drop-shadow(0 0 10px color-mix(in srgb, var(--accent-primary) 25%, transparent))',
+                            }
                       }
                       transition={
                         revealed
                           ? {
-                            duration: 1.6,
-                            delay: 1.52 + i * 0.09,
-                            times: [0, 0.5, 1],
-                            ease: 'easeOut',
-                          }
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: 'easeInOut',
+                            }
                           : { duration: 0 }
                       }
                     >
@@ -440,7 +417,7 @@ export function Hero({ revealed: revealedProp, onTrigger }: HeroProps) {
                       {stat.suffix}
                     </motion.div>
                     <div
-                      className="mt-2 text-xs sm:text-sm tracking-widest uppercase"
+                      className="mt-2 text-xs sm:text-sm tracking-widest uppercase font-medium"
                       style={{ color: 'var(--muted-warm)' }}
                     >
                       {stat.label}
