@@ -56,16 +56,16 @@ export function KitchenMenu() {
           whileInView={reduceMotion ? {} : { opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-10 mx-auto max-w-2xl"
+          className="mb-10 mx-auto max-w-md"
         >
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gold/70">🔍</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gold/70">🔍</span>
             <input
               type="text"
               placeholder="Search the menu..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-none h-14 pl-14 pr-5 text-[15px] text-warm-white placeholder:text-muted-warm border-b-2 border-l border-r border-t border-gold/25 focus:border-gold/60 focus:outline-none bg-smoke/40 backdrop-blur transition-colors duration-300"
+              className="w-full rounded-none h-10 pl-10 pr-4 text-[13px] text-warm-white placeholder:text-muted-warm border-b-2 border-l border-r border-t border-gold/25 focus:border-gold/60 focus:outline-none bg-smoke/40 backdrop-blur transition-colors duration-300"
             />
           </div>
         </motion.div>
