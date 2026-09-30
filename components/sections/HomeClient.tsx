@@ -8,7 +8,6 @@ import { ExploreBuilding } from '@/components/sections/ExploreBuilding';
 import { FeaturedPrograms } from '@/components/sections/FeaturedPrograms';
 import { MembershipPreview } from '@/components/sections/MembershipPreview';
 import { FeaturedTrainer } from '@/components/sections/FeaturedTrainer';
-import { ZoneHighlights } from '@/components/sections/ZoneHighlights';
 import { TransformationsSection } from '@/components/sections/TransformationsSection';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { GalleryPreview } from '@/components/sections/GalleryPreview';
@@ -35,7 +34,6 @@ export function HomeClient() {
       <FeaturedPrograms />
       <MembershipPreview />
       <FeaturedTrainer />
-      <ZoneHighlights />
       <TransformationsSection />
       <Testimonials forceReveal={revealed} />
       <GalleryPreview />

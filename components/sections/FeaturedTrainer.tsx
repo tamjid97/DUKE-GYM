@@ -146,12 +146,8 @@ export function FeaturedTrainer() {
               className="space-y-2"
             >
               {(lang === 'bn' ? featuredTrainer.specializationsBn : featuredTrainer.specializations).slice(0, 3).map((item, index) => (
-                <div key={index} className="flex items-center gap-2 text-warm-white text-sm">
-                  <div
-                    className="w-1 h-1 rounded-full"
-                    style={{ backgroundColor: 'var(--accent-500)' }}
-                  />
-                  <span>{item}</span>
+                <div key={index} className="text-warm-white text-sm">
+                  {item}
                 </div>
               ))}
             </motion.div>

@@ -432,31 +432,6 @@
     transform: translateY(-1px);
   }
 
-  .diamond-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-  .diamond-divider::before,
-  .diamond-divider::after {
-    content: "";
-    height: 1px;
-    width: 40px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--accent-500),
-      transparent
-    );
-  }
-  .diamond-divider .diamond {
-    width: 8px;
-    height: 8px;
-    background: var(--accent-500);
-    transform: rotate(45deg);
-  }
-
   .section-label {
     text-transform: uppercase;
     letter-spacing: 0.3em;

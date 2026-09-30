@@ -17,21 +17,6 @@ export function FinalCTA() {
         }} />
       </div>
 
-      {/* Gold dust */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div
-            key={i}
-            className="gold-dust"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-            }}
-          />
-        ))}
-      </div>
-
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,9 +24,6 @@ export function FinalCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="diamond-divider mb-6">
-            <div className="diamond" />
-          </div>
           <h2 className="font-display text-4xl font-bold text-gold-gradient sm:text-5xl lg:text-6xl">
             {t.finalCTA}
           </h2>

@@ -30,8 +30,7 @@ export function MembershipPreview() {
               )}
             >
               {plan.popular && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-champagne px-4 py-1 text-xs font-semibold text-obsidian flex items-center gap-1">
-                  ★
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold to-champagne px-4 py-1 text-xs font-semibold text-obsidian">
                   Best Value
                 </span>
               )}

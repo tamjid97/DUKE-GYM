@@ -26,7 +26,7 @@ export function FAQSection() {
               <details className="group">
                 <summary className="flex cursor-pointer items-center justify-between p-5 text-sm font-medium text-warm-white">
                   {faq.q}
-                  <span className="h-4 w-4 text-gold shrink-0 transition-transform group-open:rotate-180">↓</span>
+                  <span className="text-gold shrink-0 transition-transform group-open:rotate-180">+</span>
                 </summary>
                 <div className="px-5 pb-5 text-sm text-muted-warm leading-relaxed">
                   {faq.a}

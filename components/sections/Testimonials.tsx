@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Quote, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { testimonials } from '@/data/gallery';
 import { useLang } from '@/components/providers/LanguageProvider';
@@ -163,9 +163,6 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
         <h2 className="font-display text-3xl font-bold text-warm-white sm:text-4xl lg:text-5xl">
           {t.memberReviews}
         </h2>
-        <div className="diamond-divider mt-2">
-          <div className="diamond" />
-        </div>
       </div>
 
       {/* Featured Slider */}
@@ -256,9 +253,6 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
                       Member — {currentTestimonial.memberSince}
                     </p>
                   </div>
-
-                  {/* Decorative Quote Mark */}
-                  <Quote className="absolute top-4 right-4 w-16 h-16 text-[#d4a843]/5" />
                 </div>
               </div>
             </div>
