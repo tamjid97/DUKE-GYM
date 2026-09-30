@@ -83,13 +83,13 @@ export function KitchenHero() {
               letterSpacing: '-0.02em',
             }}
           >
-            COMING
+            DUKE
           </span>
           <span
             className="mt-[0.08em] block text-warm-white"
             style={{ fontSize: 'clamp(36px, 5.2vw, 78px)', lineHeight: 1, letterSpacing: '0.18em' }}
           >
-            SOON
+            KITCHEN
           </span>
         </motion.h1>
 
@@ -99,24 +99,8 @@ export function KitchenHero() {
           transition={{ duration: 0.6, delay: 0.52 }}
           className="mt-8 max-w-3xl text-[13px] uppercase tracking-[0.28em] text-muted-warm sm:text-sm"
         >
-          Premium Dining Experience · Healthy Meal Plans · Protein-Rich Options
+          Coming Soon
         </motion.p>
-
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.68 }}
-          className="mt-12 flex flex-wrap items-center gap-4"
-        >
-          <a
-            href="/swimming-pool"
-            className="btn-gold inline-flex items-center gap-3 px-9 py-4 text-sm font-semibold uppercase tracking-[0.22em]"
-            style={{ borderRadius: 0 }}
-          >
-            Visit Pool
-            <span>→</span>
-          </a>
-        </motion.div>
 
         <motion.div
           initial={reduceMotion ? false : { opacity: 0 }}
