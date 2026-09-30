@@ -64,7 +64,7 @@ export function FloatingContactButtons() {
   };
 
   return (
-    <div className="fixed right-4 bottom-24 z-50 flex flex-col gap-4 safe-area-bottom">
+    <div className="fixed right-4 bottom-32 z-50 flex flex-col gap-4 safe-area-bottom">
       <AnimatePresence>
         {contactButtons.map((button, index) => (
           <motion.div
@@ -121,7 +121,7 @@ export function FloatingContactButtons() {
                 onClick={() => handleScroll('contact-form')}
                 whileHover={{ scale: 1.08, x: -3 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300"
+                className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
                 style={{
                   background: `linear-gradient(145deg, ${button.color}, ${button.color}dd)`,
                   boxShadow: `
@@ -162,7 +162,7 @@ export function FloatingContactButtons() {
                 rel={button.label === 'WhatsApp' ? 'noopener noreferrer' : undefined}
                 whileHover={{ scale: 1.08, x: -3 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300"
+                className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer"
                 style={{
                   background: `linear-gradient(145deg, ${button.color}, ${button.color}dd)`,
                   boxShadow: `

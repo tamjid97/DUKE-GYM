@@ -76,7 +76,7 @@ export const trainers: Trainer[] = [
     experience: '12 years',
 
     image:
-      '/owner/owner.jpg',
+      '/triner/ttttt.jpg',
 
     social: {
       facebook: '#',

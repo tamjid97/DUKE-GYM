@@ -80,9 +80,19 @@ export function FeaturedPrograms() {
                 onClick={() => setActiveCategory(category)}
                 className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 ${
                   activeCategory === category
-                    ? 'bg-gradient-to-r from-gold to-orange-500 text-obsidian shadow-lg shadow-gold/30'
-                    : 'bg-transparent border border-gold/30 text-muted-warm hover:border-gold/60 hover:text-gold'
+                    ? 'text-obsidian shadow-lg'
+                    : 'bg-transparent text-muted-warm hover:text-[var(--accent-primary)]'
                 }`}
+                style={
+                  activeCategory === category
+                    ? {
+                        background: 'var(--accent-gradient)',
+                        boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+                      }
+                    : {
+                        border: '1px solid color-mix(in srgb, var(--accent-primary) 16%, transparent)',
+                      }
+                }
               >
                 {category}
               </button>

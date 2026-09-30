@@ -25,7 +25,7 @@ export function MembershipPreview() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
               className={cn(
-                'glass-card relative p-6 flex flex-col',
+                'glass-card relative p-6 flex flex-col min-h-[450px]',
                 plan.popular && 'border-gold/50'
               )}
             >

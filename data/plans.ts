@@ -21,6 +21,48 @@ export const promotionalAdmissionFee = 1000; // 50% off for first 100 members
 
 export const longTermPlans: MembershipTier[] = [
   {
+    id: '1-day',
+    name: '1 Day',
+    tagline: 'Day pass',
+    color: '#CD7F32',
+    duration: '1 DAY',
+    price: 200,
+    features: [
+      'Full gym access',
+      'Locker & shower access',
+      'Modern equipment',
+      'Air conditioned environment',
+    ],
+  },
+  {
+    id: '7-days',
+    name: '7 Days',
+    tagline: 'Quick start',
+    color: '#C0C0C0',
+    duration: '7 DAYS',
+    price: 500,
+    features: [
+      'Full gym access',
+      'Locker & shower access',
+      'Modern equipment',
+      'Air conditioned environment',
+    ],
+  },
+  {
+    id: '15-days',
+    name: '15 Days',
+    tagline: 'Short term',
+    color: '#D4AF37',
+    duration: '15 DAYS',
+    price: 1000,
+    features: [
+      'Full gym access',
+      'Locker & shower access',
+      'Modern equipment',
+      'Air conditioned environment',
+    ],
+  },
+  {
     id: 'bronze',
     name: 'Bronze',
     tagline: 'Start your journey',

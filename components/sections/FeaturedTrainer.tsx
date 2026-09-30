@@ -56,7 +56,7 @@ export function FeaturedTrainer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative aspect-[4/5] lg:aspect-[5/4] rounded-2xl overflow-hidden border-accent-gradient">
+            <div className="relative aspect-[4/5] lg:aspect-[1/1] rounded-2xl overflow-hidden border-accent-gradient max-w-[350px] lg:max-w-[400px] mx-auto">
               {/* Use first featured trainer image */}
               <img
                 src={trainers[0]?.image || '/videos/g7.jpg'}

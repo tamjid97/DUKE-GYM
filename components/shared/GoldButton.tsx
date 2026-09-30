@@ -74,7 +74,13 @@ export function GoldButton({
                 background: 'transparent',
               }
         }
-        whileHover={{ scale: 1.05, y: -2 }}
+        whileHover={{
+          scale: 1.05,
+          y: -2,
+          boxShadow: variant === 'primary'
+            ? '0 0 0 1px var(--accent-primary), 0 15px 40px -5px var(--accent-glow), 0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent)'
+            : '0 0 0 1px var(--accent-primary), 0 15px 40px -5px var(--accent-glow)',
+        }}
         whileTap={{ scale: 0.98 }}
       >
         {buttonContent}
@@ -97,7 +103,13 @@ export function GoldButton({
               background: 'transparent',
             }
       }
-      whileHover={{ scale: 1.05, y: -2 }}
+      whileHover={{
+        scale: 1.05,
+        y: -2,
+        boxShadow: variant === 'primary'
+          ? '0 0 0 1px var(--accent-primary), 0 15px 40px -5px var(--accent-glow), 0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent)'
+          : '0 0 0 1px var(--accent-primary), 0 15px 40px -5px var(--accent-glow)',
+      }}
       whileTap={{ scale: 0.98 }}
     >
       {buttonContent}

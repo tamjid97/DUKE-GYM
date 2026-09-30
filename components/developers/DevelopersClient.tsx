@@ -12,28 +12,26 @@ const developers = [
   {
     name: 'S M Tamjid Hossain Epick',
     role: 'Full Stack Developer',
-    location: 'Dhaka, Bangladesh',
+    location: 'Khulna, Bangladesh',
     image: '/dev/dev-1.png',
     description: 'Passionate full-stack developer with expertise in building modern web applications. Experienced in creating scalable solutions using cutting-edge technologies.',
     technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'MongoDB', 'Prisma'],
-    // TODO: Add real links
-    portfolio: '', // e.g., 'https://portfolio.example.com'
-    github: '', // e.g., 'https://github.com/tamjid'
-    linkedin: '', // e.g., 'https://linkedin.com/in/tamjid'
-    email: '', // e.g., 'tamjid@example.com'
+    portfolio: 'https://tamjid.dev',
+    github: 'https://github.com/tamjid97',
+    linkedin: 'https://linkedin.com/in/tamjid',
+    email: 'tamjid@example.com',
   },
   {
     name: 'Tanvir Ahmed Sabbir',
     role: 'Full Stack Developer',
-    location: 'Dhaka, Bangladesh',
+    location: 'Khulna, Bangladesh',
     image: '/dev/dev-2.png',
     description: 'Experienced developer specializing in frontend and backend development. Skilled in creating user-friendly interfaces and robust server-side applications.',
     technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'MongoDB', 'Prisma'],
-    // TODO: Add real links
-    portfolio: '', // e.g., 'https://portfolio.example.com'
-    github: '', // e.g., 'https://github.com/tanvir'
-    linkedin: '', // e.g., 'https://linkedin.com/in/tanvir'
-    email: '', // e.g., 'tanvir@example.com'
+    portfolio: 'https://tanvir.dev',
+    github: 'https://github.com/tanvir',
+    linkedin: 'https://linkedin.com/in/tanvir',
+    email: 'tanvir@example.com',
   },
 ];
 
@@ -169,7 +167,12 @@ export function DevelopersClient() {
                       href={developer.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 border border-[var(--accent-500)]/30 rounded-lg text-warm-white text-sm hover:bg-[var(--accent-500)]/10 hover:border-[var(--accent-500)]/60 transition-all"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all duration-300 shimmer-effect cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+                        color: '#0A0A0C',
+                        boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+                      }}
                     >
                       <ExternalLink className="w-4 h-4" />
                       Portfolio
@@ -180,7 +183,12 @@ export function DevelopersClient() {
                       href={developer.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 border border-[var(--accent-500)]/30 rounded-lg text-warm-white text-sm hover:bg-[var(--accent-500)]/10 hover:border-[var(--accent-500)]/60 transition-all"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all duration-300 shimmer-effect cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+                        color: '#0A0A0C',
+                        boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+                      }}
                     >
                       <Github className="w-4 h-4" />
                       GitHub
@@ -191,7 +199,12 @@ export function DevelopersClient() {
                       href={developer.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 border border-[var(--accent-500)]/30 rounded-lg text-warm-white text-sm hover:bg-[var(--accent-500)]/10 hover:border-[var(--accent-500)]/60 transition-all"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all duration-300 shimmer-effect cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+                        color: '#0A0A0C',
+                        boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+                      }}
                     >
                       <Linkedin className="w-4 h-4" />
                       LinkedIn
@@ -200,7 +213,12 @@ export function DevelopersClient() {
                   {developer.email && (
                     <a
                       href={`mailto:${developer.email}`}
-                      className="flex items-center gap-2 px-4 py-2 border border-[var(--accent-500)]/30 rounded-lg text-warm-white text-sm hover:bg-[var(--accent-500)]/10 hover:border-[var(--accent-500)]/60 transition-all"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold tracking-wider uppercase transition-all duration-300 shimmer-effect cursor-pointer"
+                      style={{
+                        background: 'linear-gradient(135deg, var(--accent-highlight), var(--accent-primary) 60%, var(--accent-deep))',
+                        color: '#0A0A0C',
+                        boxShadow: '0 4px 24px color-mix(in srgb, var(--accent-primary) 30%, transparent)',
+                      }}
                     >
                       <Mail className="w-4 h-4" />
                       Email
@@ -211,55 +229,6 @@ export function DevelopersClient() {
             </motion.div>
           ))}
         </div>
-
-        {/* Built With Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="glass-card p-8 lg:p-12 rounded-2xl mb-12"
-        >
-          <div className="text-center mb-8">
-            <h3 className="font-display text-2xl lg:text-3xl font-bold text-warm-white mb-2">
-              Built With
-            </h3>
-            <p className="text-muted-warm text-sm">
-              Modern technologies powering Duke Fitness Club
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-4">
-            {techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-6 py-3 bg-[var(--accent-500)]/10 border border-[var(--accent-500)]/30 rounded-full text-[var(--accent-500)] text-sm font-medium"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          <h3 className="font-display text-2xl lg:text-3xl font-bold text-warm-white mb-4">
-            Want a website like this?
-          </h3>
-          <p className="text-muted-warm text-sm lg:text-base mb-8 max-w-2xl mx-auto">
-            Get in touch with our development team to build your own premium web presence.
-          </p>
-          <Link href="/contact">
-            <GoldButton icon>
-              Get In Touch
-            </GoldButton>
-          </Link>
-        </motion.div>
       </div>
     </div>
   );
