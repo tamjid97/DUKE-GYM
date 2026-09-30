@@ -83,13 +83,13 @@ export function KitchenHero() {
               letterSpacing: '-0.02em',
             }}
           >
-            DUKE
+            COMING
           </span>
           <span
             className="mt-[0.08em] block text-warm-white"
             style={{ fontSize: 'clamp(36px, 5.2vw, 78px)', lineHeight: 1, letterSpacing: '0.18em' }}
           >
-            KITCHEN
+            SOON
           </span>
         </motion.h1>
 
@@ -99,7 +99,7 @@ export function KitchenHero() {
           transition={{ duration: 0.6, delay: 0.52 }}
           className="mt-8 max-w-3xl text-[13px] uppercase tracking-[0.28em] text-muted-warm sm:text-sm"
         >
-          Protein Meals&nbsp;·&nbsp;Grill&nbsp;·&nbsp;Smoothies&nbsp;·&nbsp;Bengali Specials&nbsp;·&nbsp;Coffee&nbsp;·&nbsp;Meal Plans
+          Premium Dining Experience · Healthy Meal Plans · Protein-Rich Options
         </motion.p>
 
         <motion.div
@@ -109,20 +109,11 @@ export function KitchenHero() {
           className="mt-12 flex flex-wrap items-center gap-4"
         >
           <a
-            href="#kitchen-menu"
+            href="/swimming-pool"
             className="btn-gold inline-flex items-center gap-3 px-9 py-4 text-sm font-semibold uppercase tracking-[0.22em]"
             style={{ borderRadius: 0 }}
           >
-            Explore Menu
-            <span>↓</span>
-          </a>
-          <a
-            href={waLink("Hello Duke Kitchen! I'd like to reserve a table.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 border border-[rgba(212,175,55,0.4)] px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#D4AF37] transition-all duration-300 hover:border-[#D4AF37] hover:bg-[rgba(212,175,55,0.08)]"
-          >
-            Reserve a Table
+            Visit Pool
             <span>→</span>
           </a>
         </motion.div>
