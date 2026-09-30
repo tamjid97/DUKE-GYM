@@ -1,166 +1,129 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
-import { waLink } from '@/lib/contact';
-import { siteConfig } from '@/data/siteConfig';
+import { useRef } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 export function AquaHero() {
-  const containerRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollY } = useScroll();
-  const imageY = useTransform(scrollY, [0, 700], reduceMotion ? [0, 0] : [0, 70]);
-  const contentY = useTransform(scrollY, [0, 700], reduceMotion ? [0, 0] : [0, -40]);
-  const imageScale = useTransform(scrollY, [0, 800], reduceMotion ? [1, 1] : [1, 0.96]);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const onMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (reduceMotion || (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMouse({
-      x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
-      y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
-    });
-  };
+  // ── Swap the URL below with a local asset if available:
+  //    e.g. '/videos/pool-hero.mp4'
+  const videoSrc =
+    'https://videos.pexels.com/video-files/855072/855072-hd_1920_1080_30fps.mp4';
+
+  const posterSrc =
+    'https://images.pexels.com/photos/23916836/pexels-photo-23916836.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
   return (
-    <section
-      ref={containerRef}
-      onMouseMove={onMove}
-      className="relative flex min-h-[85vh] items-end overflow-hidden pb-16 lg:min-h-[95vh] lg:pb-24"
-    >
-      <motion.div
-        className="absolute inset-0 z-0 overflow-hidden"
-        style={{
-          y: imageY,
-          scale: imageScale,
-          x: reduceMotion ? 0 : mouse.x * 10,
-        }}
-      >
-        <img
-          src={siteConfig.zones.pool.image}
-          alt="Duke Aqua indoor pool"
-          className={`h-[118%] w-full object-cover object-center ${reduceMotion ? '' : 'ken-burns'}`}
-          loading="eager"
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      {/* ── Video background ── */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          poster={posterSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="h-full w-full object-cover"
+          style={{ position: 'absolute', inset: 0 }}
         />
-        <div className="absolute inset-0 bg-obsidian/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/55 to-obsidian/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-obsidian/85 via-obsidian/25 to-transparent" />
-        <div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 60% 40%, transparent 20%, rgba(11,11,12,0.72) 100%)' }}
-        />
-      </motion.div>
 
-      <div className="pointer-events-none absolute inset-0 z-[1]">
-        <div className={`absolute inset-0 aqua-caustics ${reduceMotion ? '!animate-none' : ''}`} />
-        <motion.div
-          className="absolute bottom-[10%] left-[12%] h-[380px] w-[520px] rounded-full"
-          style={{
-            background: 'radial-gradient(ellipse, rgba(156,203,200,0.16), transparent 70%)',
-            filter: 'blur(70px)',
-            x: reduceMotion ? 0 : mouse.x * 18,
-            y: reduceMotion ? 0 : mouse.y * 12,
-          }}
-        />
-        <motion.div
-          className={`absolute right-[10%] top-[18%] h-72 w-72 rounded-full ${reduceMotion ? '' : 'gold-light-drift'}`}
-          style={{
-            background: 'radial-gradient(ellipse, rgba(212,175,55,0.2), transparent 70%)',
-            filter: 'blur(80px)',
-            x: reduceMotion ? 0 : mouse.x * 22,
-          }}
-        />
-        <div className="gym-grain" />
+        {/* Dark overlays for text legibility */}
+        <div className="absolute inset-0 bg-obsidian/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-obsidian/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/50 via-transparent to-obsidian/70" />
       </div>
 
-      <motion.div
-        className="relative z-10 mx-auto w-full px-6 lg:px-16"
-        style={{ maxWidth: '1600px', y: contentY, x: reduceMotion ? 0 : mouse.x * -8 }}
-      >
-        <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      {/* ── Content ── */}
+      <div className="relative z-10 mx-auto flex flex-col items-center px-6 text-center">
+        {/* Subtle top label */}
+        <motion.span
+          initial={reduceMotion ? false : { opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-7 text-[10px] font-medium uppercase tracking-[0.4em] text-[#D4AF37]"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-8 text-[10px] font-medium uppercase tracking-[0.5em] text-[#D4AF37]"
         >
-          DUKE FITNESS CLUB / AQUATIC EXPERIENCE
-        </motion.p>
+          DUKE AQUA
+        </motion.span>
+
+        {/* COMING */}
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-display font-bold leading-none"
+          transition={{ duration: 1, delay: 0.4 }}
+          className="font-display font-bold leading-none text-warm-white"
+          style={{
+            fontSize: 'clamp(64px, 12vw, 180px)',
+            lineHeight: 0.88,
+            letterSpacing: '-0.02em',
+          }}
         >
-          <span
-            className="block text-warm-white"
-            style={{ fontSize: 'clamp(64px, 10vw, 150px)', lineHeight: 0.86, letterSpacing: '-0.02em' }}
-          >
-            DUKE
-          </span>
-          <span
-            className="mt-[0.06em] block"
-            style={{
-              fontSize: 'clamp(48px, 8vw, 120px)',
-              lineHeight: 0.9,
-              background: 'linear-gradient(135deg, #8C6B2A 0%, #D4AF37 35%, #B8E0DC 58%, #F1DDA0 78%, #D4AF37 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            AQUA
-          </span>
+          COMING
         </motion.h1>
+
+        {/* SOON — gold gradient */}
+        <motion.span
+          initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mt-2 block font-display font-bold leading-none"
+          style={{
+            fontSize: 'clamp(64px, 12vw, 180px)',
+            lineHeight: 0.88,
+            letterSpacing: '-0.02em',
+            background:
+              'linear-gradient(135deg, #8C6B2A 0%, #D4AF37 35%, #F1DDA0 60%, #D4AF37 100%)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
+          SOON
+        </motion.span>
+
+        {/* Decorative divider */}
+        <motion.div
+          initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
+          className="mt-10 flex items-center gap-4"
+        >
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[rgba(212,175,55,0.5)]" />
+          <div className="h-2 w-2 rotate-45 bg-[#D4AF37]" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[rgba(212,175,55,0.5)]" />
+        </motion.div>
+
+        {/* Subtitle */}
         <motion.p
           initial={reduceMotion ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-8 max-w-xl text-[15px] leading-relaxed text-muted-warm"
+          transition={{ duration: 0.8, delay: 1.1 }}
+          className="mt-8 text-[12px] uppercase tracking-[0.4em] text-[#A8A39A]"
         >
-          {siteConfig.zones.pool.description}
+          DUKE FITNESS CLUB · AQUATIC EXPERIENCE
         </motion.p>
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55 }}
-          className="mt-10 flex flex-wrap gap-4"
-        >
-          <a
-            href={waLink('Hello Duke Aqua! I would like to book a swim / pool slot.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-gold inline-flex items-center gap-3 px-9 py-4 text-sm font-semibold uppercase tracking-[0.22em]"
-            style={{ borderRadius: 0 }}
-          >
-            Book a Swim
-          </a>
-          <a
-            href="#pool-details"
-            className="inline-flex items-center gap-3 border border-[rgba(212,175,55,0.4)] px-8 py-4 text-sm font-semibold uppercase tracking-[0.22em] text-[#D4AF37] transition-colors hover:border-[#D4AF37] hover:bg-[rgba(212,175,55,0.08)]"
-          >
-            Explore Aqua
-            <span>↓</span>
-          </a>
-        </motion.div>
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.85 }}
-          className="mt-16 flex flex-wrap items-center gap-5 text-[10px] uppercase tracking-[0.32em] text-[#A8A39A]"
-        >
-          <span className="text-[#D4AF37]">01 / DUKE AQUA</span>
-          <span className="text-[#D4AF37] opacity-60">◆</span>
-          <span>Pool • Training • Recovery</span>
-          <span className="hidden h-px w-10 bg-[rgba(212,175,55,0.35)] sm:block" />
-          <span>Open {siteConfig.zones.pool.hours}</span>
-        </motion.div>
-      </motion.div>
+      </div>
 
-      <div className="absolute bottom-[26%] right-8 z-10 hidden flex-col items-center gap-3 lg:flex">
-        <span className="text-[9px] uppercase tracking-[0.4em] text-[#A8A39A]" style={{ writingMode: 'vertical-rl' }}>
+      {/* ── Film grain overlay ── */}
+      <div className="pointer-events-none absolute inset-0 z-[1]">
+        <div className="gym-grain" />
+      </div>
+
+      {/* ── Scroll indicator (desktop) ── */}
+      <div className="absolute bottom-[8%] right-8 z-10 hidden flex-col items-center gap-3 lg:flex">
+        <span
+          className="text-[9px] uppercase tracking-[0.4em] text-[#A8A39A]"
+          style={{ writingMode: 'vertical-rl' }}
+        >
           Scroll to explore
         </span>
-        <div className="relative overflow-hidden" style={{ width: '1px', height: '72px', background: 'rgba(212,175,55,0.12)' }}>
+        <div
+          className="relative overflow-hidden"
+          style={{ width: '1px', height: '72px', background: 'rgba(212,175,55,0.12)' }}
+        >
           {!reduceMotion && (
             <motion.div
               className="absolute left-0 top-0 w-full"

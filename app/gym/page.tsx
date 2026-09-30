@@ -1,12 +1,10 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { GymHero } from '@/components/gym/GymHero';
 import { GymZones } from '@/components/gym/GymZones';
 import { GymPrograms } from '@/components/gym/GymPrograms';
 import { GymArsenal } from '@/components/gym/GymArsenal';
 import { GymCTA } from '@/components/gym/GymCTA';
 import { GymQuizSection } from '@/components/gym/GymQuizSection';
-import { GymRules } from '@/components/gym/GymRules';
-import { GymFinale } from '@/components/gym/GymFinale';
 
 export const metadata: Metadata = {
   title: 'Duke Gym — Strength, Cardio, Functional Training',
@@ -22,8 +20,6 @@ export default function GymPage() {
       <GymArsenal />
       <GymCTA />
       <GymQuizSection />
-      <GymRules />
-      <GymFinale />
     </>
   );
 }

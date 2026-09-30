@@ -7,7 +7,6 @@ import { KitchenCombos } from '@/components/restaurant/KitchenCombos';
 import { KitchenBenefits } from '@/components/restaurant/KitchenBenefits';
 import { KitchenReservation } from '@/components/restaurant/KitchenReservation';
 import { KitchenTakeaway } from '@/components/restaurant/KitchenTakeaway';
-import { KitchenFinale } from '@/components/restaurant/KitchenFinale';
 
 export const metadata: Metadata = {
   title: 'Duke Kitchen — Healthy Restaurant',
@@ -25,7 +24,7 @@ export default function RestaurantPage() {
       <KitchenBenefits />
       <KitchenReservation />
       <KitchenTakeaway />
-      <KitchenFinale />
     </>
   );
 }
+

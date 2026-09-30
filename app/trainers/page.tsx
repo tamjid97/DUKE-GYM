@@ -7,26 +7,26 @@ import { TrainerModal } from '@/components/trainers/TrainerModal';
 import { TrainerFilter } from '@/components/trainers/TrainerFilter';
 import { useLang } from '@/components/providers/LanguageProvider';
 
-type FilterType = 'all' | 'owner' | 'manager' | 'male' | 'female';
+type FilterType = 'owner' | 'manager' | 'male' | 'female';
 
 export default function TrainersPage() {
   const { t } = useLang();
   const [selectedTrainer, setSelectedTrainer] = useState<typeof trainers[0] | null>(null);
-  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+  const [activeFilter, setActiveFilter] = useState<FilterType>('owner');
 
   // Filter trainers based on selected filter
   const filteredTrainers = trainers.filter((trainer) => {
+    const roleLower = trainer.role.toLowerCase();
+    const isOwnerOrManager = roleLower.includes('owner') || roleLower.includes('manager');
     switch (activeFilter) {
       case 'owner':
-        return trainer.role.toLowerCase().includes('owner');
+        return roleLower.includes('owner');
       case 'manager':
-        return trainer.role.toLowerCase().includes('manager');
+        return roleLower.includes('manager');
       case 'male':
-        return trainer.gender === 'male';
+        return trainer.gender === 'male' && !isOwnerOrManager;
       case 'female':
-        return trainer.gender === 'female';
-      default:
-        return true;
+        return trainer.gender === 'female' && !isOwnerOrManager;
     }
   });
 

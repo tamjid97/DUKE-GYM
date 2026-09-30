@@ -45,9 +45,7 @@ export function Navbar() {
     { href: '/membership', label: t.membership },
     { href: '/schedule', label: t.schedule },
     { href: '/tools', label: t.tools },
-    { href: '/gallery', label: t.gallery },
     { href: '/blog', label: t.blog },
-    { href: '/contact', label: t.contact },
   ];
 
   return (
@@ -66,12 +64,12 @@ export function Navbar() {
           borderColor: 'var(--border-accent)',
         }}
       >
-        <nav className="mx-auto flex max-w-7xl items-center px-4 lg:px-8">
+        <nav className="mx-auto grid max-w-7xl items-center px-4 lg:px-8" style={{ gridTemplateColumns: 'auto 1fr auto' }}>
 
           {/* LOGO */}
      <Link
   href="/"
-  className="flex shrink-0 items-center gap-2 mr-6"
+  className="flex shrink-0 items-center gap-2"
 >
   <Image
     src="/favicon-source.svg"
@@ -97,7 +95,7 @@ export function Navbar() {
 </Link>
 
           {/* DESKTOP NAV */}
-          <div className="hidden items-center gap-1 lg:flex min-w-0">
+          <div className="hidden items-center justify-center gap-1 lg:flex min-w-0">
             <Link
               href="/"
               className={cn(
@@ -223,7 +221,7 @@ export function Navbar() {
           </div>
 
           {/* RIGHT ACTIONS */}
-          <div className="ml-auto flex shrink-0 items-center gap-3">
+          <div className="flex shrink-0 items-center justify-end gap-3">
             <ThemePicker />
 
             <a

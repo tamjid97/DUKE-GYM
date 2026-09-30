@@ -42,7 +42,7 @@ export function FeaturedTrainer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border-accent-gradient">
+            <div className="relative aspect-square lg:aspect-[5/4] rounded-2xl overflow-hidden border-accent-gradient">
               <img
                 src={featuredTrainer.image}
                 alt={featuredTrainer.name}
@@ -162,18 +162,12 @@ export function FeaturedTrainer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1 }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="pt-4"
             >
-              <Link href={`/trainers/${featuredTrainer.slug}`}>
+              <Link href="/trainers">
                 <GoldButton icon>
-                  {t.viewTrainerProfile}
+                  {t.viewAllTrainers}
                 </GoldButton>
-              </Link>
-              <Link
-                href="/trainers"
-                className="flex items-center gap-2 text-accent-500 hover:text-accent-400 transition-colors text-sm font-medium self-center sm:self-auto"
-              >
-                {t.viewAllTrainers} →
               </Link>
             </motion.div>
           </motion.div>

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-type FilterType = 'all' | 'owner' | 'manager' | 'male' | 'female';
+type FilterType = 'owner' | 'manager' | 'male' | 'female';
 
 interface TrainerFilterProps {
   activeFilter: FilterType;
@@ -11,7 +11,6 @@ interface TrainerFilterProps {
 
 export function TrainerFilter({ activeFilter, onFilterChange }: TrainerFilterProps) {
   const filters: { value: FilterType; label: string }[] = [
-    { value: 'all', label: 'All' },
     { value: 'owner', label: 'Owner' },
     { value: 'manager', label: 'Manager' },
     { value: 'male', label: 'Male' },
