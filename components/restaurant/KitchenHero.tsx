@@ -50,21 +50,9 @@ export function KitchenHero() {
       </div>
 
       <motion.div
-        className="relative z-10 mx-auto w-full px-6 lg:px-16"
+        className="relative z-10 mx-auto w-full px-6 lg:px-16 text-center"
         style={{ maxWidth: '1600px', y: contentY }}
       >
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="mb-4 flex items-center gap-4"
-        >
-          <div className="h-px w-14" style={{ background: 'linear-gradient(to right, transparent, #D4AF37)' }} />
-          <span className="text-[10px] font-medium uppercase tracking-[0.42em] text-[#D4AF37]">
-            FUEL × YOUR × REIGN
-          </span>
-        </motion.div>
-
         <motion.h1
           initial={reduceMotion ? false : { opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
@@ -97,7 +85,7 @@ export function KitchenHero() {
           initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.52 }}
-          className="mt-8 max-w-3xl text-[13px] uppercase tracking-[0.28em] text-muted-warm sm:text-sm"
+          className="mt-8 max-w-3xl mx-auto text-[13px] uppercase tracking-[0.28em] text-muted-warm sm:text-sm"
         >
           Coming Soon
         </motion.p>
