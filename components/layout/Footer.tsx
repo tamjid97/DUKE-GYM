@@ -18,10 +18,12 @@ export function Footer() {
         <div className="mb-12 flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
           <div className="flex items-center gap-4">
             {/* Duke Lion Logo */}
-            <div className="relative w-14 h-14 flex items-center justify-center">
-              <svg viewBox="0 0 120 120" fill="currentColor" className="w-full h-full text-[var(--accent-500)]">
-                <path d="M60 15 L75 25 L85 20 L80 38 L95 42 L85 55 L92 70 L75 68 L70 85 L60 78 L50 85 L45 68 L28 70 L35 55 L25 42 L40 38 L35 20 L45 25 Z" />
-              </svg>
+            <div className="relative w-32 h-32 flex items-center justify-center">
+              <img
+                src="/favicon-source.svg"
+                alt="Duke Fitness Club Logo"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <div className="font-display text-[clamp(40px,6vw,72px)] font-bold leading-none tracking-tight text-accent-gradient">DUKE</div>
