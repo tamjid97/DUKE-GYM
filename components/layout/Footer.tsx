@@ -111,9 +111,14 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-gold/10 pt-8 md:flex-row">
-          <p className="text-xs text-muted-warm">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center gap-4 md:items-start">
+            <p className="text-xs text-muted-warm">
+              &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            </p>
+            <Link href="/developers" className="text-xs text-muted-warm hover:text-gold transition-colors">
+              Developers
+            </Link>
+          </div>
           <p className="font-display text-sm tracking-[0.28em] text-[#D4AF37]">
             RULE YOUR LEGACY.
           </p>
