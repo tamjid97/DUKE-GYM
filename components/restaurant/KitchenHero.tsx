@@ -85,7 +85,7 @@ export function KitchenHero() {
           initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.52 }}
-          className="mt-8 max-w-3xl mx-auto text-[13px] uppercase tracking-[0.28em] text-muted-warm sm:text-sm"
+          className="mt-8 max-w-3xl mx-auto text-[20px] uppercase tracking-[0.28em] text-muted-warm sm:text-2xl"
         >
           Coming Soon
         </motion.p>
