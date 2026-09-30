@@ -2,16 +2,24 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { swimmingClasses } from '@/data/pool';
-import { galleryItems } from '@/data/gallery';
 import { waLink } from '@/lib/contact';
 
-const aquaImages = galleryItems.filter((g) => g.category === 'Aqua').map((g) => g.src);
+const unsplashImages = [
+  'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb6qRWgj90XPwOt87dKqU1KUCCbBGc09OFhWTAEFqOlR0NLm90IrPYew&s=10',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy46PVPqjg8gQhxX0HxDROlGPTpPmz3GWuTAOr3hZIxG7gHARDg3nXMOXY&s=10',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-ysUnMCp4Y3ffcS-4IWztbZPNl1qLoch3MTjIFoAVC0A5Q9WuyuatekjS&s=10',
+  'https://www.swim-central.uk/wp-content/uploads/Picture-of-women-swimming-underwater-960x640.webp',
+  'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800',
+  'https://images.unsplash.com/photo-1519315881363-5f2c27dc8e71?w=800',
+  'https://images.unsplash.com/photo-1576611987274-0e867872d805?w=800',
+];
 
 export function AquaClasses() {
   const reduceMotion = useReducedMotion();
   const featured = swimmingClasses[0];
   const rest = swimmingClasses.slice(1);
-  const featuredImage = aquaImages[0];
+  const featuredImage = unsplashImages[0];
 
   return (
     <section id="classes" className="relative py-28 lg:py-36" style={{ background: '#0B0B0C' }}>
@@ -52,8 +60,8 @@ export function AquaClasses() {
                 alt={featured.name}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0B0B0C]/80 max-lg:bg-gradient-to-t max-lg:from-[#0B0B0C]" />
-              <span className="absolute left-6 top-6 text-[10px] uppercase tracking-[0.3em] text-[#F1DDA0]">{featured.level}</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0B0B0C]/90 max-lg:bg-gradient-to-t max-lg:from-[#0B0B0C]/90" />
+              <span className="absolute left-6 top-6 text-[10px] uppercase tracking-[0.3em] text-[#F1DDA0] bg-[#0B0B0C]/60 px-2 py-1">{featured.level}</span>
             </div>
             <div className="flex flex-col justify-center px-8 py-12 lg:px-12">
               <h3 className="font-display font-bold text-warm-white" style={{ fontSize: 'clamp(28px, 3vw, 48px)' }}>
@@ -100,14 +108,14 @@ export function AquaClasses() {
             >
               <div className="relative h-[240px] overflow-hidden">
                 <img
-                  src={aquaImages[(i + 1) % aquaImages.length]}
+                  src={unsplashImages[i + 1]}
                   alt={c.name}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C] via-[#0B0B0C]/20 to-transparent" />
-                <span className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-[#F1DDA0]">{c.level}</span>
-                <h3 className="absolute bottom-4 left-4 right-4 font-display text-[22px] font-bold text-warm-white">{c.name}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0C]/90 via-[#0B0B0C]/40 to-transparent" />
+                <span className="absolute left-4 top-4 text-[10px] uppercase tracking-[0.24em] text-[#F1DDA0] bg-[#0B0B0C]/60 px-2 py-1">{c.level}</span>
+                <h3 className="absolute bottom-4 left-4 right-4 font-display text-[24px] font-bold text-warm-white drop-shadow-lg">{c.name}</h3>
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100" style={{ background: 'linear-gradient(105deg, transparent 35%, rgba(241,221,160,0.12) 50%, transparent 65%)' }} />
               </div>
               <div className="p-6">

@@ -8,8 +8,6 @@ import { AquaFlow } from '@/components/aqua/AquaFlow';
 import { AquaPricing } from '@/components/aqua/AquaPricing';
 import { AquaSafety } from '@/components/aqua/AquaSafety';
 import { AquaFAQ } from '@/components/aqua/AquaFAQ';
-import { AquaCTA } from '@/components/aqua/AquaCTA';
-import { AquaFinale } from '@/components/aqua/AquaFinale';
 
 export const metadata: Metadata = {
   title: 'Duke Aqua — Swimming Pool',
@@ -28,8 +26,6 @@ export default function SwimmingPoolPage() {
       <AquaPricing />
       <AquaSafety />
       <AquaFAQ />
-      <AquaCTA />
-      <AquaFinale />
     </>
   );
 }

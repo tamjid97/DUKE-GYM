@@ -220,14 +220,12 @@ export function KitchenMenu() {
               </div>
 
               <div className="mt-2">
-                <GoldButton
-                  href={waLink(`Hello Duke Kitchen! I'd like to order: ${selected.name} — ৳${selected.price}.`)}
-                  external
-                  icon
-                  className="w-full"
+                <button
+                  onClick={() => window.open(waLink(`Hello Duke Kitchen! I'd like to order: ${selected.name} — ৳${selected.price}.`), '_blank')}
+                  className="w-full py-4 text-sm uppercase tracking-[0.22em] rounded-none bg-gradient-to-r from-bronze via-gold to-champagne text-obsidian font-bold hover:opacity-90 transition-opacity duration-300"
                 >
                   Order via WhatsApp
-                </GoldButton>
+                </button>
               </div>
             </div>
           )}

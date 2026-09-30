@@ -119,7 +119,7 @@ export function KitchenReservation() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your full name"
-                    className="w-full rounded-none h-12 px-4 text-[14px] text-warm-white bg-smoke/40 backdrop-blur border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-muted-warm/60"
+                    className="w-full rounded-none h-12 px-4 text-[14px] text-white bg-gray-700 border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-gray-400"
                   />
                 </div>
 
@@ -132,7 +132,7 @@ export function KitchenReservation() {
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
-                      className="w-full rounded-none h-12 px-4 text-[14px] text-warm-white bg-smoke/40 backdrop-blur border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-muted-warm/60"
+                      className="w-full rounded-none h-12 px-4 text-[14px] text-white bg-gray-700 border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-gray-400"
                     />
                   </div>
                   <div>
@@ -143,7 +143,7 @@ export function KitchenReservation() {
                       type="time"
                       value={time}
                       onChange={(e) => setTime(e.target.value)}
-                      className="w-full rounded-none h-12 px-4 text-[14px] text-warm-white bg-smoke/40 backdrop-blur border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-muted-warm/60"
+                      className="w-full rounded-none h-12 px-4 text-[14px] text-white bg-gray-700 border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-gray-400"
                     />
                   </div>
                 </div>
@@ -155,10 +155,10 @@ export function KitchenReservation() {
                   <select
                     value={guests}
                     onChange={(e) => setGuests(e.target.value)}
-                    className="w-full rounded-none h-12 px-4 text-[14px] text-warm-white bg-smoke/40 backdrop-blur border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-muted-warm/60"
+                    className="w-full rounded-none h-12 px-4 text-[14px] text-white bg-gray-700 border-b-2 border-l border-r border-t border-gold/20 focus:border-gold/60 focus:outline-none transition-colors duration-300 placeholder:text-gray-400"
                   >
                     {['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'].map((n) => (
-                      <option key={n} value={n} className="bg-smoke">
+                      <option key={n} value={n} className="bg-gray-700">
                         {n}
                       </option>
                     ))}

@@ -93,13 +93,12 @@ export function KitchenSignature() {
                 )}
               </div>
               <div className="mt-7">
-                <GoldButton
-                  href={waLink(`Hello Duke Kitchen! I'd like to order: ${heroItem.name} — ৳${heroItem.price}.`)}
-                  external
-                  icon
+                <button
+                  onClick={() => window.open(waLink(`Hello Duke Kitchen! I'd like to order: ${heroItem.name} — ৳${heroItem.price}.`), '_blank')}
+                  className="py-4 text-sm uppercase tracking-[0.22em] rounded-none bg-gradient-to-r from-bronze via-gold to-champagne text-obsidian font-bold hover:opacity-90 transition-opacity duration-300"
                 >
                   Order via WhatsApp
-                </GoldButton>
+                </button>
               </div>
             </div>
           </motion.div>
@@ -142,15 +141,12 @@ export function KitchenSignature() {
                             )}
                             {item.spicy && <span className="h-3 w-3 text-red-400">🌶️</span>}
                           </div>
-                          <GoldButton
-                            href={waLink(`Hello Duke Kitchen! I'd like to order: ${item.name} — ৳${item.price}.`)}
-                            external
-                            icon
-                            variant="secondary"
-                            className="!px-3 !py-1.5 text-[11px]"
+                          <button
+                            onClick={() => window.open(waLink(`Hello Duke Kitchen! I'd like to order: ${item.name} — ৳${item.price}.`), '_blank')}
+                            className="px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] rounded-none bg-gradient-to-r from-bronze via-gold to-champagne text-obsidian font-bold hover:opacity-90 transition-opacity duration-300"
                           >
                             Order
-                          </GoldButton>
+                          </button>
                         </div>
                       </div>
                     </div>
