@@ -20,9 +20,14 @@ export const siteConfig = {
   email: 'info@dukefitnessclub.com', // [PLACEHOLDER]
   address: 'House 1, Road 1, Gulshan 2, Dhaka 1212, Bangladesh', // [PLACEHOLDER]
   addressBn: 'বাড়ি ১, রোড ১, গুলশান ২, ঢাকা ১২১২, বাংলাদেশ', // [PLACEHOLDER]
+  // Opening hours - TODO: Confirm real hours with user
+  openingHours: {
+    weekdays: 'Mon–Fri 5:00 AM – 11:00 PM',
+    weekends: 'Sat–Sun 6:00 AM – 10:00 PM',
+  },
   mapEmbed:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.5!2d90.4!3d23.79!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDQ3JzI0LjAiTiA5MMKwMjQnMDAuMCJF!5e0!3m2!1sen!2sbd!4v0', // [PLACEHOLDER]
-  mapLink: 'https://maps.google.com/?q=Gulshan+2+Dhaka', // [PLACEHOLDER]
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.4008333!2d90.4123!3d23.7932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7a0f6b5b5b5%3A0x6b5b5b5b5b5b5b5b!2sGulshan+2%2C+Dhaka!5e0!3m2!1sen!2sbd!4v1620000000000', // Updated for Gulshan 2
+  mapLink: 'https://maps.google.com/?q=House+1+Road+1+Gulshan+2+Dhaka+Bangladesh',
 
   // --- Social ---
   social: {

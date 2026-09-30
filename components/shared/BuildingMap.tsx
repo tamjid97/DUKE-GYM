@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import React from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { siteConfig, type ZoneKey } from '@/data/siteConfig';
 import { useLang } from '@/components/providers/LanguageProvider';
@@ -160,7 +161,9 @@ export function BuildingMap() {
 
             <svg viewBox="0 0 400 300" className="w-full h-auto" fill="none" style={{ color: 'var(--accent-500)' }}>
               <defs>
-                {zones.map(([key]) => getZonePattern(key))}
+                {zones.map(([key]) => (
+                  <React.Fragment key={key}>{getZonePattern(key)}</React.Fragment>
+                ))}
               </defs>
 
               {/* Building outline */}

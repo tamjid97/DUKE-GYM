@@ -17,6 +17,7 @@ const cinzel = Cinzel({ subsets: ['latin'], weight: ['400', '500', '600', '700',
 const hindSiliguri = Hind_Siliguri({ subsets: ['bengali', 'latin'], weight: ['300', '400', '500', '600', '700'], variable: '--font-bengali' });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://duke-gym-sable.vercel.app'),
   title: {
     default: 'DUKE FITNESS CLUB — Rule Your Legacy | Gym • Restaurant • Swimming Pool • Game Zone',
     template: '%s | DUKE FITNESS CLUB',
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
     description: 'Gym • Restaurant • Swimming Pool • Game Zone — One Building, Four Worlds.',
     type: 'website',
     locale: 'en_US',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Duke Fitness Club' }],
+    images: [{ url: '/logo.png', width: 1200, height: 630, alt: 'Duke Fitness Club' }],
   },
   twitter: {
     card: 'summary_large_image',

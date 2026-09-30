@@ -116,7 +116,7 @@ export const faqs = [
   },
   {
     q: 'Can I use all four zones with one membership?',
-    a: 'It depends on your tier. Silver covers the gym, Gold adds restaurant discounts, Platinum adds swimming and game zone hours, and Black Diamond includes everything with priority booking.',
+    a: 'It depends on your tier. Bronze covers the gym only, Silver adds restaurant discounts, Gold includes swimming and game zone access with restaurant discounts, and Platinum includes everything with priority booking.',
   },
   {
     q: 'Is there a women\u2019s section?',

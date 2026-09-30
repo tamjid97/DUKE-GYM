@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function DevelopersPage() {
-  return <DevelopersClient />;
+  return (
+    <div className="pt-20">
+      <DevelopersClient />
+    </div>
+  );
 }

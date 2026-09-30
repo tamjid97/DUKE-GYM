@@ -159,9 +159,12 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
     <div className="mx-auto max-w-7xl px-4 lg:px-8">
       {/* Section Header */}
       <div className="flex flex-col gap-3 items-center text-center mb-12">
-        <span className="section-label">Reviews</span>
-        <h2 className="font-display text-3xl font-bold text-warm-white sm:text-4xl lg:text-5xl">
-          {t.memberReviews}
+        <div className="flex items-center gap-3">
+          <span className="section-label">REAL TRANSFORMATIONS</span>
+          <div className="h-px w-16 bg-gradient-to-r from-[var(--accent-500)] to-transparent" />
+        </div>
+        <h2 className="font-display text-3xl font-bold text-warm-white sm:text-4xl lg:text-5xl uppercase tracking-wider">
+          WHAT MEMBERS SAY
         </h2>
       </div>
 
@@ -196,8 +199,8 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
                 <div className="relative w-full max-w-sm aspect-[4/5] rounded-2xl overflow-hidden">
                   {/* Verified Badge */}
                   <div className="absolute top-4 left-4 z-10 glass-card px-3 py-1.5 rounded-full flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#d4a843]" />
-                    <span className="text-xs font-medium text-[#d4a843] tracking-wider">VERIFIED MEMBER</span>
+                    <Check className="w-4 h-4 text-[var(--accent-500)]" />
+                    <span className="text-xs font-medium text-[var(--accent-500)] tracking-wider">VERIFIED MEMBER</span>
                   </div>
                   
                   {/* Image or Fallback */}
@@ -209,8 +212,8 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-[#d4a843]/20 to-[#d4a843]/5 flex items-center justify-center">
-                      <span className="text-8xl font-display font-bold text-[#d4a843]/30">{initial}</span>
+                    <div className="w-full h-full bg-gradient-to-br from-[var(--accent-500)]/20 to-[var(--accent-500)]/5 flex items-center justify-center">
+                      <span className="text-8xl font-display font-bold text-[var(--accent-500)]/30">{initial}</span>
                     </div>
                   )}
                   
@@ -221,19 +224,22 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
 
               {/* Overlapping Card */}
               <div className="relative w-full lg:w-1/2 flex justify-center lg:justify-start lg:-ml-20 z-10">
-                <div className="glass-card p-8 lg:p-10 max-w-lg w-full rounded-2xl border border-[#d4a843]/20"
+                <div className="glass-card p-8 lg:p-10 max-w-lg w-full rounded-2xl border border-[var(--accent-500)]/20 relative overflow-hidden"
                   style={{
                     boxShadow: '0 0 0 1px color-mix(in srgb, var(--accent-400) 15%, transparent), 0 25px 50px -20px rgba(0,0,0,0.7)',
                   }}
                 >
+                  {/* Quote watermark */}
+                  <div className="absolute top-4 right-4 text-[var(--accent-500)]/10 text-8xl font-serif leading-none">"</div>
+
                   {/* Rating */}
                   <div className="flex items-center gap-2 mb-4">
                     <div className="flex gap-0.5">
                       {Array.from({ length: currentTestimonial.rating }).map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-[#d4a843] text-[#d4a843]" />
+                        <Star key={i} className="w-5 h-5 fill-[var(--accent-500)] text-[var(--accent-500)]" />
                       ))}
                     </div>
-                    <span className="text-xs text-[#d4a843] tracking-wider">5.0 / 5.0 RATING</span>
+                    <span className="text-xs text-[var(--accent-500)] tracking-wider">5.0 / 5.0 RATING</span>
                   </div>
 
                   {/* Quote */}
@@ -242,15 +248,15 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
                   </p>
 
                   {/* Gold Line */}
-                  <div className="w-16 h-0.5 bg-gradient-to-r from-[#d4a843] to-transparent mb-4" />
+                  <div className="w-16 h-0.5 bg-gradient-to-r from-[var(--accent-500)] to-transparent mb-4" />
 
                   {/* Name and Member Since */}
                   <div>
-                    <h3 className="text-2xl font-display font-bold text-warm-white mb-1">
+                    <h3 className="text-2xl font-display font-bold text-warm-white mb-1 uppercase">
                       {currentTestimonial.name}
                     </h3>
-                    <p className="text-sm text-[#d4a843] tracking-widest uppercase">
-                      Member — {currentTestimonial.memberSince}
+                    <p className="text-sm text-[var(--accent-500)] tracking-widest uppercase">
+                      MEMBER, {currentTestimonial.memberSince}
                     </p>
                   </div>
                 </div>
@@ -270,8 +276,8 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
                   onClick={() => handleDotClick(index)}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? 'w-8 bg-[#d4a843]'
-                      : 'w-2 bg-[#d4a843]/30 hover:bg-[#d4a843]/50'
+                      ? 'w-8 bg-[var(--accent-500)]'
+                      : 'w-2 bg-[var(--accent-500)]/30 hover:bg-[var(--accent-500)]/50'
                   }`}
                   aria-label={`Go to slide ${index + 1} of ${testimonials.length}`}
                   aria-current={index === currentIndex ? 'true' : 'false'}
@@ -283,14 +289,14 @@ export function Testimonials({ forceReveal }: TestimonialsProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrevClick}
-                className="w-10 h-10 rounded-full border border-[#d4a843]/30 flex items-center justify-center text-[#d4a843] hover:bg-[#d4a843]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4a843]"
+                className="w-10 h-10 rounded-full border border-[var(--accent-500)]/30 flex items-center justify-center text-[var(--accent-500)] hover:bg-[var(--accent-500)]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-500)]"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={handleNextClick}
-                className="w-10 h-10 rounded-full border border-[#d4a843]/30 flex items-center justify-center text-[#d4a843] hover:bg-[#d4a843]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[#d4a843]"
+                className="w-10 h-10 rounded-full border border-[var(--accent-500)]/30 flex items-center justify-center text-[var(--accent-500)] hover:bg-[var(--accent-500)]/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--accent-500)]"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-5 h-5" />
