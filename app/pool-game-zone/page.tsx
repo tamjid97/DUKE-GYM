@@ -3,7 +3,6 @@ import { ArenaHero } from '@/components/arena/ArenaHero';
 import { ArenaGames } from '@/components/arena/ArenaGames';
 import { ArenaBooking } from '@/components/arena/ArenaBooking';
 import { ArenaTournaments } from '@/components/arena/ArenaTournaments';
-import { ArenaLeaderboard } from '@/components/arena/ArenaLeaderboard';
 import { ArenaPackages } from '@/components/arena/ArenaPackages';
 import { ArenaRules } from '@/components/arena/ArenaRules';
 import { ArenaFinale } from '@/components/arena/ArenaFinale';
@@ -21,7 +20,6 @@ export default function PoolGameZonePage() {
       <ArenaGames />
       <ArenaBooking />
       <ArenaTournaments />
-      <ArenaLeaderboard />
       <ArenaPackages />
       <ArenaRules />
       <ArenaFinale />
