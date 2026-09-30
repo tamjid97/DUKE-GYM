@@ -1,12 +1,50 @@
 'use client';
 
+import React from 'react';
 import { motion } from 'framer-motion';
 import { longTermPlans, admissionFee, monthlyFee } from '@/data/plans';
 import { useLang } from '@/components/providers/LanguageProvider';
 import { SectionHeading } from '@/components/shared/SectionHeading';
-import { GlowButton } from '@/components/shared/GlowButton';
 import { cn } from '@/lib/utils';
 import { waLink } from '@/lib/contact';
+
+interface GlowButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  children?: React.ReactNode;
+  variant?: 'primary' | 'secondary';
+  className?: string;
+  href?: string;
+}
+
+function GlowButton({
+  children = 'JOIN NOW',
+  variant = 'primary',
+  className,
+  href = '#',
+  ...props
+}: GlowButtonProps) {
+  const isPrimary = variant === 'primary';
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn(
+        'group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl py-3.5 px-6 text-xs font-black uppercase tracking-[0.25em] transition-all duration-300 active:scale-95 cursor-pointer bg-transparent',
+        isPrimary
+          ? 'border border-amber-500 text-amber-400 shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] hover:border-amber-400 hover:scale-[1.02]'
+          : 'border border-zinc-800 text-zinc-300 hover:border-amber-500/50 hover:text-amber-400 hover:scale-[1.02]',
+        className
+      )}
+      {...props}
+    >
+      <span className="relative flex items-center gap-2">
+        <span>{children}</span>
+        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+      </span>
+    </a>
+  );
+}
 
 export function MembershipPricing() {
   const { t } = useLang();
